@@ -7,6 +7,162 @@
   <meta name="description" content="Done-for-you 501(c)(3) nonprofit formation in Texas. We handle the paperwork, IRS filing, and state registration — you focus on your mission.">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="logo.png" type="image/png">
+
+  <!-- Nonprofit page color overrides — warm green/gold palette -->
+  <style>
+    :root {
+      --np-green: #1B6B4A;
+      --np-green-dark: #14503A;
+      --np-green-darker: #0E3A2A;
+      --np-gold: #D4A017;
+      --np-gold-light: #FFF8E7;
+      --np-warm-bg: #F8FAF7;
+      --np-cream: #FDFCF8;
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--np-green-darker) 0%, var(--np-green) 100%) !important;
+    }
+    .hero::before {
+      background: radial-gradient(circle, rgba(212,160,23,0.15) 0%, transparent 70%) !important;
+    }
+    .hero h1 span { color: var(--np-gold) !important; }
+    .hero-stats .stat-number { color: var(--np-gold) !important; }
+
+    /* Section labels */
+    .section-label { color: var(--np-green) !important; }
+
+    /* Buttons */
+    .btn-primary {
+      background: var(--np-green) !important;
+    }
+    .btn-primary:hover {
+      background: var(--np-green-dark) !important;
+      box-shadow: 0 8px 25px rgba(27,107,74,0.3) !important;
+    }
+    .btn-secondary {
+      border-color: var(--np-green) !important;
+      color: var(--np-green) !important;
+    }
+    .btn-secondary:hover {
+      background: var(--np-green) !important;
+      color: #fff !important;
+    }
+
+    /* Nav button override */
+    nav .btn-primary {
+      background: var(--np-green) !important;
+    }
+
+    /* Problem section */
+    .problem {
+      background: var(--np-warm-bg) !important;
+    }
+    .problem-list li::before {
+      background: var(--np-gold) !important;
+    }
+
+    /* Solution cards */
+    .solution-card:hover {
+      border-color: var(--np-green) !important;
+    }
+    .solution-icon {
+      background: var(--np-gold-light) !important;
+    }
+    .solution-card ul li::before {
+      color: var(--np-green) !important;
+    }
+
+    /* Process section (uses .proof) */
+    .proof {
+      background: var(--np-green-darker) !important;
+    }
+    .proof .section-label { color: var(--np-gold) !important; }
+    .proof-app-num {
+      background: var(--np-gold) !important;
+      color: var(--np-green-darker) !important;
+    }
+
+    /* Pricing */
+    .pricing {
+      background: var(--np-warm-bg) !important;
+    }
+    .pricing-card.featured {
+      border-color: var(--np-green) !important;
+      box-shadow: 0 16px 48px rgba(27,107,74,0.15) !important;
+    }
+    .pricing-badge {
+      background: var(--np-green) !important;
+    }
+    .pricing-tier {
+      color: var(--np-green) !important;
+    }
+    .pricing-price {
+      color: var(--np-green-darker) !important;
+    }
+    .pricing-features li::before {
+      background: var(--np-green) !important;
+    }
+
+    /* FAQ section */
+    .np-faq-section {
+      padding: 6rem 0;
+      background: var(--np-cream);
+    }
+    .np-faq-section h3 {
+      color: var(--np-green-darker) !important;
+    }
+
+    /* CTA */
+    .cta {
+      background: linear-gradient(135deg, var(--np-green-darker) 0%, var(--np-green) 100%) !important;
+    }
+    .cta .btn-primary {
+      background: var(--np-gold) !important;
+      color: var(--np-green-darker) !important;
+    }
+    .cta .btn-primary:hover {
+      background: #C4920F !important;
+      box-shadow: 0 8px 25px rgba(212,160,23,0.3) !important;
+    }
+
+    /* Inline color overrides for elements using CSS vars */
+    .np-number-box {
+      width: 36px; height: 36px;
+      background: var(--np-gold-light);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; font-weight: 700;
+      color: var(--np-green);
+    }
+    .np-total-box {
+      background: var(--np-gold-light);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1rem;
+    }
+    .np-schedule-label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--np-green);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .np-schedule-amount {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--np-green-darker);
+    }
+    .np-email-link {
+      color: var(--np-gold) !important;
+      text-decoration: underline;
+    }
+
+    /* Footer link accent */
+    footer a:hover { color: var(--np-green) !important; }
+  </style>
 </head>
 <body>
 
@@ -22,7 +178,7 @@
         <a href="index.html#services">Services</a>
         <a href="index.html#proof">Results</a>
         <a href="index.html#pricing">Pricing</a>
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+        <a href="https://tidycal.com/ronnieysela/nonprofit-consultation" class="btn btn-primary" target="_blank">Book a Call</a>
       </div>
     </div>
   </nav>
@@ -30,11 +186,11 @@
   <!-- ── Hero ── -->
   <section class="hero" style="padding: 10rem 0 5rem;">
     <div class="container">
-      <div class="section-label" style="color: var(--cyan);">501(c)(3) Formation Services</div>
+      <div class="section-label" style="color: var(--np-gold) !important;">501(c)(3) Formation Services</div>
       <h1>Start Your Nonprofit.<br><span>We Handle the Paperwork.</span></h1>
       <p>Done-for-you 501(c)(3) formation in Texas. You tell us your mission — we file the state registration, draft the bylaws, and submit the IRS application. Fully formed nonprofit, ready to accept tax-deductible donations.</p>
       <div class="hero-buttons">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Free Consultation</a>
+        <a href="https://tidycal.com/ronnieysela/nonprofit-consultation" class="btn btn-primary" target="_blank">Book a Free Consultation</a>
         <a href="#how-it-works" class="btn btn-outline">See the Process</a>
       </div>
       <div class="hero-stats">
@@ -181,7 +337,7 @@
           </div>
         </div>
         <div class="proof-app">
-          <div class="proof-app-num" style="background: var(--green);">&#10003;</div>
+          <div class="proof-app-num" style="background: var(--np-green) !important;">&#10003;</div>
           <div>
             <h4>Post-Approval Guidance</h4>
             <p>Texas state tax exemption, nonprofit bank account setup, Form 990 annual filing requirements. 60 days of support.</p>
@@ -217,7 +373,7 @@
             <li>60 days post-approval support</li>
             <li>Post-approval guidance included</li>
           </ul>
-          <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book Your Free Consultation</a>
+          <a href="https://tidycal.com/ronnieysela/nonprofit-consultation" class="btn btn-primary" target="_blank">Book Your Free Consultation</a>
         </div>
 
         <!-- Government Fees -->
@@ -233,8 +389,8 @@
             <li>EIN application: Free</li>
             <li>We determine which form applies</li>
           </ul>
-          <div style="background: var(--cyan-light); border-radius: 12px; padding: 1.25rem; margin-top: 1rem;">
-            <p style="font-size: 0.9rem; margin: 0; color: var(--navy); font-weight: 600;">Total all-in: $3,125–$3,450</p>
+          <div class="np-total-box">
+            <p style="font-size: 0.9rem; margin: 0; color: var(--np-green-darker); font-weight: 600;">Total all-in: $3,125–$3,450</p>
             <p style="font-size: 0.85rem; margin: 0; color: var(--gray-600);">Compare to $3,000–$5,000+ from an attorney</p>
           </div>
         </div>
@@ -245,18 +401,18 @@
         <h3 style="margin-bottom: 1.5rem;">Payment Schedule</h3>
         <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
           <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.5rem;">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); font-weight: 600; margin-bottom: 0.5rem;">At Signing</div>
-            <div style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">$600</div>
+            <div class="np-schedule-label">At Signing</div>
+            <div class="np-schedule-amount">$600</div>
             <p style="font-size: 0.85rem; margin: 0.5rem 0 0;">Application deposit</p>
           </div>
           <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.5rem;">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); font-weight: 600; margin-bottom: 0.5rem;">At Process Start</div>
-            <div style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">$375–700</div>
+            <div class="np-schedule-label">At Process Start</div>
+            <div class="np-schedule-amount">$375–700</div>
             <p style="font-size: 0.85rem; margin: 0.5rem 0 0;">Government filing fees</p>
           </div>
           <div style="background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 1.5rem;">
-            <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px; color: var(--cyan); font-weight: 600; margin-bottom: 0.5rem;">At Completion</div>
-            <div style="font-size: 1.5rem; font-weight: 800; color: var(--navy);">$2,150</div>
+            <div class="np-schedule-label">At Completion</div>
+            <div class="np-schedule-amount">$2,150</div>
             <p style="font-size: 0.85rem; margin: 0.5rem 0 0;">Remaining balance</p>
           </div>
         </div>
@@ -274,35 +430,35 @@
       </div>
       <div style="max-width: 640px; margin: 2.5rem auto 0;">
         <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--gray-200);">
-          <div style="width: 36px; height: 36px; background: var(--cyan-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; color: var(--cyan);">1</div>
+          <div class="np-number-box">1</div>
           <div>
             <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Organization Name</h3>
             <p style="margin: 0; font-size: 0.95rem;">The name you want your nonprofit registered under</p>
           </div>
         </div>
         <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--gray-200);">
-          <div style="width: 36px; height: 36px; background: var(--cyan-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; color: var(--cyan);">2</div>
+          <div class="np-number-box">2</div>
           <div>
             <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Board Members</h3>
             <p style="margin: 0; font-size: 0.95rem;">Names and addresses of at least 3 board members (IRS requirement)</p>
           </div>
         </div>
         <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--gray-200);">
-          <div style="width: 36px; height: 36px; background: var(--cyan-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; color: var(--cyan);">3</div>
+          <div class="np-number-box">3</div>
           <div>
             <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Mission &amp; Purpose</h3>
             <p style="margin: 0; font-size: 0.95rem;">What does your organization do? Who does it serve?</p>
           </div>
         </div>
         <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0; border-bottom: 1px solid var(--gray-200);">
-          <div style="width: 36px; height: 36px; background: var(--cyan-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; color: var(--cyan);">4</div>
+          <div class="np-number-box">4</div>
           <div>
             <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Programs &amp; Activities</h3>
             <p style="margin: 0; font-size: 0.95rem;">Brief description of what your organization does day-to-day</p>
           </div>
         </div>
         <div style="display: flex; align-items: flex-start; gap: 1.25rem; padding: 1.25rem 0;">
-          <div style="width: 36px; height: 36px; background: var(--cyan-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-weight: 700; color: var(--cyan);">5</div>
+          <div class="np-number-box">5</div>
           <div>
             <h3 style="font-size: 1.1rem; margin-bottom: 0.25rem;">Mailing Address</h3>
             <p style="margin: 0; font-size: 0.95rem;">Physical location or mailing address for the organization</p>
@@ -313,7 +469,7 @@
   </section>
 
   <!-- ── FAQ ── -->
-  <section style="padding: 6rem 0; background: var(--gray-50);">
+  <section class="np-faq-section">
     <div class="container">
       <div style="text-align:center; max-width:700px; margin:0 auto;">
         <div class="section-label">FAQ</div>
@@ -321,23 +477,23 @@
       </div>
       <div style="max-width: 740px; margin: 2.5rem auto 0;">
         <div style="border-bottom: 1px solid var(--gray-200); padding: 1.75rem 0;">
-          <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.5rem;">How long does the whole process take?</h3>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">How long does the whole process take?</h3>
           <p style="margin: 0; font-size: 0.95rem;">State filing takes 10–12 business days. Form 1023-EZ approval is typically 2–4 weeks after that. Full Form 1023 can take 3–12 months. Most clients using Form 1023-EZ are fully approved within 6–8 weeks total.</p>
         </div>
         <div style="border-bottom: 1px solid var(--gray-200); padding: 1.75rem 0;">
-          <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.5rem;">Do I qualify for Form 1023-EZ (the shorter application)?</h3>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Do I qualify for Form 1023-EZ (the shorter application)?</h3>
           <p style="margin: 0; font-size: 0.95rem;">Most new nonprofits with projected annual gross receipts under $50,000 and total assets under $250,000 qualify for the streamlined 1023-EZ. We'll determine your eligibility on the kickoff call.</p>
         </div>
         <div style="border-bottom: 1px solid var(--gray-200); padding: 1.75rem 0;">
-          <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.5rem;">Is this only for Texas nonprofits?</h3>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Is this only for Texas nonprofits?</h3>
           <p style="margin: 0; font-size: 0.95rem;">We specialize in Texas formations (Articles of Incorporation with the TX Secretary of State). The IRS federal filing applies to all states. If you're outside Texas, we can discuss your specific situation on the call.</p>
         </div>
         <div style="border-bottom: 1px solid var(--gray-200); padding: 1.75rem 0;">
-          <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.5rem;">Why is this cheaper than hiring an attorney?</h3>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">Why is this cheaper than hiring an attorney?</h3>
           <p style="margin: 0; font-size: 0.95rem;">We've built every template, checklist, and document needed — refined over multiple successful filings. You get the same quality documents without billable-hour overhead. Attorney fees for this work typically run $3,000–$5,000+.</p>
         </div>
         <div style="padding: 1.75rem 0;">
-          <h3 style="font-size: 1.15rem; color: var(--navy); margin-bottom: 0.5rem;">What if my application gets rejected?</h3>
+          <h3 style="font-size: 1.15rem; margin-bottom: 0.5rem;">What if my application gets rejected?</h3>
           <p style="margin: 0; font-size: 0.95rem;">Our documents are written in IRS-approved language based on successful filings. If the IRS has questions or requests additional information, we'll help you respond during your 60-day support window at no extra charge.</p>
         </div>
       </div>
@@ -350,9 +506,9 @@
       <h2>Ready to Make It Official?</h2>
       <p>Book a free consultation. We'll walk you through the process, answer your questions, and tell you exactly what to expect — no pressure, no pitch.</p>
       <div class="cta-buttons">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" style="font-size:1.2rem; padding:1.2rem 3rem;">Book Your Free Consultation</a>
+        <a href="https://tidycal.com/ronnieysela/nonprofit-consultation" class="btn btn-primary" target="_blank" style="font-size:1.2rem; padding:1.2rem 3rem;">Book Your Free Consultation</a>
       </div>
-      <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.7;">Or email us directly: <a href="mailto:ronnie@easyaiflows.com" style="color: var(--cyan); text-decoration: underline;">ronnie@easyaiflows.com</a></p>
+      <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.7;">Or email us directly: <a href="mailto:ronnie@easyaiflows.com" class="np-email-link">ronnie@easyaiflows.com</a></p>
     </div>
   </section>
 
@@ -370,7 +526,7 @@
             <li><a href="index.html#services">AI Services</a></li>
             <li><a href="index.html#pricing">AI Pricing</a></li>
             <li><a href="nonprofit.html">501(c)(3) Formation</a></li>
-            <li><a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></li>
+            <li><a href="https://tidycal.com/ronnieysela/nonprofit-consultation" target="_blank">Book a Call</a></li>
           </ul>
         </div>
         <div>
