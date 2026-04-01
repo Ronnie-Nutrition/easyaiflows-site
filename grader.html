@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Readiness Grader | EasyAiFlows</title>
+  <meta name="description" content="Find out how ready your business is for AI automation. Take the free 2-minute quiz and get a personalized score with recommendations.">
+  <meta property="og:title" content="AI Readiness Grader | EasyAiFlows">
+  <meta property="og:description" content="How ready is your business for AI? Take the free 2-minute quiz.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://easyaiflows.com/grader">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="logo.png" type="image/png">
+  <style>
+    /* ── Grader-specific styles ── */
+    .grader-hero {
+      padding: 10rem 0 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .grader-hero .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .grader-hero .hero-glow-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--electric-glow), transparent 70%);
+      top: -100px; right: -100px;
+    }
+    .grader-hero .hero-glow-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, var(--purple-glow), transparent 70%);
+      bottom: -50px; left: -50px;
+    }
+    .grader-hero h1 { margin-bottom: 1rem; }
+    .grader-hero p { max-width: 600px; margin: 0 auto 1.5rem; color: var(--gray-400, #9ca3af); font-size: 1.15rem; }
+    .grader-hero .badge-row {
+      display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;
+    }
+    .grader-hero .mini-badge {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 30px; padding: 0.4rem 1.2rem; font-size: 0.85rem; color: #fff;
+    }
+
+    /* ── Quiz container ── */
+    .quiz-section { padding: 2rem 0 6rem; }
+    .quiz-card {
+      max-width: 720px; margin: 0 auto;
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: 2.5rem;
+      position: relative;
+    }
+
+    /* ── Progress bar ── */
+    .progress-wrap {
+      margin-bottom: 2rem;
+    }
+    .progress-label {
+      display: flex; justify-content: space-between; margin-bottom: 0.5rem;
+      font-size: 0.85rem; color: var(--gray-400, #9ca3af);
+    }
+    .progress-bar {
+      height: 6px; border-radius: 3px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--electric), var(--purple));
+      transition: width 0.4s ease;
+    }
+
+    /* ── Question ── */
+    .question-wrap { display: none; }
+    .question-wrap.active { display: block; animation: fadeSlide 0.35s ease; }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .question-wrap h2 {
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem;
+    }
+    .question-sub {
+      color: var(--gray-400, #9ca3af); font-size: 0.95rem; margin-bottom: 1.5rem;
+    }
+
+    /* ── Options ── */
+    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    .option-btn {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1rem 1.25rem;
+      color: #fff; font-size: 1rem; text-align: left;
+      cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .option-btn:hover {
+      border-color: var(--electric); background: rgba(0,229,255,0.06);
+      transform: translateX(4px);
+    }
+    .option-btn.selected {
+      border-color: var(--electric); background: rgba(0,229,255,0.1);
+      box-shadow: 0 0 20px var(--electric-glow);
+    }
+    .option-key {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .option-btn:hover .option-key,
+    .option-btn.selected .option-key {
+      background: var(--electric); color: var(--dark); border-color: var(--electric);
+    }
+
+    /* ── Nav buttons ── */
+    .quiz-nav {
+      display: flex; justify-content: space-between; margin-top: 2rem;
+    }
+    .quiz-nav .btn { min-width: 120px; text-align: center; }
+    .btn-back {
+      background: transparent; border: 1px solid rgba(255,255,255,0.15);
+      color: #fff; padding: 0.75rem 1.5rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-back:hover { border-color: var(--electric); }
+    .btn-next {
+      background: var(--electric); color: var(--dark); border: none;
+      padding: 0.75rem 2rem; border-radius: 10px;
+      font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.25s;
+      box-shadow: 0 0 25px var(--electric-glow);
+    }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 0 35px var(--electric-strong); }
+    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    /* ── Email gate ── */
+    .email-gate { display: none; text-align: center; }
+    .email-gate.active { display: block; animation: fadeSlide 0.35s ease; }
+    .email-gate h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    .email-gate p { color: var(--gray-400, #9ca3af); margin-bottom: 2rem; }
+    .email-form {
+      display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto;
+    }
+    .email-form input {
+      flex: 1; padding: 0.9rem 1.2rem; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05);
+      color: #fff; font-size: 1rem; outline: none; transition: border-color 0.2s;
+    }
+    .email-form input::placeholder { color: rgba(255,255,255,0.35); }
+    .email-form input:focus { border-color: var(--electric); }
+    .email-form .btn-next { white-space: nowrap; }
+    .email-skip {
+      display: block; margin: 1rem auto 0; background: none; border: none;
+      color: rgba(255,255,255,0.4); font-size: 0.85rem; cursor: pointer;
+      text-decoration: underline;
+    }
+    .email-skip:hover { color: rgba(255,255,255,0.6); }
+
+    /* ── Results ── */
+    .results-section { display: none; padding: 4rem 0 6rem; text-align: center; }
+    .results-section.active { display: block; animation: fadeSlide 0.5s ease; }
+    .score-ring-wrap {
+      width: 200px; height: 200px; margin: 0 auto 2rem; position: relative;
+    }
+    .score-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+    .score-ring-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 8; }
+    .score-ring-fill {
+      fill: none; stroke-width: 8; stroke-linecap: round;
+      transition: stroke-dashoffset 1.5s ease, stroke 0.5s;
+    }
+    .score-number {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      font-size: 3rem; font-weight: 900; line-height: 1;
+    }
+    .score-label {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 28px));
+      font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
+      color: var(--gray-400, #9ca3af);
+    }
+    .results-tier {
+      font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;
+    }
+    .results-desc {
+      color: var(--gray-400, #9ca3af); max-width: 540px; margin: 0 auto 2.5rem;
+      font-size: 1.05rem; line-height: 1.6;
+    }
+
+    /* ── Recommendation cards ── */
+    .rec-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
+      max-width: 900px; margin: 0 auto 3rem; text-align: left;
+    }
+    .rec-card {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 14px; padding: 1.5rem;
+      transition: all 0.25s;
+    }
+    .rec-card:hover { border-color: var(--electric); transform: translateY(-3px); }
+    .rec-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem; margin-bottom: 0.75rem;
+      background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2);
+    }
+    .rec-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .rec-card p { font-size: 0.88rem; color: var(--gray-400, #9ca3af); line-height: 1.5; margin: 0; }
+
+    /* ── CTA area ── */
+    .results-cta { margin-top: 2rem; }
+    .results-cta .btn { margin: 0.5rem; }
+    .share-row {
+      display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem;
+    }
+    .share-btn {
+      background: var(--glass); border: 1px solid var(--glass-border);
+      border-radius: 10px; padding: 0.6rem 1.2rem;
+      color: #fff; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .share-btn:hover { border-color: var(--electric); }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .grader-hero { padding: 8rem 0 3rem; }
+      .grader-hero h1 { font-size: 2.2rem; }
+      .quiz-card { padding: 1.5rem; margin: 0 1rem; }
+      .email-form { flex-direction: column; }
+      .rec-grid { grid-template-columns: 1fr; }
+      .share-row { flex-wrap: wrap; justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="/#services">Services</a>
+        <a href="/#voice-agent">Voice Agents</a>
+        <a href="/#proof">Results</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="https://azteampossibility.gumroad.com/l/vhldm" class="btn btn-outline" target="_blank">Free AI Guide</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="grader-hero">
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+    <div class="container">
+      <span class="section-label">Free Assessment</span>
+      <h1>How Ready Is Your Business<br><span class="electric-text">For AI Automation?</span></h1>
+      <p>Answer 7 quick questions and get a personalized automation score — plus specific recommendations for your business. Takes about 2 minutes.</p>
+      <div class="badge-row">
+        <span class="mini-badge">&#9201; 2 min</span>
+        <span class="mini-badge">&#127919; Personalized score</span>
+        <span class="mini-badge">&#9989; Free forever</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Quiz ── -->
+  <section class="quiz-section" id="quiz">
+    <div class="quiz-card" id="quizCard">
+
+      <!-- Progress -->
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressText">Question 1 of 7</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Questions injected by JS -->
+      <div id="questionsContainer"></div>
+
+      <!-- Email gate -->
+      <div class="email-gate" id="emailGate">
+        <h2>Your score is ready!</h2>
+        <p>Enter your email to see your personalized results and get a copy sent to your inbox.</p>
+        <div class="email-form">
+          <input type="email" id="emailInput" placeholder="you@business.com" autocomplete="email">
+          <button class="btn-next" onclick="submitEmail()">See My Score</button>
+        </div>
+        <button class="email-skip" onclick="skipEmail()">Skip — just show my results</button>
+      </div>
+
+      <!-- Navigation -->
+      <div class="quiz-nav" id="quizNav">
+        <button class="btn-back" id="backBtn" onclick="prevQuestion()" style="visibility: hidden">&#8592; Back</button>
+        <button class="btn-next" id="nextBtn" onclick="nextQuestion()" disabled>Next &#8594;</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Results ── -->
+  <section class="results-section" id="results">
+    <div class="container">
+      <span class="section-label" id="resultsBadge">Your AI Readiness Score</span>
+
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 120 120">
+          <circle class="score-ring-bg" cx="60" cy="60" r="52"/>
+          <circle class="score-ring-fill" id="scoreRing" cx="60" cy="60" r="52"
+            stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
+        </svg>
+        <div class="score-number electric-text" id="scoreNumber">0</div>
+        <div class="score-label">out of 100</div>
+      </div>
+
+      <div class="results-tier" id="tierName"></div>
+      <p class="results-desc" id="tierDesc"></p>
+
+      <h3 style="margin-bottom: 1.25rem;">Your Top Recommendations</h3>
+      <div class="rec-grid" id="recGrid"></div>
+
+      <div class="results-cta">
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book Your Free Strategy Call</a>
+        <a href="/" class="btn btn-outline">Back to EasyAiFlows</a>
+      </div>
+
+      <div class="share-row">
+        <button class="share-btn" onclick="shareTwitter()">&#120143; Share on X</button>
+        <button class="share-btn" onclick="shareLinkedIn()">in Share on LinkedIn</button>
+        <button class="share-btn" onclick="copyLink()">&#128279; Copy Link</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a href="/" class="nav-logo" style="margin-bottom:1rem;display:inline-flex">
+            <img src="logo.png" alt="EasyAiFlows">
+            <span>EasyAiFlows</span>
+          </a>
+          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem;max-width:320px">AI automation for entrepreneurs who'd rather grow their business than drown in busywork.</p>
+        </div>
+        <div>
+          <h4 style="margin-bottom:0.75rem">Quick Links</h4>
+          <a href="/#services" style="display:block;color:var(--gray-400,#9ca3af);margin-bottom:0.4rem;text-decoration:none">Services</a>
+          <a href="/#pricing" style="display:block;color:var(--gray-400,#9ca3af);margin-bottom:0.4rem;text-decoration:none">Pricing</a>
+          <a href="/grader" style="display:block;color:var(--electric);margin-bottom:0.4rem;text-decoration:none">AI Readiness Grader</a>
+        </div>
+        <div>
+          <h4 style="margin-bottom:0.75rem">Contact</h4>
+          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem">azteampossibility@gmail.com</p>
+          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem">(520) 560-5447</p>
+        </div>
+      </div>
+      <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);margin-top:2rem">
+        <p style="color:var(--gray-400,#9ca3af);font-size:0.8rem">&copy; 2026 EasyAiFlows. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+<script>
+// ── Questions ──
+const questions = [
+  {
+    q: "What industry is your business in?",
+    sub: "This helps us tailor recommendations to your specific field.",
+    options: [
+      { text: "Restaurant, food service, or nutrition", pts: 14 },
+      { text: "Health, fitness, or wellness", pts: 15 },
+      { text: "Beauty, salon, or med spa", pts: 14 },
+      { text: "Real estate, insurance, or finance", pts: 15 },
+      { text: "Home services (HVAC, cleaning, landscaping)", pts: 13 },
+      { text: "Other local service business", pts: 12 }
+    ]
+  },
+  {
+    q: "How many people are on your team?",
+    sub: "Includes you, employees, and contractors.",
+    options: [
+      { text: "Just me — solopreneur", pts: 8 },
+      { text: "2–5 people", pts: 12 },
+      { text: "6–15 people", pts: 15 },
+      { text: "16+ people", pts: 14 }
+    ]
+  },
+  {
+    q: "How many hours per week do you spend on repetitive tasks?",
+    sub: "Think: follow-ups, scheduling, social media, data entry, invoicing.",
+    options: [
+      { text: "Less than 5 hours", pts: 6 },
+      { text: "5–10 hours", pts: 10 },
+      { text: "10–20 hours", pts: 14 },
+      { text: "20+ hours — it's overwhelming", pts: 16 }
+    ]
+  },
+  {
+    q: "What tools do you currently use to run your business?",
+    sub: "Pick the one that best describes your setup.",
+    options: [
+      { text: "Mostly pen, paper, and phone calls", pts: 6 },
+      { text: "Basic tools — spreadsheets, email, maybe a free CRM", pts: 10 },
+      { text: "Paid platforms — CRM, scheduling software, social tools", pts: 14 },
+      { text: "Multiple integrated tools — already somewhat automated", pts: 16 }
+    ]
+  },
+  {
+    q: "What's your biggest pain point right now?",
+    sub: "If multiple apply, pick the one that costs you the most time or money.",
+    options: [
+      { text: "I can't follow up with leads fast enough — they go cold", pts: 15 },
+      { text: "I'm glued to my phone answering DMs and calls", pts: 14 },
+      { text: "Social media takes forever and I still don't post enough", pts: 12 },
+      { text: "I'm doing everything manually — scheduling, invoicing, reminders", pts: 15 },
+      { text: "I don't really know where to start with AI", pts: 8 }
+    ]
+  },
+  {
+    q: "Have you tried any AI tools before?",
+    sub: "ChatGPT, voice assistants, AI scheduling, chatbots — anything counts.",
+    options: [
+      { text: "Never — AI is completely new to me", pts: 6 },
+      { text: "I've played with ChatGPT or similar but nothing for my business", pts: 10 },
+      { text: "I use AI occasionally for content or ideas", pts: 13 },
+      { text: "I already use AI in my workflow and want to do more", pts: 16 }
+    ]
+  },
+  {
+    q: "If AI could save you 10+ hours a week, what would you do with that time?",
+    sub: "This tells us what matters most to you.",
+    options: [
+      { text: "Grow revenue — more sales calls, more clients", pts: 15 },
+      { text: "Work on my business instead of in it — strategy and planning", pts: 14 },
+      { text: "Spend more time with family and actually take days off", pts: 12 },
+      { text: "Launch something new — a product, location, or side project", pts: 15 }
+    ]
+  }
+];
+
+// ── State ──
+let current = 0;
+const answers = new Array(questions.length).fill(null);
+
+// ── Render questions ──
+const container = document.getElementById('questionsContainer');
+questions.forEach((q, i) => {
+  const keys = ['A','B','C','D','E','F'];
+  let html = `<div class="question-wrap" id="q${i}" ${i===0?'':''}>`
+    + `<h2>${q.q}</h2><p class="question-sub">${q.sub}</p><div class="options">`;
+  q.options.forEach((opt, j) => {
+    html += `<button class="option-btn" data-q="${i}" data-idx="${j}" onclick="selectOption(${i},${j},this)">`
+      + `<span class="option-key">${keys[j]}</span>${opt.text}</button>`;
+  });
+  html += '</div></div>';
+  container.insertAdjacentHTML('beforeend', html);
+});
+// Show first question
+document.getElementById('q0').classList.add('active');
+
+function selectOption(qi, oi, el) {
+  answers[qi] = oi;
+  el.closest('.options').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function updateProgress() {
+  const pct = Math.round(((current) / questions.length) * 100);
+  document.getElementById('progressText').textContent = `Question ${current + 1} of ${questions.length}`;
+  document.getElementById('progressPct').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('backBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
+  document.getElementById('nextBtn').disabled = answers[current] === null;
+  document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'See My Results' : 'Next →';
+}
+
+function nextQuestion() {
+  if (answers[current] === null) return;
+  document.getElementById('q' + current).classList.remove('active');
+
+  if (current === questions.length - 1) {
+    // Show email gate
+    document.getElementById('quizNav').style.display = 'none';
+    document.querySelector('.progress-wrap').style.display = 'none';
+    document.getElementById('emailGate').classList.add('active');
+    return;
+  }
+  current++;
+  document.getElementById('q' + current).classList.add('active');
+  updateProgress();
+}
+
+function prevQuestion() {
+  if (current === 0) return;
+  document.getElementById('q' + current).classList.remove('active');
+  current--;
+  document.getElementById('q' + current).classList.add('active');
+  updateProgress();
+}
+
+// ── Email ──
+function submitEmail() {
+  const email = document.getElementById('emailInput').value.trim();
+  if (email && email.includes('@')) {
+    // Fire GHL webhook (non-blocking)
+    fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook/grader', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email, score: calcScore(), source: 'ai-readiness-grader' })
+    }).catch(() => {});
+  }
+  showResults();
+}
+
+function skipEmail() { showResults(); }
+
+// ── Scoring ──
+function calcScore() {
+  let total = 0;
+  answers.forEach((a, i) => { if (a !== null) total += questions[i].options[a].pts; });
+  // Normalize to 0-100 (max possible ~108, min ~52)
+  const maxPossible = questions.reduce((s, q) => s + Math.max(...q.options.map(o => o.pts)), 0);
+  const minPossible = questions.reduce((s, q) => s + Math.min(...q.options.map(o => o.pts)), 0);
+  return Math.round(((total - minPossible) / (maxPossible - minPossible)) * 100);
+}
+
+// ── Tiers & recommendations ──
+const tiers = [
+  {
+    name: "Getting Started",
+    range: [0, 30],
+    color: "#f59e0b",
+    desc: "You're early in your AI journey — and that's a great place to be. Most businesses at this stage are leaving 10-20 hours a week on the table. A few quick automations could free up your schedule immediately.",
+    recs: [
+      { icon: "💬", title: "AI Chatbot for FAQs", desc: "Automate the 20 questions you answer every single day — hours back instantly." },
+      { icon: "📅", title: "Smart Appointment Booking", desc: "Let AI handle scheduling, reminders, and no-show follow-ups 24/7." },
+      { icon: "📱", title: "Auto Social Media Posts", desc: "Generate and schedule a week of posts in 10 minutes instead of 5 hours." }
+    ]
+  },
+  {
+    name: "Growing — Ready to Automate",
+    range: [31, 60],
+    color: "var(--electric)",
+    desc: "Your business has real traction and you're starting to feel the weight of doing everything manually. You're in the sweet spot for AI — the ROI on automation will be massive right now.",
+    recs: [
+      { icon: "🔥", title: "Lead Follow-Up Sequences", desc: "AI follows up with every lead in under 60 seconds — before they go cold." },
+      { icon: "🎙️", title: "AI Voice Agent", desc: "Never miss a call again. AI answers, qualifies, and books — even at 2 AM." },
+      { icon: "⚡", title: "Workflow Automation", desc: "Connect your tools so invoicing, reminders, and data entry happen automatically." }
+    ]
+  },
+  {
+    name: "Ready to Scale",
+    range: [61, 100],
+    color: "var(--purple)",
+    desc: "You're already tech-savvy and running systems. AI isn't just a nice-to-have for you — it's the multiplier that lets you scale without scaling your team. Let's find the gaps and plug them.",
+    recs: [
+      { icon: "🧠", title: "Custom AI Assistant", desc: "A trained AI that knows your business, answers like you, and works 24/7." },
+      { icon: "📊", title: "AI-Powered Analytics", desc: "Stop guessing. AI identifies your best leads, peak hours, and revenue patterns." },
+      { icon: "🚀", title: "Full Automation Audit", desc: "Map every manual process and build an automation roadmap for 10x efficiency." }
+    ]
+  }
+];
+
+function getTier(score) {
+  return tiers.find(t => score >= t.range[0] && score <= t.range[1]) || tiers[1];
+}
+
+// ── Show results ──
+function showResults() {
+  const score = calcScore();
+  const tier = getTier(score);
+
+  // Hide quiz, show results
+  document.getElementById('quiz').style.display = 'none';
+  document.querySelector('.grader-hero').style.display = 'none';
+  const results = document.getElementById('results');
+  results.classList.add('active');
+
+  // Animate score ring
+  const circumference = 2 * Math.PI * 52; // ~326.73
+  const offset = circumference - (score / 100) * circumference;
+  const ring = document.getElementById('scoreRing');
+  ring.style.stroke = tier.color.startsWith('var') ?
+    getComputedStyle(document.documentElement).getPropertyValue(tier.color.replace('var(','').replace(')','')) :
+    tier.color;
+  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+
+  // Animate number
+  const numEl = document.getElementById('scoreNumber');
+  let count = 0;
+  const step = Math.ceil(score / 40);
+  const counter = setInterval(() => {
+    count = Math.min(count + step, score);
+    numEl.textContent = count;
+    if (count >= score) clearInterval(counter);
+  }, 30);
+
+  // Tier info
+  document.getElementById('tierName').textContent = tier.name;
+  document.getElementById('tierName').style.color = tier.color.startsWith('var') ?
+    getComputedStyle(document.documentElement).getPropertyValue(tier.color.replace('var(','').replace(')','')) :
+    tier.color;
+  document.getElementById('tierDesc').textContent = tier.desc;
+
+  // Recommendations
+  const grid = document.getElementById('recGrid');
+  grid.innerHTML = tier.recs.map(r =>
+    `<div class="rec-card"><div class="rec-icon">${r.icon}</div><h4>${r.title}</h4><p>${r.desc}</p></div>`
+  ).join('');
+
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Sharing ──
+function shareTwitter() {
+  const score = calcScore();
+  const text = encodeURIComponent(`I scored ${score}/100 on the AI Readiness Grader! How ready is YOUR business for AI automation? Find out free 👇`);
+  const url = encodeURIComponent('https://easyaiflows.com/grader');
+  window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
+}
+
+function shareLinkedIn() {
+  const url = encodeURIComponent('https://easyaiflows.com/grader');
+  window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+}
+
+function copyLink() {
+  navigator.clipboard.writeText('https://easyaiflows.com/grader').then(() => {
+    const btn = event.target.closest('.share-btn');
+    const orig = btn.innerHTML;
+    btn.innerHTML = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = orig; }, 2000);
+  });
+}
+
+// ── Keyboard nav ──
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('emailGate').classList.contains('active')) {
+    if (e.key === 'Enter') submitEmail();
+    return;
+  }
+  const keys = { a: 0, b: 1, c: 2, d: 3, e: 4, f: 5 };
+  if (keys[e.key.toLowerCase()] !== undefined) {
+    const idx = keys[e.key.toLowerCase()];
+    const q = questions[current];
+    if (idx < q.options.length) {
+      const btn = document.querySelector(`#q${current} .option-btn[data-idx="${idx}"]`);
+      if (btn) { selectOption(current, idx, btn); }
+    }
+  }
+  if (e.key === 'Enter' && answers[current] !== null) nextQuestion();
+  if (e.key === 'Backspace' && current > 0) { e.preventDefault(); prevQuestion(); }
+});
+</script>
+
+</body>
+</html>
