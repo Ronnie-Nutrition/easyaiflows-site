@@ -12,221 +12,259 @@
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="logo.png" type="image/png">
   <style>
-    /* ── Grader-specific styles ── */
+    /* ── Grader Hero — compact so quiz shows above the fold ── */
     .grader-hero {
-      padding: 10rem 0 4rem;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      padding: 7rem 0 2.5rem;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
-    .grader-hero .hero-glow {
+    .grader-hero::before {
+      content: '';
       position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      pointer-events: none;
-    }
-    .grader-hero .hero-glow-1 {
+      top: -50%; right: -20%;
       width: 500px; height: 500px;
-      background: radial-gradient(circle, var(--electric-glow), transparent 70%);
-      top: -100px; right: -100px;
+      background: radial-gradient(circle, rgba(0,188,212,0.15) 0%, transparent 70%);
+      border-radius: 50%;
     }
-    .grader-hero .hero-glow-2 {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, var(--purple-glow), transparent 70%);
-      bottom: -50px; left: -50px;
+    .grader-hero h1 { color: var(--white); margin-bottom: 0.75rem; font-size: 2.4rem; }
+    .grader-hero h1 span { color: var(--cyan); }
+    .grader-hero p {
+      color: rgba(255,255,255,0.8); font-size: 1.1rem;
+      max-width: 560px; margin: 0 auto 1.25rem;
     }
-    .grader-hero h1 { margin-bottom: 1rem; }
-    .grader-hero p { max-width: 600px; margin: 0 auto 1.5rem; color: var(--gray-400, #9ca3af); font-size: 1.15rem; }
-    .grader-hero .badge-row {
-      display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-top: 1rem;
+    .badge-row {
+      display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;
     }
-    .grader-hero .mini-badge {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: 30px; padding: 0.4rem 1.2rem; font-size: 0.85rem; color: #fff;
+    .mini-badge {
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px; padding: 0.35rem 1rem; font-size: 0.82rem;
+      color: rgba(255,255,255,0.9);
     }
 
-    /* ── Quiz container ── */
-    .quiz-section { padding: 2rem 0 6rem; }
+    /* ── Quiz Section ── */
+    .quiz-section { padding: 2.5rem 0 4rem; background: var(--gray-50); }
     .quiz-card {
-      max-width: 720px; margin: 0 auto;
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: 18px; padding: 2.5rem;
-      position: relative;
+      max-width: 680px; margin: 0 auto;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
 
     /* ── Progress bar ── */
-    .progress-wrap {
-      margin-bottom: 2rem;
-    }
+    .progress-wrap { margin-bottom: 1.75rem; }
     .progress-label {
       display: flex; justify-content: space-between; margin-bottom: 0.5rem;
-      font-size: 0.85rem; color: var(--gray-400, #9ca3af);
+      font-size: 0.85rem; color: var(--gray-400); font-weight: 500;
     }
     .progress-bar {
-      height: 6px; border-radius: 3px;
-      background: rgba(255,255,255,0.08);
+      height: 8px; border-radius: 4px;
+      background: var(--gray-200);
       overflow: hidden;
     }
     .progress-fill {
-      height: 100%; border-radius: 3px;
-      background: linear-gradient(90deg, var(--electric), var(--purple));
+      height: 100%; border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--navy));
       transition: width 0.4s ease;
     }
 
     /* ── Question ── */
     .question-wrap { display: none; }
-    .question-wrap.active { display: block; animation: fadeSlide 0.35s ease; }
+    .question-wrap.active { display: block; animation: fadeSlide 0.3s ease; }
     @keyframes fadeSlide {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .question-wrap h2 {
-      font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem;
+      font-size: 1.35rem; font-weight: 700; color: var(--navy-dark);
+      margin-bottom: 0.3rem;
     }
     .question-sub {
-      color: var(--gray-400, #9ca3af); font-size: 0.95rem; margin-bottom: 1.5rem;
+      color: var(--gray-400); font-size: 0.9rem; margin-bottom: 1.25rem;
+    }
+    .select-hint {
+      font-size: 0.8rem; color: var(--cyan); font-weight: 600;
+      margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px;
     }
 
-    /* ── Options ── */
-    .options { display: flex; flex-direction: column; gap: 0.75rem; }
+    /* ── Answer Options — big, obvious, clickable ── */
+    .options { display: flex; flex-direction: column; gap: 0.6rem; }
     .option-btn {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 12px; padding: 1rem 1.25rem;
-      color: #fff; font-size: 1rem; text-align: left;
-      cursor: pointer; transition: all 0.2s;
-      display: flex; align-items: center; gap: 0.75rem;
+      background: var(--white);
+      border: 2px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 0.9rem 1.1rem;
+      color: var(--gray-800);
+      font-size: 1rem;
+      font-weight: 500;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
     .option-btn:hover {
-      border-color: var(--electric); background: rgba(0,229,255,0.06);
-      transform: translateX(4px);
+      border-color: var(--cyan);
+      background: var(--cyan-light);
+      transform: translateX(3px);
     }
     .option-btn.selected {
-      border-color: var(--electric); background: rgba(0,229,255,0.1);
-      box-shadow: 0 0 20px var(--electric-glow);
+      border-color: var(--cyan);
+      background: var(--cyan-light);
+      box-shadow: 0 0 0 3px rgba(0,188,212,0.2);
+      font-weight: 600;
     }
     .option-key {
-      width: 28px; height: 28px; border-radius: 8px;
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+      width: 32px; height: 32px; border-radius: 8px;
+      background: var(--gray-100);
+      border: 2px solid var(--gray-200);
       display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem; font-weight: 700; flex-shrink: 0;
+      font-size: 0.8rem; font-weight: 700; color: var(--gray-600);
+      flex-shrink: 0;
       transition: all 0.2s;
     }
-    .option-btn:hover .option-key,
+    .option-btn:hover .option-key {
+      background: var(--cyan); color: var(--white); border-color: var(--cyan);
+    }
     .option-btn.selected .option-key {
-      background: var(--electric); color: var(--dark); border-color: var(--electric);
+      background: var(--cyan); color: var(--white); border-color: var(--cyan);
     }
 
-    /* ── Nav buttons ── */
+    /* ── Quiz nav buttons ── */
     .quiz-nav {
-      display: flex; justify-content: space-between; margin-top: 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 1.75rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--gray-200);
     }
-    .quiz-nav .btn { min-width: 120px; text-align: center; }
     .btn-back {
-      background: transparent; border: 1px solid rgba(255,255,255,0.15);
-      color: #fff; padding: 0.75rem 1.5rem; border-radius: 10px;
-      font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+      background: transparent;
+      border: 2px solid var(--gray-200);
+      color: var(--gray-600);
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s;
     }
-    .btn-back:hover { border-color: var(--electric); }
+    .btn-back:hover { border-color: var(--navy); color: var(--navy); }
     .btn-next {
-      background: var(--electric); color: var(--dark); border: none;
-      padding: 0.75rem 2rem; border-radius: 10px;
-      font-size: 0.95rem; font-weight: 700; cursor: pointer; transition: all 0.25s;
-      box-shadow: 0 0 25px var(--electric-glow);
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-size: 0.95rem; font-weight: 700;
+      cursor: pointer; transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(0,188,212,0.25);
     }
-    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 0 35px var(--electric-strong); }
-    .btn-next:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+    .btn-next:hover { background: #0097A7; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,188,212,0.35); }
+    .btn-next:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
 
     /* ── Email gate ── */
-    .email-gate { display: none; text-align: center; }
-    .email-gate.active { display: block; animation: fadeSlide 0.35s ease; }
-    .email-gate h2 { font-size: 1.6rem; margin-bottom: 0.5rem; }
-    .email-gate p { color: var(--gray-400, #9ca3af); margin-bottom: 2rem; }
+    .email-gate { display: none; text-align: center; padding: 1rem 0; }
+    .email-gate.active { display: block; animation: fadeSlide 0.3s ease; }
+    .email-gate h2 { font-size: 1.5rem; color: var(--navy-dark); margin-bottom: 0.5rem; }
+    .email-gate p { color: var(--gray-400); margin-bottom: 1.5rem; }
     .email-form {
-      display: flex; gap: 0.75rem; max-width: 480px; margin: 0 auto;
+      display: flex; gap: 0.75rem; max-width: 460px; margin: 0 auto;
     }
     .email-form input {
-      flex: 1; padding: 0.9rem 1.2rem; border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05);
-      color: #fff; font-size: 1rem; outline: none; transition: border-color 0.2s;
+      flex: 1; padding: 0.85rem 1rem; border-radius: 8px;
+      border: 2px solid var(--gray-200); background: var(--white);
+      color: var(--gray-800); font-size: 1rem; outline: none;
+      transition: border-color 0.2s;
     }
-    .email-form input::placeholder { color: rgba(255,255,255,0.35); }
-    .email-form input:focus { border-color: var(--electric); }
+    .email-form input::placeholder { color: var(--gray-400); }
+    .email-form input:focus { border-color: var(--cyan); }
     .email-form .btn-next { white-space: nowrap; }
     .email-skip {
-      display: block; margin: 1rem auto 0; background: none; border: none;
-      color: rgba(255,255,255,0.4); font-size: 0.85rem; cursor: pointer;
-      text-decoration: underline;
+      display: block; margin: 1rem auto 0;
+      background: none; border: none;
+      color: var(--gray-400); font-size: 0.85rem;
+      cursor: pointer; text-decoration: underline;
     }
-    .email-skip:hover { color: rgba(255,255,255,0.6); }
+    .email-skip:hover { color: var(--gray-600); }
 
-    /* ── Results ── */
-    .results-section { display: none; padding: 4rem 0 6rem; text-align: center; }
+    /* ── Results Section ── */
+    .results-section {
+      display: none; padding: 7rem 0 4rem; text-align: center;
+      background: var(--white);
+    }
     .results-section.active { display: block; animation: fadeSlide 0.5s ease; }
     .score-ring-wrap {
-      width: 200px; height: 200px; margin: 0 auto 2rem; position: relative;
+      width: 200px; height: 200px; margin: 0 auto 1.5rem; position: relative;
     }
     .score-ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-    .score-ring-bg { fill: none; stroke: rgba(255,255,255,0.06); stroke-width: 8; }
+    .score-ring-bg { fill: none; stroke: var(--gray-200); stroke-width: 8; }
     .score-ring-fill {
       fill: none; stroke-width: 8; stroke-linecap: round;
       transition: stroke-dashoffset 1.5s ease, stroke 0.5s;
     }
     .score-number {
-      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-      font-size: 3rem; font-weight: 900; line-height: 1;
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -55%);
+      font-size: 3.2rem; font-weight: 900; line-height: 1;
+      color: var(--navy-dark);
     }
     .score-label {
       position: absolute; top: 50%; left: 50%; transform: translate(-50%, calc(-50% + 28px));
       font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;
-      color: var(--gray-400, #9ca3af);
+      color: var(--gray-400);
     }
     .results-tier {
-      font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem;
+      font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem;
     }
     .results-desc {
-      color: var(--gray-400, #9ca3af); max-width: 540px; margin: 0 auto 2.5rem;
-      font-size: 1.05rem; line-height: 1.6;
+      color: var(--gray-600); max-width: 540px; margin: 0 auto 2.5rem;
+      font-size: 1.05rem; line-height: 1.7;
     }
 
     /* ── Recommendation cards ── */
     .rec-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem;
-      max-width: 900px; margin: 0 auto 3rem; text-align: left;
+      max-width: 900px; margin: 0 auto 2.5rem; text-align: left;
     }
     .rec-card {
-      background: var(--glass); border: 1px solid var(--glass-border);
+      background: var(--white);
+      border: 1px solid var(--gray-200);
       border-radius: 14px; padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
       transition: all 0.25s;
     }
-    .rec-card:hover { border-color: var(--electric); transform: translateY(-3px); }
+    .rec-card:hover { border-color: var(--cyan); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
     .rec-icon {
       width: 44px; height: 44px; border-radius: 10px;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.3rem; margin-bottom: 0.75rem;
-      background: rgba(0,229,255,0.1); border: 1px solid rgba(0,229,255,0.2);
+      background: var(--cyan-light);
     }
-    .rec-card h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .rec-card p { font-size: 0.88rem; color: var(--gray-400, #9ca3af); line-height: 1.5; margin: 0; }
+    .rec-card h4 { font-size: 1rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 0.4rem; }
+    .rec-card p { font-size: 0.88rem; color: var(--gray-600); line-height: 1.5; margin: 0; }
 
     /* ── CTA area ── */
-    .results-cta { margin-top: 2rem; }
+    .results-cta { margin-top: 1.5rem; }
     .results-cta .btn { margin: 0.5rem; }
+    .results-cta .btn-secondary { font-size: 1rem; }
     .share-row {
       display: flex; justify-content: center; gap: 0.75rem; margin-top: 1.5rem;
     }
     .share-btn {
-      background: var(--glass); border: 1px solid var(--glass-border);
-      border-radius: 10px; padding: 0.6rem 1.2rem;
-      color: #fff; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px; padding: 0.55rem 1.1rem;
+      color: var(--gray-600); font-size: 0.85rem;
+      cursor: pointer; transition: all 0.2s;
       display: flex; align-items: center; gap: 0.4rem;
     }
-    .share-btn:hover { border-color: var(--electric); }
+    .share-btn:hover { border-color: var(--cyan); color: var(--navy); }
 
     /* ── Responsive ── */
     @media (max-width: 768px) {
-      .grader-hero { padding: 8rem 0 3rem; }
-      .grader-hero h1 { font-size: 2.2rem; }
+      .grader-hero { padding: 6rem 0 2rem; }
+      .grader-hero h1 { font-size: 1.8rem; }
       .quiz-card { padding: 1.5rem; margin: 0 1rem; }
       .email-form { flex-direction: column; }
       .rec-grid { grid-template-columns: 1fr; }
@@ -246,27 +284,22 @@
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
       <div class="nav-links">
         <a href="/#services">Services</a>
-        <a href="/#voice-agent">Voice Agents</a>
         <a href="/#proof">Results</a>
         <a href="/#pricing">Pricing</a>
-        <a href="https://azteampossibility.gumroad.com/l/vhldm" class="btn btn-outline" target="_blank">Free AI Guide</a>
         <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
       </div>
     </div>
   </nav>
 
-  <!-- ── Hero ── -->
+  <!-- ── Hero — compact ── -->
   <section class="grader-hero">
-    <div class="hero-glow hero-glow-1"></div>
-    <div class="hero-glow hero-glow-2"></div>
     <div class="container">
-      <span class="section-label">Free Assessment</span>
-      <h1>How Ready Is Your Business<br><span class="electric-text">For AI Automation?</span></h1>
-      <p>Answer 7 quick questions and get a personalized automation score — plus specific recommendations for your business. Takes about 2 minutes.</p>
+      <h1>How Ready Is Your Business<br><span>For AI Automation?</span></h1>
+      <p>Answer 7 quick questions. Get a personalized score and specific recommendations for your business.</p>
       <div class="badge-row">
-        <span class="mini-badge">&#9201; 2 min</span>
-        <span class="mini-badge">&#127919; Personalized score</span>
-        <span class="mini-badge">&#9989; Free forever</span>
+        <span class="mini-badge">2 minutes</span>
+        <span class="mini-badge">Personalized score</span>
+        <span class="mini-badge">100% free</span>
       </div>
     </div>
   </section>
@@ -311,62 +344,60 @@
   <!-- ── Results ── -->
   <section class="results-section" id="results">
     <div class="container">
-      <span class="section-label" id="resultsBadge">Your AI Readiness Score</span>
-
       <div class="score-ring-wrap">
         <svg viewBox="0 0 120 120">
           <circle class="score-ring-bg" cx="60" cy="60" r="52"/>
           <circle class="score-ring-fill" id="scoreRing" cx="60" cy="60" r="52"
             stroke-dasharray="326.73" stroke-dashoffset="326.73"/>
         </svg>
-        <div class="score-number electric-text" id="scoreNumber">0</div>
+        <div class="score-number" id="scoreNumber">0</div>
         <div class="score-label">out of 100</div>
       </div>
 
       <div class="results-tier" id="tierName"></div>
       <p class="results-desc" id="tierDesc"></p>
 
-      <h3 style="margin-bottom: 1.25rem;">Your Top Recommendations</h3>
+      <h3 style="margin-bottom: 1.25rem; color: var(--navy-dark);">Your Top Recommendations</h3>
       <div class="rec-grid" id="recGrid"></div>
 
       <div class="results-cta">
         <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book Your Free Strategy Call</a>
-        <a href="/" class="btn btn-outline">Back to EasyAiFlows</a>
+        <a href="/" class="btn btn-secondary">Back to EasyAiFlows</a>
       </div>
 
       <div class="share-row">
-        <button class="share-btn" onclick="shareTwitter()">&#120143; Share on X</button>
-        <button class="share-btn" onclick="shareLinkedIn()">in Share on LinkedIn</button>
-        <button class="share-btn" onclick="copyLink()">&#128279; Copy Link</button>
+        <button class="share-btn" onclick="shareTwitter()">Share on X</button>
+        <button class="share-btn" onclick="shareLinkedIn()">Share on LinkedIn</button>
+        <button class="share-btn" onclick="copyLink()">Copy Link</button>
       </div>
     </div>
   </section>
 
   <!-- ── Footer ── -->
-  <footer>
+  <footer style="background: var(--navy-dark); color: var(--white); padding: 3rem 0;">
     <div class="container">
-      <div class="footer-grid">
+      <div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;">
         <div>
           <a href="/" class="nav-logo" style="margin-bottom:1rem;display:inline-flex">
             <img src="logo.png" alt="EasyAiFlows">
-            <span>EasyAiFlows</span>
+            <span style="color:var(--white)">EasyAiFlows</span>
           </a>
-          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem;max-width:320px">AI automation for entrepreneurs who'd rather grow their business than drown in busywork.</p>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem;max-width:320px;margin-top:0.75rem">AI automation for entrepreneurs who'd rather grow their business than drown in busywork.</p>
         </div>
         <div>
           <h4 style="margin-bottom:0.75rem">Quick Links</h4>
-          <a href="/#services" style="display:block;color:var(--gray-400,#9ca3af);margin-bottom:0.4rem;text-decoration:none">Services</a>
-          <a href="/#pricing" style="display:block;color:var(--gray-400,#9ca3af);margin-bottom:0.4rem;text-decoration:none">Pricing</a>
-          <a href="/grader" style="display:block;color:var(--electric);margin-bottom:0.4rem;text-decoration:none">AI Readiness Grader</a>
+          <a href="/#services" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Services</a>
+          <a href="/#pricing" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Pricing</a>
+          <a href="/grader" style="display:block;color:var(--cyan);margin-bottom:0.4rem;text-decoration:none">AI Readiness Grader</a>
         </div>
         <div>
           <h4 style="margin-bottom:0.75rem">Contact</h4>
-          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem">azteampossibility@gmail.com</p>
-          <p style="color:var(--gray-400,#9ca3af);font-size:0.9rem">(520) 560-5447</p>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem">azteampossibility@gmail.com</p>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.9rem">(520) 560-5447</p>
         </div>
       </div>
-      <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.06);margin-top:2rem">
-        <p style="color:var(--gray-400,#9ca3af);font-size:0.8rem">&copy; 2026 EasyAiFlows. All rights reserved.</p>
+      <div style="text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,0.1);margin-top:2rem">
+        <p style="color:rgba(255,255,255,0.4);font-size:0.8rem">&copy; 2026 EasyAiFlows. All rights reserved.</p>
       </div>
     </div>
   </footer>
@@ -391,8 +422,8 @@ const questions = [
     sub: "Includes you, employees, and contractors.",
     options: [
       { text: "Just me — solopreneur", pts: 8 },
-      { text: "2–5 people", pts: 12 },
-      { text: "6–15 people", pts: 15 },
+      { text: "2-5 people", pts: 12 },
+      { text: "6-15 people", pts: 15 },
       { text: "16+ people", pts: 14 }
     ]
   },
@@ -401,8 +432,8 @@ const questions = [
     sub: "Think: follow-ups, scheduling, social media, data entry, invoicing.",
     options: [
       { text: "Less than 5 hours", pts: 6 },
-      { text: "5–10 hours", pts: 10 },
-      { text: "10–20 hours", pts: 14 },
+      { text: "5-10 hours", pts: 10 },
+      { text: "10-20 hours", pts: 14 },
       { text: "20+ hours — it's overwhelming", pts: 16 }
     ]
   },
@@ -432,7 +463,7 @@ const questions = [
     sub: "ChatGPT, voice assistants, AI scheduling, chatbots — anything counts.",
     options: [
       { text: "Never — AI is completely new to me", pts: 6 },
-      { text: "I've played with ChatGPT or similar but nothing for my business", pts: 10 },
+      { text: "I've played with ChatGPT but nothing for my business", pts: 10 },
       { text: "I use AI occasionally for content or ideas", pts: 13 },
       { text: "I already use AI in my workflow and want to do more", pts: 16 }
     ]
@@ -457,8 +488,10 @@ const answers = new Array(questions.length).fill(null);
 const container = document.getElementById('questionsContainer');
 questions.forEach((q, i) => {
   const keys = ['A','B','C','D','E','F'];
-  let html = `<div class="question-wrap" id="q${i}" ${i===0?'':''}>`
-    + `<h2>${q.q}</h2><p class="question-sub">${q.sub}</p><div class="options">`;
+  let html = `<div class="question-wrap" id="q${i}">`
+    + `<h2>${q.q}</h2><p class="question-sub">${q.sub}</p>`
+    + `<p class="select-hint">Select one answer</p>`
+    + `<div class="options">`;
   q.options.forEach((opt, j) => {
     html += `<button class="option-btn" data-q="${i}" data-idx="${j}" onclick="selectOption(${i},${j},this)">`
       + `<span class="option-key">${keys[j]}</span>${opt.text}</button>`;
@@ -483,7 +516,7 @@ function updateProgress() {
   document.getElementById('progressFill').style.width = pct + '%';
   document.getElementById('backBtn').style.visibility = current === 0 ? 'hidden' : 'visible';
   document.getElementById('nextBtn').disabled = answers[current] === null;
-  document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'See My Results' : 'Next →';
+  document.getElementById('nextBtn').textContent = current === questions.length - 1 ? 'See My Results' : 'Next \u2192';
 }
 
 function nextQuestion() {
@@ -491,7 +524,6 @@ function nextQuestion() {
   document.getElementById('q' + current).classList.remove('active');
 
   if (current === questions.length - 1) {
-    // Show email gate
     document.getElementById('quizNav').style.display = 'none';
     document.querySelector('.progress-wrap').style.display = 'none';
     document.getElementById('emailGate').classList.add('active');
@@ -514,7 +546,6 @@ function prevQuestion() {
 function submitEmail() {
   const email = document.getElementById('emailInput').value.trim();
   if (email && email.includes('@')) {
-    // Fire GHL webhook (non-blocking)
     fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook/grader', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -530,7 +561,6 @@ function skipEmail() { showResults(); }
 function calcScore() {
   let total = 0;
   answers.forEach((a, i) => { if (a !== null) total += questions[i].options[a].pts; });
-  // Normalize to 0-100 (max possible ~108, min ~52)
   const maxPossible = questions.reduce((s, q) => s + Math.max(...q.options.map(o => o.pts)), 0);
   const minPossible = questions.reduce((s, q) => s + Math.min(...q.options.map(o => o.pts)), 0);
   return Math.round(((total - minPossible) / (maxPossible - minPossible)) * 100);
@@ -542,33 +572,33 @@ const tiers = [
     name: "Getting Started",
     range: [0, 30],
     color: "#f59e0b",
-    desc: "You're early in your AI journey — and that's a great place to be. Most businesses at this stage are leaving 10-20 hours a week on the table. A few quick automations could free up your schedule immediately.",
+    desc: "You're early in your AI journey \u2014 and that's a great place to be. Most businesses at this stage are leaving 10-20 hours a week on the table. A few quick automations could free up your schedule immediately.",
     recs: [
-      { icon: "💬", title: "AI Chatbot for FAQs", desc: "Automate the 20 questions you answer every single day — hours back instantly." },
-      { icon: "📅", title: "Smart Appointment Booking", desc: "Let AI handle scheduling, reminders, and no-show follow-ups 24/7." },
-      { icon: "📱", title: "Auto Social Media Posts", desc: "Generate and schedule a week of posts in 10 minutes instead of 5 hours." }
+      { icon: "\uD83D\uDCAC", title: "AI Chatbot for FAQs", desc: "Automate the 20 questions you answer every single day \u2014 hours back instantly." },
+      { icon: "\uD83D\uDCC5", title: "Smart Appointment Booking", desc: "Let AI handle scheduling, reminders, and no-show follow-ups 24/7." },
+      { icon: "\uD83D\uDCF1", title: "Auto Social Media Posts", desc: "Generate and schedule a week of posts in 10 minutes instead of 5 hours." }
     ]
   },
   {
-    name: "Growing — Ready to Automate",
+    name: "Growing \u2014 Ready to Automate",
     range: [31, 60],
-    color: "var(--electric)",
-    desc: "Your business has real traction and you're starting to feel the weight of doing everything manually. You're in the sweet spot for AI — the ROI on automation will be massive right now.",
+    color: "#00BCD4",
+    desc: "Your business has real traction and you're starting to feel the weight of doing everything manually. You're in the sweet spot for AI \u2014 the ROI on automation will be massive right now.",
     recs: [
-      { icon: "🔥", title: "Lead Follow-Up Sequences", desc: "AI follows up with every lead in under 60 seconds — before they go cold." },
-      { icon: "🎙️", title: "AI Voice Agent", desc: "Never miss a call again. AI answers, qualifies, and books — even at 2 AM." },
-      { icon: "⚡", title: "Workflow Automation", desc: "Connect your tools so invoicing, reminders, and data entry happen automatically." }
+      { icon: "\uD83D\uDD25", title: "Lead Follow-Up Sequences", desc: "AI follows up with every lead in under 60 seconds \u2014 before they go cold." },
+      { icon: "\uD83C\uDFA4", title: "AI Voice Agent", desc: "Never miss a call again. AI answers, qualifies, and books \u2014 even at 2 AM." },
+      { icon: "\u26A1", title: "Workflow Automation", desc: "Connect your tools so invoicing, reminders, and data entry happen automatically." }
     ]
   },
   {
     name: "Ready to Scale",
     range: [61, 100],
-    color: "var(--purple)",
-    desc: "You're already tech-savvy and running systems. AI isn't just a nice-to-have for you — it's the multiplier that lets you scale without scaling your team. Let's find the gaps and plug them.",
+    color: "#1B3A6B",
+    desc: "You're already tech-savvy and running systems. AI isn't just a nice-to-have for you \u2014 it's the multiplier that lets you scale without scaling your team. Let's find the gaps and plug them.",
     recs: [
-      { icon: "🧠", title: "Custom AI Assistant", desc: "A trained AI that knows your business, answers like you, and works 24/7." },
-      { icon: "📊", title: "AI-Powered Analytics", desc: "Stop guessing. AI identifies your best leads, peak hours, and revenue patterns." },
-      { icon: "🚀", title: "Full Automation Audit", desc: "Map every manual process and build an automation roadmap for 10x efficiency." }
+      { icon: "\uD83E\uDDE0", title: "Custom AI Assistant", desc: "A trained AI that knows your business, answers like you, and works 24/7." },
+      { icon: "\uD83D\uDCCA", title: "AI-Powered Analytics", desc: "Stop guessing. AI identifies your best leads, peak hours, and revenue patterns." },
+      { icon: "\uD83D\uDE80", title: "Full Automation Audit", desc: "Map every manual process and build an automation roadmap for 10x efficiency." }
     ]
   }
 ];
@@ -582,19 +612,16 @@ function showResults() {
   const score = calcScore();
   const tier = getTier(score);
 
-  // Hide quiz, show results
   document.getElementById('quiz').style.display = 'none';
   document.querySelector('.grader-hero').style.display = 'none';
   const results = document.getElementById('results');
   results.classList.add('active');
 
   // Animate score ring
-  const circumference = 2 * Math.PI * 52; // ~326.73
+  const circumference = 2 * Math.PI * 52;
   const offset = circumference - (score / 100) * circumference;
   const ring = document.getElementById('scoreRing');
-  ring.style.stroke = tier.color.startsWith('var') ?
-    getComputedStyle(document.documentElement).getPropertyValue(tier.color.replace('var(','').replace(')','')) :
-    tier.color;
+  ring.style.stroke = tier.color;
   setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
 
   // Animate number
@@ -609,9 +636,7 @@ function showResults() {
 
   // Tier info
   document.getElementById('tierName').textContent = tier.name;
-  document.getElementById('tierName').style.color = tier.color.startsWith('var') ?
-    getComputedStyle(document.documentElement).getPropertyValue(tier.color.replace('var(','').replace(')','')) :
-    tier.color;
+  document.getElementById('tierName').style.color = tier.color;
   document.getElementById('tierDesc').textContent = tier.desc;
 
   // Recommendations
@@ -620,14 +645,13 @@ function showResults() {
     `<div class="rec-card"><div class="rec-icon">${r.icon}</div><h4>${r.title}</h4><p>${r.desc}</p></div>`
   ).join('');
 
-  // Scroll to top
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ── Sharing ──
 function shareTwitter() {
   const score = calcScore();
-  const text = encodeURIComponent(`I scored ${score}/100 on the AI Readiness Grader! How ready is YOUR business for AI automation? Find out free 👇`);
+  const text = encodeURIComponent(`I scored ${score}/100 on the AI Readiness Grader! How ready is YOUR business for AI automation? Find out free`);
   const url = encodeURIComponent('https://easyaiflows.com/grader');
   window.open(`https://twitter.com/intent/tweet?text=${text}&url=${url}`, '_blank');
 }
@@ -641,7 +665,7 @@ function copyLink() {
   navigator.clipboard.writeText('https://easyaiflows.com/grader').then(() => {
     const btn = event.target.closest('.share-btn');
     const orig = btn.innerHTML;
-    btn.innerHTML = '✓ Copied!';
+    btn.innerHTML = 'Copied!';
     setTimeout(() => { btn.innerHTML = orig; }, 2000);
   });
 }
