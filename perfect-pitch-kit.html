@@ -12,8 +12,9 @@
   /* Cover */
   .cover { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 3px solid #00BCD4; padding-bottom: 50px; }
   .cover-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #00BCD4; margin-bottom: 20px; font-family: 'Arial', sans-serif; }
-  .cover h1 { font-size: 42px; line-height: 1.15; color: #1a1a1a; margin-bottom: 12px; }
+  .cover h1 { font-size: 36px; line-height: 1.2; color: #1a1a1a; margin-bottom: 12px; }
   .cover h1 span { color: #00BCD4; }
+  @media (max-width: 600px) { .cover h1 { font-size: 28px; } }
   .cover h2 { font-size: 18px; color: #666; font-weight: normal; margin-bottom: 36px; line-height: 1.6; }
   .cover-divider { width: 60px; height: 3px; background: #00BCD4; margin-bottom: 36px; }
   .cover-stats { display: flex; gap: 40px; margin-bottom: 36px; }
@@ -81,7 +82,7 @@
   <!-- COVER -->
   <div class="cover">
     <div class="cover-tag">The Perfect Pitch Kit</div>
-    <h1>How I Closed a $2,500/mo Client<br><span>In One Meeting</span></h1>
+    <h1>How I Closed a $2,500/mo Client <span>In One Meeting</span></h1>
     <h2>The exact 3-step system, email scripts, presentation structure, and pricing strategy I used. No fluff. No theory. Just what worked.</h2>
     <div class="cover-divider"></div>
     <div class="cover-stats">
