@@ -330,6 +330,25 @@ Best,
     </ul>
   </div>
 
+  <!-- OPT-IN FORM -->
+  <div class="section" style="text-align: center; padding: 50px 0; background: #f0fafb;">
+    <div class="section-tag">Get Future Kits</div>
+    <h2>Want More Frameworks Like This?</h2>
+    <p style="max-width: 480px; margin: 0 auto 20px; color: #555;">Drop your name and email below. I'll send you new playbooks, templates, and scripts as I build them — plus a follow-up with bonus tips on this kit.</p>
+    <div id="kitFormWrap" style="max-width: 420px; margin: 0 auto;">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <input type="text" id="kitName" placeholder="Your first name" style="padding: 12px 14px; border-radius: 8px; border: 2px solid #e0e0e0; font-size: 15px; outline: none; font-family: inherit;">
+        <input type="email" id="kitEmail" placeholder="Your best email" style="padding: 12px 14px; border-radius: 8px; border: 2px solid #e0e0e0; font-size: 15px; outline: none; font-family: inherit;">
+        <button onclick="submitKitForm()" style="padding: 13px; border-radius: 8px; border: none; background: #00BCD4; color: white; font-size: 15px; font-weight: bold; cursor: pointer; font-family: 'Arial', sans-serif;">Send Me Future Kits</button>
+      </div>
+      <p style="font-size: 12px; color: #bbb; margin-top: 10px;">No spam. Unsubscribe anytime.</p>
+    </div>
+    <div id="kitThanks" style="display: none;">
+      <p style="color: #00BCD4; font-weight: bold; font-size: 18px; margin-bottom: 8px;">You're in! Check your inbox.</p>
+      <p style="color: #666; font-size: 14px;">I'll send you new frameworks and playbooks as I build them.</p>
+    </div>
+  </div>
+
   <!-- CTA -->
   <div class="section" style="text-align: center; padding: 50px 0;">
     <div class="section-tag">What's Next</div>
@@ -348,5 +367,25 @@ Best,
   </div>
 
 </div>
+<script>
+function submitKitForm() {
+  var name = document.getElementById('kitName').value.trim();
+  var email = document.getElementById('kitEmail').value.trim();
+  if (!email || email.indexOf('@') === -1) {
+    document.getElementById('kitEmail').style.borderColor = '#ef4444';
+    return;
+  }
+  fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/6bb80381-738f-4f98-b830-3a39f4f3ae8d', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: name, email: email })
+  }).catch(function(){});
+  document.getElementById('kitFormWrap').style.display = 'none';
+  document.getElementById('kitThanks').style.display = 'block';
+}
+document.getElementById('kitEmail').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') submitKitForm();
+});
+</script>
 </body>
 </html>
