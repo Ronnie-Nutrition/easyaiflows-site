@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Perfect Pitch Kit — EasyAiFlows</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Georgia', serif; color: #1a1a1a; background: #fff; }
+  .page { max-width: 780px; margin: 0 auto; padding: 60px 50px; }
+
+  /* Cover */
+  .cover { min-height: 90vh; display: flex; flex-direction: column; justify-content: center; border-bottom: 3px solid #00BCD4; padding-bottom: 50px; }
+  .cover-tag { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: #00BCD4; margin-bottom: 20px; font-family: 'Arial', sans-serif; }
+  .cover h1 { font-size: 42px; line-height: 1.15; color: #1a1a1a; margin-bottom: 12px; }
+  .cover h1 span { color: #00BCD4; }
+  .cover h2 { font-size: 18px; color: #666; font-weight: normal; margin-bottom: 36px; line-height: 1.6; }
+  .cover-divider { width: 60px; height: 3px; background: #00BCD4; margin-bottom: 36px; }
+  .cover-stats { display: flex; gap: 40px; margin-bottom: 36px; }
+  .cs { text-align: center; }
+  .cs-num { font-size: 32px; font-weight: bold; color: #00BCD4; font-family: 'Arial', sans-serif; }
+  .cs-label { font-size: 11px; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Arial', sans-serif; }
+  .cover-meta { font-size: 13px; color: #999; font-family: 'Arial', sans-serif; line-height: 1.8; }
+  .cover-meta strong { color: #1a1a1a; }
+
+  /* Sections */
+  .section { padding: 44px 0; border-bottom: 1px solid #eee; }
+  .section:last-child { border-bottom: none; }
+  .section-tag { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #00BCD4; font-family: 'Arial', sans-serif; margin-bottom: 10px; }
+  .section h2 { font-size: 26px; color: #1a1a1a; margin-bottom: 16px; line-height: 1.25; }
+  .section h3 { font-size: 15px; color: #00BCD4; margin-bottom: 6px; font-family: 'Arial', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+  p { font-size: 15px; line-height: 1.8; color: #333; margin-bottom: 14px; }
+
+  /* Callout */
+  .callout { background: #f0fafb; border-left: 4px solid #00BCD4; padding: 18px 22px; margin: 20px 0; border-radius: 0 6px 6px 0; }
+  .callout p { margin: 0; font-size: 14.5px; color: #1a1a1a; }
+  .callout-warn { background: #fffbf0; border-left-color: #F59E0B; }
+
+  /* Step blocks */
+  .step-block { border: 2px solid #00BCD4; border-radius: 12px; padding: 28px; margin: 24px 0; background: #fafeff; }
+  .step-block .sb-num { display: inline-block; background: #00BCD4; color: white; width: 36px; height: 36px; border-radius: 50%; text-align: center; line-height: 36px; font-family: 'Arial', sans-serif; font-size: 16px; font-weight: bold; margin-right: 12px; vertical-align: middle; }
+  .step-block .sb-title { display: inline; font-size: 20px; font-weight: bold; color: #1a1a1a; vertical-align: middle; }
+  .step-block .sb-body { margin-top: 16px; }
+  .step-block ul { padding-left: 20px; margin: 12px 0; }
+  .step-block ul li { font-size: 14px; color: #444; line-height: 2; }
+
+  /* Email template */
+  .email-tpl { background: #f8f8f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 20px 24px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 13.5px; line-height: 1.7; color: #333; white-space: pre-wrap; }
+  .email-tpl .tpl-label { font-family: 'Arial', sans-serif; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: #00BCD4; margin-bottom: 10px; display: block; font-weight: bold; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+  th { text-align: left; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: #00BCD4; font-family: 'Arial', sans-serif; padding: 8px 10px; border-bottom: 2px solid #00BCD4; }
+  td { font-size: 13.5px; color: #333; padding: 10px; border-bottom: 1px solid #eee; line-height: 1.55; }
+
+  /* Objection cards */
+  .obj { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 18px 20px; margin: 12px 0; }
+  .obj-q { font-weight: bold; color: #1a1a1a; font-size: 14px; margin-bottom: 8px; }
+  .obj-a { font-size: 14px; color: #555; line-height: 1.7; font-style: italic; }
+
+  /* Checklist */
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { font-size: 14px; color: #333; padding: 10px 0; border-bottom: 1px solid #f0f0f0; padding-left: 28px; position: relative; }
+  .checklist li::before { content: '\2713'; position: absolute; left: 0; top: 10px; color: #00BCD4; font-weight: bold; font-size: 16px; }
+
+  /* Footer */
+  .footer { text-align: center; padding: 40px 0 20px; font-size: 13px; color: #bbb; font-family: 'Arial', sans-serif; border-top: 1px solid #eee; margin-top: 40px; }
+  .footer a { color: #00BCD4; text-decoration: none; }
+
+  @media print {
+    .page { padding: 30px 40px; }
+    .cover { min-height: auto; padding-bottom: 30px; page-break-after: always; }
+    .section { page-break-inside: avoid; }
+    .step-block { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- COVER -->
+  <div class="cover">
+    <div class="cover-tag">The Perfect Pitch Kit</div>
+    <h1>How I Closed a $2,500/mo Client<br><span>In One Meeting</span></h1>
+    <h2>The exact 3-step system, email scripts, presentation structure, and pricing strategy I used. No fluff. No theory. Just what worked.</h2>
+    <div class="cover-divider"></div>
+    <div class="cover-stats">
+      <div class="cs"><div class="cs-num">$1K</div><div class="cs-label">Phase 1</div></div>
+      <div class="cs"><div class="cs-num">$2.5K</div><div class="cs-label">Monthly Retainer</div></div>
+      <div class="cs"><div class="cs-num">1</div><div class="cs-label">Meeting</div></div>
+    </div>
+    <div class="cover-meta">
+      <strong>By:</strong> Ronnie Craig, Founder of EasyAiFlows<br>
+      <strong>Based on:</strong> A real deal closed April 1, 2026<br>
+      <strong>For:</strong> Freelancers, consultants, and service business owners who want to close higher-ticket clients
+    </div>
+  </div>
+
+  <!-- THE BACKSTORY -->
+  <div class="section">
+    <div class="section-tag">The Backstory</div>
+    <h2>How This Deal Actually Happened</h2>
+    <p>A contact named Josie introduced me to the decision-maker at a nonprofit foundation. They'd been operating for 20 years, had programs running in multiple cities, and had <strong>never applied for a single grant</strong>.</p>
+    <p>I didn't cold call. I didn't DM spam. I got introduced, did my homework, then showed up with a pitch so clear they signed the same week.</p>
+    <p>Here's exactly what I did, broken down into three steps you can copy for your own business.</p>
+  </div>
+
+  <!-- STEP 1: THE PITCH -->
+  <div class="section">
+    <div class="section-tag">Step 1 of 3</div>
+    <div class="step-block">
+      <span class="sb-num">1</span>
+      <span class="sb-title">The Pitch</span>
+      <div class="sb-body">
+        <p><strong>Lead with the problem they already know they have.</strong> Don't lead with your service. Don't lead with your resume. Lead with their pain.</p>
+
+        <h3 style="margin-top: 20px;">The Formula</h3>
+        <ul>
+          <li><strong>Acknowledge their situation</strong> &mdash; show you did your research</li>
+          <li><strong>Name the gap</strong> &mdash; the thing they know is a problem but haven't fixed</li>
+          <li><strong>Quantify the cost of inaction</strong> &mdash; what staying the same is costing them</li>
+          <li><strong>Hint at the solution</strong> &mdash; don't reveal everything, just enough to earn the meeting</li>
+        </ul>
+
+        <h3 style="margin-top: 20px;">What I Actually Said</h3>
+        <p>In my case, the pitch was: <em>"You've been running these programs for 20 years and have never applied for a grant. Based on my initial research, there's $850K to $4M+ in grant money available for your programs right now. I'd love to show you what I found."</em></p>
+
+        <div class="callout">
+          <p><strong>Key Principle:</strong> The pitch isn't about you. It's about the gap between where they are and where they could be. Your job is to make that gap visible.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>The Outreach Email That Got Me In</h3>
+    <div class="email-tpl">
+      <span class="tpl-label">Email Template &mdash; Initial Outreach</span>
+Subject: Quick question about [THEIR ORGANIZATION]
+
+Hi [NAME],
+
+[MUTUAL CONTACT] connected us &mdash; I've been following
+what [ORG] has been doing with [SPECIFIC PROGRAM] and
+it's impressive work.
+
+I noticed you might be leaving some [MONEY / OPPORTUNITY]
+on the table. I did a quick analysis and found [SPECIFIC
+NUMBER OR FINDING] that I think would be worth a short
+conversation.
+
+Would you be open to a 15-minute call this week? No pitch,
+just want to share what I found.
+
+Best,
+[YOUR NAME]
+[PHONE]</div>
+
+    <div class="callout-warn callout">
+      <p><strong>Do NOT skip the research.</strong> If you send a generic pitch, you get a generic response (silence). Spend 30 minutes learning about them before you ever type a word. The specificity is what earns the reply.</p>
+    </div>
+  </div>
+
+  <!-- STEP 2: THE PRESENTATION -->
+  <div class="section">
+    <div class="section-tag">Step 2 of 3</div>
+    <div class="step-block">
+      <span class="sb-num">2</span>
+      <span class="sb-title">The Presentation</span>
+      <div class="sb-body">
+        <p><strong>Show, don't tell.</strong> A clean, professional presentation that makes the decision easy. Here's the exact structure I used:</p>
+      </div>
+    </div>
+
+    <h3>The 7-Section Presentation Structure</h3>
+    <table>
+      <thead><tr><th>Section</th><th>What It Does</th><th>Time</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Executive Summary</strong></td><td>Restate their problem + your big finding. "Here's what I found."</td><td>2 min</td></tr>
+        <tr><td><strong>2. Research / Discovery</strong></td><td>Show the actual data. Tables, numbers, sources. Prove you did the work.</td><td>5 min</td></tr>
+        <tr><td><strong>3. About You</strong></td><td>Brief &mdash; who you are and why you're qualified. 3-4 sentences max.</td><td>1 min</td></tr>
+        <tr><td><strong>4. How You Work</strong></td><td>Your process in 3 simple steps. Make it feel easy and structured.</td><td>2 min</td></tr>
+        <tr><td><strong>5. Engagement Structure</strong></td><td>Phase 1 (low risk) + Phase 2 (retainer). This is the pricing page.</td><td>3 min</td></tr>
+        <tr><td><strong>6. What You Need From Them</strong></td><td>List exactly what they provide. Makes it feel real and actionable.</td><td>1 min</td></tr>
+        <tr><td><strong>7. Timeline + Next Steps</strong></td><td>Week-by-week plan. Ends with signature lines.</td><td>1 min</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>The secret:</strong> Section 2 (Research) is where you win or lose. If your research is generic, they think "I could do this myself." If it's specific, with real numbers tied to THEIR business, they think "I need this person."</p>
+    </div>
+
+    <h3 style="margin-top: 24px;">Presentation Design Rules</h3>
+    <ul class="checklist">
+      <li>Clean, minimal design. No clip art. No stock photos of handshakes.</li>
+      <li>One font family, max two weights (regular + bold)</li>
+      <li>One accent color throughout (mine: #2C5F8A &mdash; professional blue)</li>
+      <li>Tables over paragraphs. Numbers over adjectives.</li>
+      <li>Every section fits on one page when printed to PDF</li>
+      <li>Include a callout box for your single most impressive finding</li>
+      <li>Signature block at the end &mdash; makes it feel like a real contract</li>
+    </ul>
+  </div>
+
+  <!-- STEP 3: THE CLOSE -->
+  <div class="section">
+    <div class="section-tag">Step 3 of 3</div>
+    <div class="step-block">
+      <span class="sb-num">3</span>
+      <span class="sb-title">The Close</span>
+      <div class="sb-body">
+        <p><strong>Make it easy to say yes.</strong> The biggest mistake people make is asking for too much commitment upfront. Instead, use the <em>Phase 1 / Phase 2</em> structure:</p>
+      </div>
+    </div>
+
+    <h3>The Two-Phase Pricing Structure</h3>
+    <table>
+      <thead><tr><th>Phase</th><th>Price</th><th>What It Does</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Phase 1 &mdash; "Get Started"</strong></td><td>$500 &ndash; $1,500</td><td>Low-risk first month. Deliver something tangible so they can see your quality before committing further. This is where trust gets built.</td></tr>
+        <tr><td><strong>Phase 2 &mdash; "Ongoing"</strong></td><td>$1,500 &ndash; $5,000/mo</td><td>Monthly retainer that only begins if they're happy with Phase 1. Month-to-month, 30-day cancellation. Zero long-term pressure.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="callout">
+      <p><strong>The ROI line that closes:</strong> "Phase 2 costs $2,500/month &mdash; that's $30K/year. If we land even 5% of what I've identified, that's $42K back. One win pays for 6+ years of the retainer." Always do the ROI math FOR them.</p>
+    </div>
+
+    <h3 style="margin-top: 24px;">Closing Language That Works</h3>
+    <div class="email-tpl">
+      <span class="tpl-label">What to Say at the End of the Meeting</span>
+"So here's what I'd suggest. Let's start with
+Phase 1 this month &mdash; [DOLLAR AMOUNT]. I'll
+deliver [SPECIFIC DELIVERABLE] so you can see
+the quality of my work before you commit to
+anything further.
+
+If you love it, we move into the monthly retainer.
+If not, you got [DELIVERABLE] and we part as
+friends. No pressure either way.
+
+Want to get started this week?"</div>
+
+    <p>That's it. No tricks. No urgency hacks. No countdown timers. Just a clear, low-risk path they can see themselves on.</p>
+  </div>
+
+  <!-- OBJECTION HANDLING -->
+  <div class="section">
+    <div class="section-tag">Bonus</div>
+    <h2>Objection Handling</h2>
+    <p>Here's what they might say and exactly how to respond:</p>
+
+    <div class="obj">
+      <div class="obj-q">"We need to think about it."</div>
+      <div class="obj-a">"Totally understand. What specifically would help you feel more confident? I'm happy to answer any questions or adjust the scope. And remember &mdash; Phase 1 is designed to be low-risk so you can see the work before committing further."</div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-q">"We don't have the budget right now."</div>
+      <div class="obj-a">"I hear you. That's actually why I structured it this way &mdash; Phase 1 at [AMOUNT] is designed to generate enough value to pay for itself. If I can show you [SPECIFIC ROI] in the first month, the budget conversation changes. Would it help to start smaller?"</div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-q">"We already have someone / a team for this."</div>
+      <div class="obj-a">"That's great. I'm not here to replace anyone &mdash; I'm here to add capacity in areas your team hasn't been able to focus on. [NAME THE GAP]. Would it make sense to try Phase 1 as a supplement and see if it adds value?"</div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-q">"Can you do it cheaper?"</div>
+      <div class="obj-a">"I understand wanting to be smart with the investment. Here's how I think about it: [ROI MATH]. If we hit even a fraction of that, the return is many times the cost. But I'm flexible on scope &mdash; we can start with a smaller Phase 1 if that feels better."</div>
+    </div>
+
+    <div class="obj">
+      <div class="obj-q">"We need to talk to our board / partner / team first."</div>
+      <div class="obj-a">"Of course. Would it help if I put together a one-page summary they can review? I can also hop on a quick call with them if that would move things along."</div>
+    </div>
+  </div>
+
+  <!-- THE FOLLOW-UP -->
+  <div class="section">
+    <div class="section-tag">After the Meeting</div>
+    <h2>The Follow-Up Email</h2>
+    <p>Send this within 2 hours of the meeting:</p>
+
+    <div class="email-tpl">
+      <span class="tpl-label">Email Template &mdash; Post-Meeting Follow-Up</span>
+Subject: Great connecting &mdash; next steps for [PROJECT]
+
+[NAME],
+
+Great connecting today. I'm excited about the
+opportunity to work together.
+
+As discussed, I've attached the proposal with
+the full breakdown. Here are the highlights:
+
+&bull; [KEY FINDING #1]
+&bull; [KEY FINDING #2]
+&bull; [KEY FINDING #3]
+
+To get started, I'll need:
+1. [DOCUMENT OR INFO]
+2. [DOCUMENT OR INFO]
+3. [DOCUMENT OR INFO]
+
+Happy to hop on a call anytime if you have
+questions. Looking forward to getting this
+moving for you.
+
+Best,
+[YOUR NAME]
+[PHONE]</div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section">
+    <div class="section-tag">Quick Reference</div>
+    <h2>Pre-Pitch Checklist</h2>
+    <p>Run through this before every client pitch:</p>
+
+    <ul class="checklist">
+      <li>Researched their business for at least 30 minutes</li>
+      <li>Found one specific gap or opportunity to lead with</li>
+      <li>Quantified the cost of inaction (dollar amount or hours)</li>
+      <li>Built a clean, professional presentation (7 sections)</li>
+      <li>Included real data in Section 2 (not generic promises)</li>
+      <li>Priced with Phase 1 / Phase 2 structure</li>
+      <li>Calculated the ROI math for them</li>
+      <li>Prepared for top 3 likely objections</li>
+      <li>Have the follow-up email pre-drafted (just fill in details)</li>
+      <li>Know what documents you need from them to start</li>
+    </ul>
+  </div>
+
+  <!-- CTA -->
+  <div class="section" style="text-align: center; padding: 50px 0;">
+    <div class="section-tag">What's Next</div>
+    <h2>Want Help Building Your Pitch?</h2>
+    <p style="max-width: 500px; margin: 0 auto 24px;">If you've got a service but struggle to close higher-ticket clients, let's talk. I'll look at your business, help you identify your best offer, and map out a pitch that closes.</p>
+    <p style="margin-bottom: 24px;">
+      <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank" style="display: inline-block; background: #00BCD4; color: white; padding: 14px 36px; border-radius: 8px; text-decoration: none; font-family: 'Arial', sans-serif; font-weight: bold; font-size: 16px;">Book a Free Strategy Call</a>
+    </p>
+    <p style="font-size: 13px; color: #999;">15 minutes. No pressure. No pitch. Just clarity on your next move.</p>
+  </div>
+
+  <div class="footer">
+    <strong>The Perfect Pitch Kit</strong> by Ronnie Craig<br>
+    <a href="https://easyaiflows.com">easyaiflows.com</a> &nbsp;|&nbsp; 520-560-5447 &nbsp;|&nbsp; ronnie@easyaiflows.com<br><br>
+    &copy; 2026 EasyAiFlows. All rights reserved.
+  </div>
+
+</div>
+</body>
+</html>
