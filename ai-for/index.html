@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Automation by Industry | EasyAiFlows</title>
+  <meta name="description" content="Explore how AI automation helps businesses in 20+ industries save time, close more deals, and grow on autopilot. Find your industry and see what's possible.">
+  <link rel="stylesheet" href="industry-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+  <link rel="canonical" href="https://easyaiflows.com/ai-for/">
+  <style>
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .industry-tile {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 16px;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .industry-tile:hover {
+      border-color: var(--cyan);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .industry-tile .tile-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .industry-tile h3 {
+      font-size: 1.1rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+    }
+    .industry-tile p {
+      font-size: 0.85rem;
+      color: var(--gray-400);
+      margin: 0;
+    }
+    .index-intro {
+      padding: 10rem 0 3rem;
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+    .index-intro h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .index-intro h1 span { color: var(--cyan); }
+    .index-intro p {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.2rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .industries-section {
+      padding: 4rem 0 6rem;
+      background: var(--gray-50);
+    }
+    @media (max-width: 768px) {
+      .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .index-intro { padding: 8rem 0 3rem; }
+      .index-intro h1 { font-size: 2rem; }
+    }
+    @media (max-width: 480px) {
+      .industry-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav>
+    <div class="container">
+      <a href="/" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="/#services">Services</a>
+        <a href="/ai-for/">Industries</a>
+        <a href="/blog/">Blog</a>
+        <a href="/grader" class="btn btn-outline" style="border-color:var(--cyan);color:var(--cyan)">AI Grader</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="index-intro">
+    <div class="container">
+      <h1>AI Automation for <span>Your Industry</span></h1>
+      <p>Every business has repetitive tasks eating up time. Find your industry below and see exactly how AI automation can save you 10+ hours a week.</p>
+    </div>
+  </section>
+
+  <!-- ── Industry Grid ── -->
+  <section class="industries-section">
+    <div class="container">
+      <div class="industry-grid">
+        <a href="/ai-for/dentists" class="industry-tile">
+          <div class="tile-icon">&#129463;</div>
+          <h3>Dentists</h3>
+          <p>Reminders, follow-ups, front desk</p>
+        </a>
+        <a href="/ai-for/restaurants" class="industry-tile">
+          <div class="tile-icon">&#127828;</div>
+          <h3>Restaurants</h3>
+          <p>Orders, reviews, marketing</p>
+        </a>
+        <a href="/ai-for/hvac" class="industry-tile">
+          <div class="tile-icon">&#10052;</div>
+          <h3>HVAC Companies</h3>
+          <p>Dispatch, calls, seasonal campaigns</p>
+        </a>
+        <a href="/ai-for/real-estate" class="industry-tile">
+          <div class="tile-icon">&#127968;</div>
+          <h3>Real Estate Agents</h3>
+          <p>Lead response, CRM nurture, listings</p>
+        </a>
+        <a href="/ai-for/fitness-studios" class="industry-tile">
+          <div class="tile-icon">&#127947;</div>
+          <h3>Fitness Studios</h3>
+          <p>Bookings, retention, lead conversion</p>
+        </a>
+        <a href="/ai-for/barbershops" class="industry-tile">
+          <div class="tile-icon">&#9986;</div>
+          <h3>Barbershops</h3>
+          <p>Booking, reminders, rebooking</p>
+        </a>
+        <a href="/ai-for/nail-salons" class="industry-tile">
+          <div class="tile-icon">&#128133;</div>
+          <h3>Nail Salons</h3>
+          <p>Booking, waitlist, loyalty</p>
+        </a>
+        <a href="/ai-for/med-spas" class="industry-tile">
+          <div class="tile-icon">&#10024;</div>
+          <h3>Med Spas</h3>
+          <p>Consultations, follow-ups, memberships</p>
+        </a>
+        <a href="/ai-for/chiropractors" class="industry-tile">
+          <div class="tile-icon">&#129470;</div>
+          <h3>Chiropractors</h3>
+          <p>Treatment plans, reactivation, intake</p>
+        </a>
+        <a href="/ai-for/insurance-agents" class="industry-tile">
+          <div class="tile-icon">&#128203;</div>
+          <h3>Insurance Agents</h3>
+          <p>Speed-to-lead, renewals, cross-sell</p>
+        </a>
+        <a href="/ai-for/mortgage-brokers" class="industry-tile">
+          <div class="tile-icon">&#127970;</div>
+          <h3>Mortgage Brokers</h3>
+          <p>Lead nurture, docs, rate alerts</p>
+        </a>
+        <a href="/ai-for/photographers" class="industry-tile">
+          <div class="tile-icon">&#128247;</div>
+          <h3>Photographers</h3>
+          <p>Inquiries, booking workflow, lifecycle</p>
+        </a>
+        <a href="/ai-for/event-planners" class="industry-tile">
+          <div class="tile-icon">&#127881;</div>
+          <h3>Event Planners</h3>
+          <p>Vendors, timelines, client updates</p>
+        </a>
+        <a href="/ai-for/cleaning-services" class="industry-tile">
+          <div class="tile-icon">&#129529;</div>
+          <h3>Cleaning Services</h3>
+          <p>Booking, routing, rebooking</p>
+        </a>
+        <a href="/ai-for/landscapers" class="industry-tile">
+          <div class="tile-icon">&#127793;</div>
+          <h3>Landscapers</h3>
+          <p>Estimates, crew scheduling, seasonal</p>
+        </a>
+        <a href="/ai-for/auto-repair" class="industry-tile">
+          <div class="tile-icon">&#128663;</div>
+          <h3>Auto Repair Shops</h3>
+          <p>Booking, status updates, reminders</p>
+        </a>
+        <a href="/ai-for/pet-groomers" class="industry-tile">
+          <div class="tile-icon">&#128054;</div>
+          <h3>Pet Groomers</h3>
+          <p>Booking, no-shows, rebooking</p>
+        </a>
+        <a href="/ai-for/daycares" class="industry-tile">
+          <div class="tile-icon">&#128118;</div>
+          <h3>Daycares</h3>
+          <p>Enrollment, waitlist, parent comms</p>
+        </a>
+        <a href="/ai-for/churches" class="industry-tile">
+          <div class="tile-icon">&#9962;</div>
+          <h3>Churches</h3>
+          <p>Visitor follow-up, events, volunteers</p>
+        </a>
+        <a href="/ai-for/nonprofits" class="industry-tile">
+          <div class="tile-icon">&#128156;</div>
+          <h3>Nonprofits</h3>
+          <p>Donors, grants, volunteer management</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="cta">
+    <div class="container">
+      <h2>Don't See Your Industry?</h2>
+      <p>AI automation works for any business with repetitive tasks. Book a free strategy call and we'll map out exactly what's possible for your business.</p>
+      <div class="cta-buttons">
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" style="font-size:1.15rem; padding:1.1rem 2.5rem;">Book Your Free Call Now</a>
+        <a href="/grader" class="btn btn-outline" style="font-size:1rem; padding:0.9rem 2rem;">Take the AI Readiness Quiz</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>EasyAiFlows</h4>
+          <p>Custom AI automation for entrepreneurs who are ready to stop grinding and start growing. Based in Pearland, TX. Serving clients nationwide.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="/#services">Services</a></li>
+            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="/ai-for/">Industries</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/grader">AI Readiness Grader</a></li>
+            <li><a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:azteampossibility@gmail.com">azteampossibility@gmail.com</a></li>
+            <li><a href="https://instagram.com/nutritionhub101" target="_blank">Instagram</a></li>
+            <li><a href="https://twitter.com/Ronnie71Craig" target="_blank">X / Twitter</a></li>
+            <li><a href="https://tiktok.com/@nutritionhub" target="_blank">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 EasyAiFlows. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
