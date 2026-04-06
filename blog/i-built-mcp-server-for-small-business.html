@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I Built an MCP Server That Helps AI Assistants Recommend Automations for Your Business | EasyAiFlows</title>
+  <meta name="description" content="I built a free MCP server that lets Claude and other AI assistants assess your business for automation readiness across 20 industries. Here's what it does and how to install it.">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an MCP server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "MCP (Model Context Protocol) is a standard that lets AI assistants like Claude connect to external tools and data sources. An MCP server gives AI assistants new capabilities — like assessing your business for automation opportunities."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I install the EasyAiFlows MCP server?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If you use Claude Desktop, add the server config to your claude_desktop_config.json file with the command 'npx easyaiflows-mcp-server'. If you use Claude Code, run 'claude mcp add easyaiflows npx easyaiflows-mcp-server'. The server runs locally on your machine."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What industries does the EasyAiFlows MCP server cover?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The server covers 20 industries: dentists, restaurants, HVAC, real estate, fitness studios, barbershops, nail salons, med spas, chiropractors, insurance agents, mortgage brokers, photographers, event planners, cleaning services, landscapers, auto repair, pet groomers, daycares, churches, and nonprofits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the EasyAiFlows MCP server free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, completely free. It's open source on GitHub and published on npm. Install it, use it, and if you want help implementing the automations it recommends, book a free strategy call."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "I Built an MCP Server That Helps AI Assistants Recommend Automations for Your Business",
+    "description": "A free MCP server that lets Claude assess your business for automation readiness across 20 industries.",
+    "author": {
+      "@type": "Person",
+      "name": "Ronnie Craig",
+      "url": "https://easyaiflows.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "EasyAiFlows",
+      "url": "https://easyaiflows.com"
+    },
+    "datePublished": "2026-04-05",
+    "dateModified": "2026-04-05"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="/ai-for/">Industries</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">Builder Story</span>
+      <h1>I Built an MCP Server That Helps AI Assistants Recommend Automations for Your Business</h1>
+      <p class="article-meta">By Ronnie Craig &bull; April 5, 2026 &bull; 5 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>I run two businesses — a nutrition club in Pearland, TX and an AI automation company called EasyAiFlows. I use AI every single day to run both of them. I've built 3 iOS apps with AI. I automate my outreach, my follow-ups, my scheduling, and my marketing with AI.</p>
+
+    <p>So when I learned about MCP servers — tools that give AI assistants like Claude new capabilities — I thought: <strong>what if Claude could assess any business for automation readiness and tell them exactly what to automate?</strong></p>
+
+    <p>So I built it. And I'm giving it away for free.</p>
+
+    <h2>What Is an MCP Server?</h2>
+
+    <p>MCP stands for <strong>Model Context Protocol</strong>. It's a standard created by Anthropic (the company behind Claude) that lets AI assistants connect to external tools and data sources.</p>
+
+    <p>Think of it like this: Claude is smart, but it doesn't know the specifics of your industry. An MCP server gives Claude specialized knowledge — in this case, knowledge about what AI automations work for 20 different industries.</p>
+
+    <p>When you install the EasyAiFlows MCP server, you can ask Claude things like:</p>
+
+    <ul>
+      <li>"Assess my restaurant's automation readiness — we miss a lot of phone calls and our reviews go unanswered."</li>
+      <li>"What AI automations exist for dental practices?"</li>
+      <li>"I run a cleaning service solo. How can AI help?"</li>
+    </ul>
+
+    <p>And Claude will give you a personalized assessment with a readiness score, specific automations, time saved per week, and revenue impact.</p>
+
+    <h2>What the Server Does</h2>
+
+    <p>The EasyAiFlows MCP server has two tools:</p>
+
+    <h3>1. Assess Business Automation</h3>
+
+    <p>You tell it your industry, your pain points, your team size, and what tools you currently use. It returns:</p>
+
+    <ul>
+      <li><strong>Automation Readiness Score</strong> (0-100) — are you a beginner, growing, or ready to scale?</li>
+      <li><strong>Industry-specific pain points</strong> — the problems you're probably dealing with</li>
+      <li><strong>3 recommended automations</strong> — with descriptions of exactly what they do and how much time they save</li>
+      <li><strong>Expected impact</strong> — hours saved per week and revenue impact</li>
+    </ul>
+
+    <h3>2. Get Automation Examples</h3>
+
+    <p>Pick any of 20 industries and get real examples of AI automations that businesses in that space are using right now. Each example includes what it does, how much time it saves, and the overall impact on the business.</p>
+
+    <h2>20 Industries Covered</h2>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Industry</th>
+          <th>Top Automation</th>
+          <th>Time Saved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Dentists</td><td>Smart appointment reminders</td><td>15+ hrs/week</td></tr>
+        <tr><td>Restaurants</td><td>AI order taking</td><td>20+ hrs/week</td></tr>
+        <tr><td>HVAC</td><td>24/7 AI call answering</td><td>15+ hrs/week</td></tr>
+        <tr><td>Real Estate</td><td>Instant lead response</td><td>10+ hrs/week</td></tr>
+        <tr><td>Fitness Studios</td><td>Trial-to-member conversion</td><td>14+ hrs/week</td></tr>
+        <tr><td>Barbershops</td><td>Online booking + AI chat</td><td>5+ hrs/week</td></tr>
+        <tr><td>Nail Salons</td><td>Cancellation recovery</td><td>10+ hrs/week</td></tr>
+        <tr><td>Med Spas</td><td>Instant consultation booking</td><td>13+ hrs/week</td></tr>
+        <tr><td>Chiropractors</td><td>Treatment plan adherence</td><td>12+ hrs/week</td></tr>
+        <tr><td>Insurance Agents</td><td>Speed-to-lead automation</td><td>15+ hrs/week</td></tr>
+        <tr><td>Mortgage Brokers</td><td>Long-term lead nurture</td><td>20+ hrs/week</td></tr>
+        <tr><td>Photographers</td><td>Automated booking workflow</td><td>15+ hrs/week</td></tr>
+        <tr><td>Event Planners</td><td>Vendor communication</td><td>10+ hrs/event</td></tr>
+        <tr><td>Cleaning Services</td><td>AI booking assistant</td><td>8+ hrs/week</td></tr>
+        <tr><td>Landscapers</td><td>AI lead capture & response</td><td>15+ hrs/week</td></tr>
+        <tr><td>Auto Repair</td><td>Vehicle status updates</td><td>10+ hrs/week</td></tr>
+        <tr><td>Pet Groomers</td><td>Auto-rebook at right interval</td><td>5+ hrs/week</td></tr>
+        <tr><td>Daycares</td><td>AI enrollment assistant</td><td>10+ hrs/week</td></tr>
+        <tr><td>Churches</td><td>Visitor follow-up sequence</td><td>8+ hrs/week</td></tr>
+        <tr><td>Nonprofits</td><td>Donor stewardship automation</td><td>15+ hrs/week</td></tr>
+      </tbody>
+    </table>
+
+    <p>The server also handles aliases — so if someone says "gym" it maps to fitness studios, "mechanic" maps to auto repair, "wedding" maps to event planners. And if someone asks about an industry we don't cover yet, it gives a generic assessment with universal automations that work for any business.</p>
+
+    <h2>How to Install It</h2>
+
+    <p>It's free and takes about 2 minutes.</p>
+
+    <h3>Option 1: Claude Desktop</h3>
+
+    <p>Add this to your Claude Desktop config file (<code>~/Library/Application Support/Claude/claude_desktop_config.json</code> on Mac):</p>
+
+    <pre><code>{
+  "mcpServers": {
+    "easyaiflows": {
+      "command": "npx",
+      "args": ["easyaiflows-mcp-server"]
+    }
+  }
+}</code></pre>
+
+    <p>Restart Claude Desktop and you're good to go.</p>
+
+    <h3>Option 2: Claude Code</h3>
+
+    <pre><code>claude mcp add easyaiflows npx easyaiflows-mcp-server</code></pre>
+
+    <h2>Why I Built This</h2>
+
+    <p>Most small business owners don't know what AI can do for them. They've heard the buzz, but they don't know where to start. They ask ChatGPT or Claude "how do I automate my business?" and get generic, theoretical answers.</p>
+
+    <p>I wanted to change that. This MCP server gives AI assistants <strong>real, specific, industry-tested knowledge</strong> about what automations work and what kind of results to expect. No theory. No fluff. Just "here's what dentists are automating and here's how much time it saves."</p>
+
+    <p>And if someone wants help implementing those automations? That's what EasyAiFlows does.</p>
+
+    <h2>Try It Now</h2>
+
+    <p>Install the server and ask Claude to assess your business. Or if you want the human version, take our <a href="/grader">free AI Readiness Quiz</a> or <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">book a free strategy call</a>.</p>
+
+    <div class="cta-box" style="background: #0F2344; color: white; padding: 2rem; border-radius: 12px; margin: 2rem 0; text-align: center;">
+      <h3 style="color: white; margin-bottom: 0.5rem;">Get the Server</h3>
+      <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Free. Open source. Install in 2 minutes.</p>
+      <p style="margin-bottom: 1.5rem;">
+        <a href="https://github.com/Ronnie-Nutrition/easyaiflows-mcp-server" target="_blank" style="color: #00BCD4; font-weight: 600;">GitHub</a> &nbsp;&bull;&nbsp;
+        <a href="https://www.npmjs.com/package/easyaiflows-mcp-server" target="_blank" style="color: #00BCD4; font-weight: 600;">npm</a>
+      </p>
+      <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank" style="display:inline-block; background:#00BCD4; color:white; padding:0.8rem 2rem; border-radius:8px; text-decoration:none; font-weight:600;">Or Just Book a Free Call</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>EasyAiFlows</h4>
+          <p>Custom AI automation for entrepreneurs who are ready to stop grinding and start growing. Based in Pearland, TX. Serving clients nationwide.</p>
+        </div>
+        <div>
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="../#services">Services</a></li>
+            <li><a href="../#pricing">Pricing</a></li>
+            <li><a href="/ai-for/">Industries</a></li>
+            <li><a href="./">Blog</a></li>
+            <li><a href="../grader.html">AI Readiness Grader</a></li>
+            <li><a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:azteampossibility@gmail.com">azteampossibility@gmail.com</a></li>
+            <li><a href="https://instagram.com/nutritionhub101" target="_blank">Instagram</a></li>
+            <li><a href="https://twitter.com/Ronnie71Craig" target="_blank">X / Twitter</a></li>
+            <li><a href="https://tiktok.com/@nutritionhub" target="_blank">TikTok</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2026 EasyAiFlows. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
