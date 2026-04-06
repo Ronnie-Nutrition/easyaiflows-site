@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Use Claude AI for Customer Service | EasyAiFlows</title>
+  <meta name="description" content="Learn how to set up Claude AI for customer service — FAQ automation, email drafting, and live chat support. Practical steps for small business owners.">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is Claude AI good for customer service?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Claude AI excels at customer service because of its long context window (it can reference your entire knowledge base at once), its ability to match your brand's tone, and its built-in safety features that prevent it from making up information or going off-script." }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to use Claude AI for customer service?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The Claude API uses pay-per-token pricing starting around $3 per million input tokens. For most small businesses handling under 500 conversations per month, expect to spend between $50 and $200 on API costs. A managed setup through a provider like EasyAiFlows includes the build, training, and ongoing support." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can Claude AI handle angry customers?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Claude is actually better than most human agents at de-escalation. It never gets defensive, never takes things personally, and always responds with empathy. You can train it with specific escalation rules — like automatically flagging conversations where a customer mentions cancellation or legal action — so a human steps in at the right moment." }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Use Claude AI for Customer Service",
+    "description": "A practical guide to setting up Claude AI for FAQ responses, email drafting, and chat support in your small business.",
+    "author": { "@type": "Person", "name": "Ronnie Craig", "url": "https://easyaiflows.com" },
+    "publisher": { "@type": "Organization", "name": "EasyAiFlows", "url": "https://easyaiflows.com" },
+    "datePublished": "2026-04-06",
+    "dateModified": "2026-04-06"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">How-To</span>
+      <h1>How to Use Claude AI for Customer Service</h1>
+      <p class="article-meta">By Ronnie Craig &bull; April 6, 2026 &bull; 9 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+    <p>I run a nutrition club in Pearland, TX. People DM me on Instagram, text me, message me on Facebook, walk in the door — and they all want answers right now. What's in the shakes? What time do you open? Can I bring my kids? Do you have sugar-free options?</p>
+
+    <p>For a long time, I was the customer service department. Me, my phone, and whatever free time I had between making drinks and running the business. Then I started using Claude AI — and I'm going to walk you through exactly how I set it up, what it handles, and why I chose Claude over the other options out there.</p>
+
+    <h2>Why Claude AI Specifically?</h2>
+
+    <p>There are a lot of AI tools you could use for customer service. ChatGPT, Gemini, Llama — the list keeps growing. But I chose Claude for three specific reasons that matter when you're talking to real customers with real money:</p>
+
+    <h3>1. The Context Window Is Massive</h3>
+    <p>Claude can hold your entire FAQ document, your product menu, your pricing guide, your hours, your policies, and your brand guidelines — all at once, in a single conversation. That means it doesn't "forget" halfway through a customer interaction that you're closed on Sundays or that the protein shake has 24 grams of protein. Other models lose track. Claude doesn't.</p>
+
+    <h3>2. It Matches Your Tone</h3>
+    <p>This is huge for small businesses. My customers aren't talking to a Fortune 500 help desk. They're talking to a local nutrition spot where we know their name and their order. Claude is exceptional at matching conversational tone. You give it examples of how you actually talk, and it stays in character. No robotic corporate speak. No "I'd be happy to assist you with your inquiry today." Just normal, friendly conversation.</p>
+
+    <h3>3. Built-In Safety</h3>
+    <p>Claude is designed to say "I don't know" instead of making things up. In customer service, that's everything. If someone asks a medical question about ingredients and allergies, I do not want an AI confidently guessing. Claude will tell the customer it's not sure and suggest they contact you directly. That's exactly the behavior you want.</p>
+
+    <div class="takeaway-box"><p><strong>Key insight:</strong> The best customer service AI isn't the one that answers the most questions — it's the one that knows when to stop answering and hand off to a human.</p></div>
+
+    <h2>Step 1: Document Everything Your Customers Ask</h2>
+
+    <p>Before you touch any AI tool, you need to build your knowledge base. And I don't mean some fancy document — I mean a simple list of every question customers ask you, with the exact answer you'd give.</p>
+
+    <p>Here's how I did it:</p>
+    <ul>
+      <li>Scrolled through my last 200 DMs and texts</li>
+      <li>Wrote down every unique question</li>
+      <li>Grouped them into categories: menu, hours/location, pricing, events, health questions</li>
+      <li>Wrote my actual answer for each one — not a corporate answer, my answer</li>
+    </ul>
+
+    <p>For most small businesses, you'll end up with 30 to 50 questions. That covers about 90% of what comes in. The other 10% is the stuff that genuinely needs a human — and that's fine. That's what escalation rules are for.</p>
+
+    <h2>Step 2: Set Up Your Claude-Powered Assistant</h2>
+
+    <p>There are two ways to go here, depending on your technical comfort level:</p>
+
+    <h3>Option A: API-Based Setup (More Control)</h3>
+    <p>If you or someone on your team is comfortable with basic technical setup, you can use the Claude API directly. This gives you full control over:</p>
+    <ul>
+      <li>The system prompt (the instructions that tell Claude how to behave)</li>
+      <li>What knowledge base it has access to</li>
+      <li>How it handles different types of questions</li>
+      <li>When it escalates to a human</li>
+      <li>Integration with your existing tools (website chat, email, etc.)</li>
+    </ul>
+
+    <h3>Option B: Managed Platform (Easier)</h3>
+    <p>If you just want it to work without dealing with APIs, there are platforms that let you build a Claude-powered chatbot with a visual interface. You upload your FAQ, set your rules, customize the look, and embed it on your site. That's the approach we take at EasyAiFlows — we build it, train it on your business, and you just use it.</p>
+
+    <h2>Step 3: Write Your System Prompt</h2>
+
+    <p>The system prompt is the most important piece. This is where you tell Claude who it is, what it knows, and how it should behave. Here's the structure I use:</p>
+
+    <ul>
+      <li><strong>Identity:</strong> "You are the customer service assistant for [Business Name]. You are friendly, helpful, and casual."</li>
+      <li><strong>Knowledge boundaries:</strong> "Only answer questions using the information provided below. If you don't know something, say: 'Great question — let me connect you with the team for the most accurate answer.'"</li>
+      <li><strong>Tone rules:</strong> "Match the energy of the customer. If they're casual, be casual. If they're formal, be professional. Never use corporate jargon."</li>
+      <li><strong>Escalation triggers:</strong> "If a customer mentions: allergies, medical conditions, complaints, refunds, or anything involving safety — immediately flag for human review."</li>
+      <li><strong>The knowledge base:</strong> Your full FAQ document, menu, hours, policies, etc.</li>
+    </ul>
+
+    <div class="takeaway-box"><p><strong>Pro tip:</strong> Include 5-10 example conversations in your system prompt. Show Claude a real customer question and exactly how you'd respond. This does more for tone accuracy than any amount of written instructions.</p></div>
+
+    <h2>Step 4: Set Up Your Three Core Channels</h2>
+
+    <h3>FAQ / Website Chat</h3>
+    <p>This is the easiest win. Embed a chat widget on your website that's powered by Claude. Most of my website visitors have the same 5 questions — hours, location, menu, pricing, and how to order. Claude handles all of them in under 2 seconds. Before this, those people either called me (while I'm making drinks) or just left the site.</p>
+
+    <h3>Email Drafting</h3>
+    <p>I don't have Claude send emails automatically — and I'd recommend you don't either, at least not at first. Instead, Claude drafts the response and I review it before it goes out. Takes me about 10 seconds to approve or tweak. This is especially useful for:</p>
+    <ul>
+      <li>Order confirmations</li>
+      <li>Event inquiries</li>
+      <li>Catering requests</li>
+      <li>Follow-up emails after a first visit</li>
+    </ul>
+
+    <h3>DM / Chat Support</h3>
+    <p>This is where the real volume is for most local businesses. People DM you on Instagram, message you on Facebook, text you. Claude can draft responses for all of these. The key is having it connected to your actual messaging platforms — which is where API integration or a managed platform comes in.</p>
+
+    <h2>Step 5: Train, Test, and Refine</h2>
+
+    <p>Here's what most people skip: testing. Before you let Claude talk to a single real customer, you need to stress-test it.</p>
+
+    <ul>
+      <li><strong>Ask it trick questions</strong> — things outside its knowledge base. Make sure it says "I don't know" instead of guessing.</li>
+      <li><strong>Ask it edge cases</strong> — what if someone asks for a refund? What if someone's rude? What if someone asks a medical question?</li>
+      <li><strong>Ask it in different tones</strong> — casual, formal, frustrated, excited. Make sure it adapts.</li>
+      <li><strong>Have friends test it</strong> — people who don't know the "right" answers. See if the responses make sense to a real customer.</li>
+    </ul>
+
+    <p>Plan on spending a week refining your system prompt based on test results. This isn't set-it-and-forget-it. You'll find gaps, weird responses, and edge cases you didn't think of. That's normal. Fix them, update the prompt, test again.</p>
+
+    <h2>What Results to Expect</h2>
+
+    <p>Let me be straight with you — AI customer service isn't going to replace you. Not even close. What it does is handle the repetitive stuff so you can focus on the conversations that actually need a human touch.</p>
+
+    <p>Here's what I've seen in my own business:</p>
+    <ul>
+      <li><strong>Response time:</strong> Went from 2-4 hours (whenever I checked my phone) to under 30 seconds</li>
+      <li><strong>Repeat questions:</strong> 80-85% of incoming messages are now handled without me touching them</li>
+      <li><strong>Customer satisfaction:</strong> People actually prefer the fast response, even knowing it's AI-assisted</li>
+      <li><strong>My time saved:</strong> About 2 hours per day that I now spend on revenue-generating activities</li>
+    </ul>
+
+    <p>The math is simple. If your time is worth $50/hour, that's $100/day, $3,000/month in reclaimed time. The AI costs a fraction of that.</p>
+
+    <div class="takeaway-box"><p><strong>Bottom line:</strong> Claude AI for customer service isn't about replacing the human element — it's about making sure your customers get fast, accurate answers while you focus on growing the business.</p></div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Is Claude AI good for customer service?
+        </button>
+        <div class="faq-answer">Yes. Claude AI excels at customer service because of its long context window (it can reference your entire knowledge base at once), its ability to match your brand's tone, and its built-in safety features that prevent it from making up information or going off-script. It's especially strong for small businesses that need a natural, conversational feel — not a robotic help desk.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          How much does it cost to use Claude AI for customer service?
+        </button>
+        <div class="faq-answer">The Claude API uses pay-per-token pricing starting around $3 per million input tokens. For most small businesses handling under 500 conversations per month, expect to spend between $50 and $200 on API costs. A managed setup through a provider like EasyAiFlows includes the build, training, and ongoing support so you don't have to deal with the technical side.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Can Claude AI handle angry customers?
+        </button>
+        <div class="faq-answer">Claude is actually better than most human agents at de-escalation. It never gets defensive, never takes things personally, and always responds with empathy. You can train it with specific escalation rules — like automatically flagging conversations where a customer mentions cancellation or legal action — so a human steps in at the right moment.</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="article-cta">
+      <h3>Ready to Put Claude AI to Work in Your Business?</h3>
+      <p>Take our free 2-minute assessment to find out how much time and money AI customer service could save your business — and get a personalized action plan.</p>
+      <a href="../grader.html" class="btn btn-primary">Take the AI Readiness Grader &rarr;</a>
+    </div>
+  </article>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows. All rights reserved. | <a href="../">Home</a> | <a href="./">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+</body>
+</html>
