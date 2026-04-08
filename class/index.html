@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI for Business — Class Notes | EasyAiFlows</title>
+  <meta name="description" content="Class notes and resources from Ronnie Craig's AI for Business workshop. Get the slides, tools, and step-by-step guides.">
+  <link rel="icon" href="../logo.png" type="image/png">
+  <style>
+    :root {
+      --navy: #1B3A6B;
+      --navy-dark: #0F2344;
+      --cyan: #00BCD4;
+      --cyan-light: #E0F7FA;
+      --gray-50: #F8FAFC;
+      --gray-100: #F1F5F9;
+      --gray-200: #E2E8F0;
+      --gray-400: #94A3B8;
+      --gray-600: #475569;
+      --gray-800: #1E293B;
+      --white: #FFFFFF;
+      --green: #10B981;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-800); line-height: 1.6; }
+    .container { max-width: 680px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+    .hero h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .hero h1 span { color: var(--cyan); }
+    .hero .subtitle { color: rgba(255,255,255,0.8); font-size: 1.1rem; margin-bottom: 0.25rem; }
+    .hero .date { color: var(--cyan); font-weight: 600; font-size: 1rem; }
+
+    /* Email Gate */
+    .email-gate {
+      background: var(--white);
+      border: 2px solid var(--cyan);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      margin: -2rem auto 2rem;
+      max-width: 520px;
+      text-align: center;
+      position: relative;
+      z-index: 10;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .email-gate h2 { font-size: 1.4rem; color: var(--navy); margin-bottom: 0.5rem; }
+    .email-gate p { color: var(--gray-600); margin-bottom: 1.5rem; font-size: 0.95rem; }
+    .email-gate form { display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center; }
+    .email-gate input[type="text"],
+    .email-gate input[type="email"] {
+      flex: 1;
+      min-width: 180px;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 1rem;
+      outline: none;
+    }
+    .email-gate input:focus { border-color: var(--cyan); }
+    .email-gate button {
+      background: var(--cyan);
+      color: var(--white);
+      border: none;
+      padding: 0.85rem 2rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .email-gate button:hover { background: #0097A7; transform: translateY(-1px); }
+
+    /* Success */
+    .success-msg {
+      display: none;
+      background: #ECFDF5;
+      border: 1px solid var(--green);
+      border-radius: 12px;
+      padding: 1.5rem;
+      text-align: center;
+      margin: -2rem auto 2rem;
+      max-width: 520px;
+      position: relative;
+      z-index: 10;
+    }
+    .success-msg.active { display: block; }
+    .success-msg h3 { color: var(--green); margin-bottom: 0.5rem; }
+
+    /* Notes section */
+    .notes {
+      display: none;
+      padding: 2rem 0 4rem;
+    }
+    .notes.active { display: block; }
+    .notes h2 { font-size: 1.6rem; color: var(--navy); margin: 2rem 0 1rem; padding-top: 1rem; border-top: 1px solid var(--gray-200); }
+    .notes h2:first-child { border-top: none; padding-top: 0; }
+    .notes h3 { font-size: 1.2rem; color: var(--navy); margin: 1.5rem 0 0.75rem; }
+    .notes p { color: var(--gray-600); margin-bottom: 1rem; }
+    .notes ul, .notes ol { color: var(--gray-600); padding-left: 1.5rem; margin-bottom: 1rem; }
+    .notes li { margin-bottom: 0.5rem; }
+    .notes strong { color: var(--gray-800); }
+
+    .tool-card {
+      background: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .tool-card h4 { color: var(--navy); margin-bottom: 0.25rem; }
+    .tool-card p { font-size: 0.9rem; margin: 0; }
+    .tool-card a { color: var(--cyan); font-weight: 600; }
+
+    .step-box {
+      background: var(--cyan-light);
+      border-left: 4px solid var(--cyan);
+      border-radius: 0 12px 12px 0;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .step-box strong { color: var(--navy); display: block; margin-bottom: 0.25rem; }
+    .step-box p { margin: 0; font-size: 0.95rem; }
+
+    .cta-box {
+      background: linear-gradient(135deg, var(--navy-dark) 0%, var(--navy) 100%);
+      color: var(--white);
+      border-radius: 16px;
+      padding: 2.5rem;
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .cta-box h3 { color: var(--white); font-size: 1.4rem; margin-bottom: 0.75rem; }
+    .cta-box p { color: rgba(255,255,255,0.8); margin-bottom: 1.5rem; }
+    .cta-box a {
+      display: inline-block;
+      background: var(--cyan);
+      color: var(--white);
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .cta-box a:hover { background: #0097A7; }
+
+    footer {
+      background: var(--gray-800);
+      color: rgba(255,255,255,0.6);
+      padding: 2rem 0;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    footer a { color: var(--cyan); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.7rem; }
+      .email-gate { margin: -1.5rem 1rem 1.5rem; padding: 2rem 1.25rem; }
+      .email-gate form { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="container">
+      <h1>AI for <span>Your Business</span></h1>
+      <p class="subtitle">with Ronnie Craig | EasyAiFlows</p>
+      <p class="date">Live Workshop — April 8, 2026</p>
+    </div>
+  </section>
+
+  <!-- Email Gate -->
+  <div class="container">
+    <div class="email-gate" id="emailGate">
+      <h2>Get Your Class Notes + Resources</h2>
+      <p>Enter your name and email below. You'll get the full notes, tool links, and a follow-up with everything we covered.</p>
+      <form onsubmit="submitClassEmail(event)">
+        <input type="text" id="nameInput" placeholder="Your first name" required>
+        <input type="email" id="emailInput" placeholder="you@email.com" required>
+        <button type="submit">Get My Notes</button>
+      </form>
+    </div>
+
+    <div class="success-msg" id="successMsg">
+      <h3>You're in! Scroll down for your class notes.</h3>
+      <p>You'll also get a follow-up email with everything we covered today.</p>
+    </div>
+  </div>
+
+  <!-- Class Notes (hidden until email submitted) -->
+  <section class="notes" id="classNotes">
+    <div class="container">
+
+      <h2>Part 1: What AI Can Actually Do for Your Business (5 min)</h2>
+
+      <p>AI isn't here to replace you — it's here to handle the repetitive tasks that eat your time. Think of it as a tireless assistant that works 24/7.</p>
+
+      <h3>The Big 5 Business Uses</h3>
+      <ol>
+        <li><strong>Answer customer questions</strong> — AI chatbots handle FAQs, DMs, and emails</li>
+        <li><strong>Follow up with leads</strong> — automated text/email sequences so nobody falls through the cracks</li>
+        <li><strong>Create content</strong> — social media posts, emails, blog articles in minutes</li>
+        <li><strong>Book appointments</strong> — AI scheduling that works while you sleep</li>
+        <li><strong>Organize and analyze</strong> — sort data, generate reports, spot trends</li>
+      </ol>
+
+      <p><strong>Key stat:</strong> Small business owners who use AI save 10-20 hours/week on average. That's like hiring a part-time employee for $50-200/month.</p>
+
+      <h2>Part 2: Setting Up Claude AI — Step by Step (10 min)</h2>
+
+      <p>Claude is made by Anthropic. It's the AI I use to run my businesses every day. Here's how to get started in under 5 minutes.</p>
+
+      <div class="step-box">
+        <strong>Step 1: Go to claude.ai</strong>
+        <p>Visit <a href="https://claude.ai" style="color:var(--cyan)">claude.ai</a> and click "Sign up." Use your Google account or email. The free plan gives you plenty to start with.</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 2: Start a conversation</strong>
+        <p>Just type what you need — like talking to an assistant. "Write me 5 Instagram posts about my salon" or "Draft a follow-up email for a customer who hasn't been in 30 days."</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 3: Give it context</strong>
+        <p>The more you tell Claude about your business, the better the output. Try: "I own a [type of business] in [city]. My customers are [describe them]. Write me..."</p>
+      </div>
+
+      <div class="step-box">
+        <strong>Step 4: Iterate and refine</strong>
+        <p>Don't accept the first draft. Say "make it shorter," "more casual," "add a call to action," or "rewrite it for Instagram." Claude gets better with feedback.</p>
+      </div>
+
+      <h3>Pro Tips</h3>
+      <ul>
+        <li><strong>Upload files:</strong> Drop in your menu, price list, or FAQ document — Claude can read it and answer questions about YOUR business</li>
+        <li><strong>Use Projects:</strong> Create a "project" in Claude for your business with your brand info saved — every conversation stays on-brand</li>
+        <li><strong>Be specific:</strong> "Write a social media post" = generic. "Write an Instagram caption for my Pearland fitness studio announcing a new 6am class, casual and energetic tone, under 100 words" = gold</li>
+      </ul>
+
+      <h2>Part 3: 5 Things You Can Do With AI Right Now (15 min)</h2>
+
+      <h3>1. Write a Week of Social Media Posts (10 min)</h3>
+      <p>Prompt to try right now:</p>
+      <div class="tool-card">
+        <p><em>"I own a [business type] in [city]. Write me 7 Instagram posts for this week — one per day. Mix educational tips, behind-the-scenes, and promotional. Casual, friendly tone. Include hashtag suggestions."</em></p>
+      </div>
+
+      <h3>2. Create a Customer Follow-Up Email (3 min)</h3>
+      <p>Prompt:</p>
+      <div class="tool-card">
+        <p><em>"Write a friendly follow-up email for customers who visited my [business] but haven't been back in 30 days. Include a special offer to come back. Keep it under 150 words."</em></p>
+      </div>
+
+      <h3>3. Build Your FAQ Responses (5 min)</h3>
+      <p>Prompt:</p>
+      <div class="tool-card">
+        <p><em>"Here are the 10 questions my customers ask most: [list them]. Write professional but friendly responses to each one that I can use for my website, DMs, and chatbot."</em></p>
+      </div>
+
+      <h3>4. Analyze Your Competition (5 min)</h3>
+      <p>Prompt:</p>
+      <div class="tool-card">
+        <p><em>"I own a [business type] in [city/area]. What are the top 5 things similar businesses are doing with AI and automation right now? What should I prioritize first?"</em></p>
+      </div>
+
+      <h3>5. Plan Your Next Month of Content (10 min)</h3>
+      <p>Prompt:</p>
+      <div class="tool-card">
+        <p><em>"Create a 30-day content calendar for my [business] on Instagram. Mix these content types: tips, testimonials, behind-the-scenes, promotional, community engagement. Include post ideas and best times to post."</em></p>
+      </div>
+
+      <h2>Part 4: AI Automation — Beyond Chat (10 min)</h2>
+
+      <p>Claude is the starting point. Once you're comfortable, here's what's next:</p>
+
+      <div class="tool-card">
+        <h4>Missed Call Text-Back</h4>
+        <p>Someone calls, you can't answer — they automatically get a text: "Hey, sorry we missed you! How can we help?" Captures 40% of leads that would've gone to your competitor.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Automated Review Requests</h4>
+        <p>After every visit, your customer gets a text asking for a Google review. Your rating goes up on autopilot. No more awkwardly asking in person.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>AI Chatbot on Your Website</h4>
+        <p>Answer questions, book appointments, and capture leads 24/7 — even at 2 AM. Platforms like Tidio and Chatbase make this possible with zero coding.</p>
+      </div>
+
+      <div class="tool-card">
+        <h4>Email/SMS Nurture Sequences</h4>
+        <p>New lead comes in → automatic welcome message → follow-up on Day 3 → offer on Day 7. Runs forever without you touching it.</p>
+      </div>
+
+      <h2>Part 5: Resources + Next Steps (5 min)</h2>
+
+      <h3>Free Tools to Start Today</h3>
+      <div class="tool-card">
+        <h4>Claude AI (Free)</h4>
+        <p><a href="https://claude.ai">claude.ai</a> — The AI I use daily. Free tier is powerful enough for most tasks.</p>
+      </div>
+      <div class="tool-card">
+        <h4>ChatGPT (Free)</h4>
+        <p><a href="https://chatgpt.com">chatgpt.com</a> — Another great option. Try both, see which fits your style.</p>
+      </div>
+      <div class="tool-card">
+        <h4>Canva (Free)</h4>
+        <p><a href="https://canva.com">canva.com</a> — AI-powered design tool for social media graphics, presentations, and more.</p>
+      </div>
+      <div class="tool-card">
+        <h4>Tidio (Free)</h4>
+        <p><a href="https://tidio.com">tidio.com</a> — Add an AI chatbot to your website in 10 minutes.</p>
+      </div>
+
+      <h3>Deep Dive Articles</h3>
+      <ul>
+        <li><a href="/blog/free-ai-tools-small-business.html" style="color:var(--cyan)">Free AI Tools for Small Business Owners</a></li>
+        <li><a href="/blog/build-ai-chatbot-no-coding.html" style="color:var(--cyan)">How to Build an AI Chatbot (No Coding)</a></li>
+        <li><a href="/blog/ai-automation-local-businesses.html" style="color:var(--cyan)">AI Automation for Local Businesses — Where to Start</a></li>
+        <li><a href="/blog/ai-automation-cost-small-business.html" style="color:var(--cyan)">How Much Does AI Automation Cost?</a></li>
+        <li><a href="/blog/ai-automation-roi-small-business.html" style="color:var(--cyan)">What's the ROI of AI Automation?</a></li>
+      </ul>
+
+      <h3>How Ready Is Your Business?</h3>
+      <div class="tool-card">
+        <h4>Take the AI Readiness Grader (2 min)</h4>
+        <p>Get a personalized automation score + specific recommendations for YOUR business.<br>
+        <a href="/grader">Take the quiz at easyaiflows.com/grader</a></p>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-box">
+        <h3>Want Help Setting This Up?</h3>
+        <p>I'll hop on a free 15-minute call, look at your business, and tell you exactly what to automate first — and what it would cost. No pitch, no pressure.</p>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book Your Free Strategy Call</a>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows | <a href="/">Home</a> | <a href="/blog/">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+  <script>
+    const GHL_API = 'https://services.leadconnectorhq.com';
+    const GHL_TOKEN = 'pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0';
+    const GHL_LOC = 'k5gu12TNotD5eV866JKZ';
+    const GHL_HEADERS = {
+      'Authorization': 'Bearer ' + GHL_TOKEN,
+      'Version': '2021-07-28',
+      'Content-Type': 'application/json'
+    };
+
+    async function submitClassEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById('nameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+
+      if (!email || !email.includes('@')) return;
+
+      // Create contact in GHL
+      try {
+        const res = await fetch(GHL_API + '/contacts/upsert', {
+          method: 'POST',
+          headers: GHL_HEADERS,
+          body: JSON.stringify({
+            locationId: GHL_LOC,
+            firstName: name,
+            email: email,
+            source: 'ai-class-apr8',
+            tags: ['class-attendee']
+          })
+        });
+        const data = await res.json();
+        const contactId = data.contact?.id;
+        if (contactId) {
+          await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
+            method: 'POST',
+            headers: GHL_HEADERS,
+            body: JSON.stringify({ tags: ['class-attendee'] })
+          });
+        }
+      } catch (err) { /* fail silently */ }
+
+      // Show notes
+      document.getElementById('emailGate').style.display = 'none';
+      document.getElementById('successMsg').classList.add('active');
+      document.getElementById('classNotes').classList.add('active');
+
+      // Save to localStorage
+      localStorage.setItem('classOptIn', JSON.stringify({ name, email, date: new Date().toISOString() }));
+    }
+
+    // If already opted in, show notes immediately
+    if (localStorage.getItem('classOptIn')) {
+      document.getElementById('emailGate').style.display = 'none';
+      document.getElementById('classNotes').classList.add('active');
+    }
+  </script>
+
+</body>
+</html>
