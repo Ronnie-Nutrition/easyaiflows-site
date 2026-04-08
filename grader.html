@@ -542,15 +542,46 @@ function prevQuestion() {
   updateProgress();
 }
 
-// ── Email ──
+// ── Email & GHL Contact Creation ──
+const GHL_API = 'https://services.leadconnectorhq.com';
+const GHL_TOKEN = 'pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0';
+const GHL_LOC = 'k5gu12TNotD5eV866JKZ';
+const GHL_HEADERS = {
+  'Authorization': 'Bearer ' + GHL_TOKEN,
+  'Version': '2021-07-28',
+  'Content-Type': 'application/json'
+};
+
+async function createGHLContact(email, score) {
+  try {
+    // 1. Create or update contact
+    const contactRes = await fetch(GHL_API + '/contacts/upsert', {
+      method: 'POST',
+      headers: GHL_HEADERS,
+      body: JSON.stringify({
+        locationId: GHL_LOC,
+        email: email,
+        source: 'ai-readiness-grader',
+        customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
+      })
+    });
+    const contactData = await contactRes.json();
+    const contactId = contactData.contact?.id;
+    if (!contactId) return;
+
+    // 2. Add tag
+    await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
+      method: 'POST',
+      headers: GHL_HEADERS,
+      body: JSON.stringify({ tags: ['ai-grader-lead'] })
+    });
+  } catch (e) { /* fail silently — don't block the user */ }
+}
+
 function submitEmail() {
   const email = document.getElementById('emailInput').value.trim();
   if (email && email.includes('@')) {
-    fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook/grader', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: email, score: calcScore(), source: 'ai-readiness-grader' })
-    }).catch(() => {});
+    createGHLContact(email, calcScore());
   }
   showResults();
 }
