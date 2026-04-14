@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EasyAI Assistant — Your Personal AI, Finally</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray: #6b7280;
+      --light: #f9fafb;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --green: #16a34a;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      padding: 20px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    .logo {
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: -0.5px;
+    }
+    .logo span { color: var(--accent); }
+    nav a.nav-cta {
+      background: var(--accent);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* HERO */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero p {
+      font-size: 1.15rem;
+      color: #374151;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .hero-cta:hover { background: var(--accent-dark); }
+    .hero-sub {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--gray);
+    }
+
+    /* PAIN */
+    .pain {
+      background: var(--black);
+      color: white;
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .pain h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .pain-item {
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 28px 24px;
+      text-align: left;
+    }
+    .pain-item .icon { font-size: 1.6rem; margin-bottom: 12px; }
+    .pain-item p { font-size: 0.95rem; color: #d1d5db; line-height: 1.55; }
+
+    /* SOLUTION */
+    .solution {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .solution h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .solution .sub {
+      font-size: 1.05rem;
+      color: #374151;
+      margin-bottom: 48px;
+    }
+    .feature-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .feature {
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 24px 20px;
+    }
+    .feature .check {
+      color: var(--green);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+    .feature h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 6px; }
+    .feature p { font-size: 0.88rem; color: var(--gray); }
+
+    /* STORY */
+    .story {
+      background: #eff6ff;
+      padding: 72px 24px;
+    }
+    .story-inner {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .story h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+    .story p {
+      font-size: 1rem;
+      color: #1f2937;
+      margin-bottom: 16px;
+    }
+    .story .attribution {
+      margin-top: 28px;
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+    .story .attribution span { color: var(--gray); font-weight: 400; }
+
+    /* INTEGRATIONS */
+    .integrations {
+      padding: 64px 24px;
+      text-align: center;
+      border-top: 1px solid #e5e7eb;
+    }
+    .integrations h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+    .integrations-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      max-width: 860px;
+      margin: 0 auto 24px;
+    }
+    .integration-chip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #e5e7eb;
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1f2937;
+      background: white;
+    }
+    .integration-chip .i-icon { font-size: 1.2rem; }
+    .integrations .catchall {
+      font-size: 0.85rem;
+      color: var(--gray);
+      margin-top: 8px;
+    }
+
+    /* PRICING */
+    .pricing {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .pricing h2 {
+      font-size: clamp(1.6rem, 4vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .pricing .sub { color: var(--gray); margin-bottom: 48px; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+    .plan {
+      border: 1px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: left;
+      position: relative;
+    }
+    .plan.featured {
+      border-color: var(--accent);
+      border-width: 2px;
+    }
+    .plan-badge {
+      position: absolute;
+      top: -13px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .plan h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; color: var(--gray); text-transform: uppercase; letter-spacing: 0.05em; }
+    .plan .price { font-size: 2.4rem; font-weight: 800; margin-bottom: 4px; letter-spacing: -1px; }
+    .plan .price span { font-size: 1rem; font-weight: 400; color: var(--gray); }
+    .plan .desc { font-size: 0.88rem; color: var(--gray); margin-bottom: 24px; }
+    .plan ul { list-style: none; margin-bottom: 28px; }
+    .plan ul li {
+      font-size: 0.9rem;
+      padding: 7px 0;
+      border-bottom: 1px solid #f3f4f6;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .plan ul li::before { content: "✓"; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .plan a {
+      display: block;
+      text-align: center;
+      padding: 13px;
+      border-radius: 7px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+    .plan.featured a { background: var(--accent); color: white; }
+    .plan:not(.featured) a { border: 2px solid var(--black); color: var(--black); }
+
+    /* OBJECTION */
+    .objection {
+      background: var(--light);
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .objection h2 {
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .faq-item h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; }
+    .faq-item p { font-size: 0.9rem; color: #374151; }
+
+    /* CTA */
+    .final-cta {
+      background: var(--accent);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 4.5vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    .final-cta p { font-size: 1.05rem; opacity: 0.9; margin-bottom: 36px; }
+    .final-cta a {
+      display: inline-block;
+      background: white;
+      color: var(--accent);
+      padding: 16px 40px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .final-cta .sub { margin-top: 16px; font-size: 0.85rem; opacity: 0.7; }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--gray);
+      border-top: 1px solid #e5e7eb;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Easy<span>AI</span> Flows</div>
+    <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="nav-cta" target="_blank">Book a Free Call</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Personal AI Assistant</div>
+    <h1>You're running your business.<br><em>Who's running you?</em></h1>
+    <p>EasyAI Assistant handles your follow-ups, drafts your messages, tracks your tasks, and answers your questions — so you can stop drowning in small stuff and focus on what actually grows your business.</p>
+    <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="hero-cta" target="_blank">Get My Assistant — $97/mo</a>
+    <p class="hero-sub">No contracts. Cancel anytime. Set up in 24 hours.</p>
+  </section>
+
+  <!-- PAIN -->
+  <section class="pain">
+    <h2>Sound familiar?</h2>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="icon">📱</div>
+        <p>You open your phone and immediately feel behind. 47 unread messages. You don't know where to start.</p>
+      </div>
+      <div class="pain-item">
+        <div class="icon">🔁</div>
+        <p>You keep forgetting to follow up. Leads go cold. Appointments get missed. Not because you don't care — because you're doing everything.</p>
+      </div>
+      <div class="pain-item">
+        <div class="icon">⏰</div>
+        <p>You're working 10-hour days but somehow feel like nothing got done. Admin work ate your whole morning again.</p>
+      </div>
+      <div class="pain-item">
+        <div class="icon">🧠</div>
+        <p>Your brain is full. Notes are everywhere. You're holding a hundred things in your head and still dropping them.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLUTION -->
+  <section class="solution">
+    <h2>Your personal AI is one text away.</h2>
+    <p class="sub">EasyAI Assistant works through text — just like messaging a real assistant. Ask it anything, give it a task, and it handles it.</p>
+    <div class="feature-list">
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>Draft messages & emails</h4>
+        <p>Tell it what you need to say. It writes it. You approve and send.</p>
+      </div>
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>Reminders & follow-ups</h4>
+        <p>Set it and forget it. It pings you so nothing falls through.</p>
+      </div>
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>Research & quick answers</h4>
+        <p>Ask questions, get fast, accurate answers without digging around.</p>
+      </div>
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>Organize your day</h4>
+        <p>Brain dump your tasks. It sorts, prioritizes, and keeps you on track.</p>
+      </div>
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>SMS & Telegram access</h4>
+        <p>Reach your assistant wherever you already communicate. No new apps.</p>
+      </div>
+      <div class="feature">
+        <div class="check">✓</div>
+        <h4>Always on, always ready</h4>
+        <p>6 AM or 11 PM — your assistant doesn't clock out.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="story">
+    <div class="story-inner">
+      <h2>"I built this because I needed it first."</h2>
+      <p>I own a nutrition club in Pearland, TX, run an AI automation business, and work in hospice care. I was doing outreach, managing leads, writing messages, scheduling calls, posting content — all by myself.</p>
+      <p>I was burning hours on $10/hr work while $100/hr opportunities slipped past me. I needed someone to help me stay on top of it all. I couldn't afford a human assistant. So I built an AI one.</p>
+      <p>It's the thing that actually changed my week. Not another tool or another app — just a reliable assistant that handles the small stuff so I can focus on the big stuff.</p>
+      <p>Now I'm making it available to other business owners who are in the same spot I was.</p>
+      <div class="attribution">— Ronnie Craig <span>/ Founder, EasyAiFlows</span></div>
+    </div>
+  </section>
+
+  <!-- INTEGRATIONS -->
+  <section class="integrations">
+    <h2>Works with the tools you're already using</h2>
+    <div class="integrations-grid">
+      <div class="integration-chip"><span class="i-icon">📧</span> Gmail</div>
+      <div class="integration-chip"><span class="i-icon">📅</span> Google Calendar</div>
+      <div class="integration-chip"><span class="i-icon">💬</span> WhatsApp</div>
+      <div class="integration-chip"><span class="i-icon">✈️</span> Telegram</div>
+      <div class="integration-chip"><span class="i-icon">📱</span> Text Messages (SMS)</div>
+      <div class="integration-chip"><span class="i-icon">📊</span> Excel &amp; Spreadsheets</div>
+      <div class="integration-chip"><span class="i-icon">📄</span> PDFs &amp; Documents</div>
+      <div class="integration-chip"><span class="i-icon">🔍</span> Live Web Search</div>
+    </div>
+    <p class="catchall">Don't see your tool? We connect to 40+ platforms — ask us on your call.</p>
+  </section>
+
+  <!-- PRICING -->
+  <section class="pricing">
+    <h2>Simple, honest pricing.</h2>
+    <p class="sub">No upsells. No hidden fees. Pick the plan that fits where you are right now.</p>
+    <div class="pricing-grid">
+
+      <div class="plan">
+        <h3>Starter</h3>
+        <div class="price">$97 <span>/mo</span></div>
+        <p class="desc">Perfect if you're doing everything solo and just need reliable help.</p>
+        <ul>
+          <li>Personal AI assistant via Telegram</li>
+          <li>Message drafting & task management</li>
+          <li>Reminders & follow-up prompts</li>
+          <li>Q&A and quick research</li>
+          <li>24/7 availability</li>
+          <li>Setup in 24 hours</li>
+        </ul>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Get Started</a>
+      </div>
+
+      <div class="plan featured">
+        <div class="plan-badge">Most Popular</div>
+        <h3>Pro</h3>
+        <div class="price">$247 <span>/mo</span></div>
+        <p class="desc">For business owners who want SMS access and a smarter assistant.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>SMS access via your phone number</li>
+          <li>Smarter AI model (GPT-4o)</li>
+          <li>Calendar & scheduling integration</li>
+          <li>Web search & live lookups</li>
+          <li>Priority support</li>
+        </ul>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Get Started</a>
+      </div>
+
+      <div class="plan">
+        <h3>Done-For-You</h3>
+        <div class="price">$497 <span>/mo</span></div>
+        <p class="desc">Custom setup, onboarding call, and a fully personalized assistant.</p>
+        <ul>
+          <li>Everything in Pro</li>
+          <li>1-on-1 onboarding call with Ronnie</li>
+          <li>Custom persona & business context</li>
+          <li>Workflow integration (CRM, GHL, etc.)</li>
+          <li>Monthly check-in & optimization</li>
+          <li>White-glove support</li>
+        </ul>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Get Started</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- OBJECTIONS -->
+  <section class="objection">
+    <h2>Real questions, straight answers.</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Is this just ChatGPT?</h4>
+        <p>No. ChatGPT is a generic tool. EasyAI Assistant is set up specifically for you — your business context, your communication style, your priorities. It's the difference between a search engine and an assistant who knows you.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Do I need to be tech-savvy?</h4>
+        <p>Not at all. If you can send a text message, you can use this. We handle the setup. You just start talking to it.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I want to cancel?</h4>
+        <p>No contracts, no drama. Cancel anytime. We don't lock you in because we'd rather earn your business every month.</p>
+      </div>
+      <div class="faq-item">
+        <h4>How fast is the setup?</h4>
+        <p>Within 24 hours of booking your call. We get you set up, walk you through it, and you're messaging your assistant the same day.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Will it actually save me time?</h4>
+        <p>Most clients reclaim 5–10 hours a week in the first month. If you're doing your own follow-ups, drafting your own messages, and managing your own calendar — yes, it will.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is my information private?</h4>
+        <p>Yes. Your assistant runs on a private server. Your conversations aren't shared, sold, or used to train anything. What you tell your assistant stays with your assistant.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <h2>Stop doing it all yourself.</h2>
+    <p>Book a free 15-minute call. We'll show you exactly how EasyAI Assistant fits your business — and get you set up same week.</p>
+    <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book My Free Call</a>
+    <p class="sub">No pressure. No pitch. Just a real conversation about whether this is right for you.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 EasyAiFlows · Pearland, TX · <a href="https://easyaiflows.com" target="_blank">easyaiflows.com</a> · <a href="mailto:azteampossibility@gmail.com">Contact</a></p>
+  </footer>
+
+</body>
+</html>
