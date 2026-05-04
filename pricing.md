@@ -10,7 +10,8 @@
 **Best for:** Solopreneurs, side hustles, anyone getting started with AI
 
 **What's included:**
-- 1 Custom AI Assistant (Telegram + SMS access)
+- 1 Custom AI Assistant (Telegram access)
+- Voice note input
 - Message drafting & task management
 - Reminders & follow-up prompts
 - Q&A and quick research
@@ -32,6 +33,7 @@
 
 **What's included:**
 - Everything in Starter
+- SMS access
 - 2-3 Custom AI Agents (email, lead management, scheduling)
 - 3-5 integrations (Gmail, CRM, calendar, Slack, etc.)
 - Custom automation workflows
