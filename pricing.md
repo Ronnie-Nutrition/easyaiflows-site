@@ -4,101 +4,95 @@
 
 ---
 
-### STARTER — $397/month
-**Setup Fee:** $497 (one-time)
-**Annual:** $4,050/year (save 15%)
+### STARTER — $97/month
+**Annual:** $990/year (save 15% — "2 months free")
 
 **Best for:** Solopreneurs, side hustles, anyone getting started with AI
 
 **What's included:**
-- 1 Custom AI Agent (email assistant, lead qualifier, or customer support bot)
-- 1 integration (Gmail, Google Calendar, basic CRM, etc.)
-- Initial setup & configuration (up to 10 hours)
-- 2 training sessions (video call, recorded for you to keep)
-- Monthly optimization check-in (30 min call)
+- 1 Custom AI Assistant (Telegram + SMS access)
+- Message drafting & task management
+- Reminders & follow-up prompts
+- Q&A and quick research
+- Setup within 24 hours
 - Email support with 48-hour response time
-- Access to the EasyAiFlows knowledge base
+
+**What it costs the client per day:** ~$3.20/day
+
+**ROI pitch:** "If this saves you just 2 hours a week, and your time is worth $25/hour, that's $200/month in time back — for $97."
+
+**Payment:** Direct checkout — no call required → buy.stripe.com/28E28sbNt3wne4m37wgIo0u
+
+---
+
+### PROFESSIONAL — $397/month (CORE TIER)
+**Annual:** $4,050/year (save 15% — "2 months free")
+
+**Best for:** Growing businesses with 1-20 employees, serious entrepreneurs
+
+**What's included:**
+- Everything in Starter
+- 2-3 Custom AI Agents (email, lead management, scheduling)
+- 3-5 integrations (Gmail, CRM, calendar, Slack, etc.)
+- Custom automation workflows
+- Weekly strategy calls (30 min)
+- Email + Slack support with 24-hour response time
+- Monthly performance reporting
+- Up to 5 minor revisions per month
+
+**Add-ons:**
+- Additional AI agent: +$150/month
+- Additional integration: +$200 (one-time)
+- Priority phone support: +$100/month
 
 **What it costs the client per day:** ~$13/day
 
-**ROI pitch:** "If this saves you just 5 hours a week, and your time is worth $50/hour, that's $1,000/month in time back — for $397."
+**ROI pitch:** "Our average Professional client saves 10+ hours per week. At $50/hour, that's $2,000/month in time savings — 5x the investment."
 
 ---
 
-### PROFESSIONAL — $1,097/month (CORE TIER)
-**Setup Fee:** $1,997 (one-time)
-**Annual:** $11,190/year (save 15%)
+### ENTERPRISE — $997/month
+**Annual:** $10,170/year (save 15% — "2 months free")
 
-**Best for:** Growing businesses with 5-20 employees, serious entrepreneurs
-
-**What's included:**
-- 2-3 Custom AI Agents (email, social media outreach, lead management, scheduling)
-- 3-5 integrations (Gmail, CRM, social platforms, calendar, Slack, etc.)
-- Full implementation & onboarding (up to 40 hours)
-- 5 training sessions over 30 days (team included)
-- Weekly strategy calls (30 min)
-- Email + Slack support with 24-hour response time
-- Custom automation workflows (up to 3)
-- Monthly performance reporting
-- Up to 5 minor revisions per month
-- Documentation & playbooks for your team
-
-**Add-ons:**
-- Additional AI agent: +$300-400/month
-- Additional integration: +$300-500 (one-time)
-- Priority phone support: +$200/month
-
-**What it costs the client per day:** ~$36/day
-
-**ROI pitch:** "Our average Professional client saves 10+ hours per week. At $75/hour, that's $3,000/month in time savings — nearly 3x the investment."
-
----
-
-### ENTERPRISE — $3,997/month
-**Setup Fee:** $7,500 (one-time)
-**Annual:** $40,770/year (save 15%)
-
-**Best for:** Established businesses with 20+ employees, multi-location, high-revenue
+**Best for:** Established businesses, multi-location, high-revenue operations
 
 **What's included:**
-- 4-6 Custom AI Agents (comprehensive automation suite)
-- 5-10 integrations (CRM, ERP, accounting, social, email, phone, etc.)
-- Full custom development (100+ hours)
-- Unlimited training for your entire team
-- Weekly strategy calls + quarterly business reviews
-- Phone + Slack support with 4-hour response time
+- Everything in Professional
+- 4-6 Custom AI Agents (full automation suite)
+- Unlimited integrations (CRM, accounting, social, email, phone, etc.)
 - Advanced automation workflows (unlimited)
+- Weekly calls + quarterly business reviews
+- Phone + Slack support with 4-hour response time
 - Custom reporting dashboards
 - Dedicated success manager (Ronnie)
 - Performance-based pricing option available
 
 **Add-ons:**
-- Custom workflow development: $500-2,000 per workflow
-- Team training workshops: $1,500 per session
-- Performance bonus: 10-15% of documented revenue increase (optional)
+- Custom workflow development: $300-1,000 per workflow
+- Team training workshops: $750 per session
 
-**What it costs the client per day:** ~$133/day
+**What it costs the client per day:** ~$33/day
 
-**ROI pitch:** "Enterprise clients typically see $50K-$100K in annual savings or new revenue. Your investment pays for itself in the first quarter."
+**ROI pitch:** "Enterprise clients typically see $25K-$100K in annual savings or new revenue. Your investment pays for itself in the first 30-90 days."
 
 ---
 
 ## Pricing Psychology & Selling Notes
 
 ### Why these numbers?
-- **$397** ends in 7 (proven conversion psychology), under $400 feels accessible
-- **$1,097** positions as premium but justified — anchored against the $3,997 tier
-- **$3,997** under $4K psychological barrier, premium enough to filter tire-kickers
+- **$97** — under $100 psychological barrier, feels like a no-brainer to try
+- **$397** — ends in 7 (proven conversion psychology), under $400 feels accessible
+- **$997** — under $1K psychological barrier, premium enough to filter tire-kickers
 
 ### Annual discount strategy
 - 15% off for annual prepay
 - Frame it as "2 months free" — sounds better than "15% off"
-- Improves your cash flow dramatically ($11K upfront vs. $1,097/month)
+- Improves your cash flow dramatically
 
 ### Objection handling
 
 **"That's too expensive"**
-→ "I understand. Let me ask — how much is your time worth per hour? If this saves you 10 hours a week at $50/hour, that's $2,000/month in time back. The Professional plan costs $1,097. You're actually MAKING $900/month by investing in this."
+→ "I understand. The Starter is $97/month — that's $3 a day. If this saves you even 2 hours a week, you're ahead. And there's a 30-day guarantee — you don't love it, you get your money back."
 
 **"I can just use ChatGPT"**
 → "You absolutely can — and I use Claude and ChatGPT daily. The difference is: can ChatGPT log into your email, draft responses in your voice, schedule your appointments, and follow up with leads automatically? That's what a custom AI agent does. ChatGPT is a tool. This is a system."
@@ -116,12 +110,11 @@
 
 ## Upsell Path
 
-**Month 1-3:** Client starts on Starter ($397/mo)
-**Month 4-6:** Add second AI agent (+$350/mo) → effectively at Professional pricing
-**Month 6-12:** Upgrade to Professional ($1,097/mo) for full support
-**Year 2:** Some clients upgrade to Enterprise or add team training
+**Month 1-3:** Client starts on Starter ($97/mo) — low friction, easy yes
+**Month 3-6:** Show results, upgrade to Professional ($397/mo)
+**Month 6-12:** Full automation suite, upgrade to Enterprise ($997/mo)
 
-**Target:** Move 30-40% of Starter clients to Professional within 6 months.
+**Target:** Move 40-50% of Starter clients to Professional within 6 months.
 
 ---
 
@@ -130,17 +123,15 @@
 **Conservative Year 1:**
 | Tier | Clients | Monthly | Annual |
 |------|---------|---------|--------|
-| Starter | 8 | $3,176 | $38,112 |
-| Professional | 5 | $5,485 | $65,820 |
-| Enterprise | 1 | $3,997 | $47,964 |
-| Setup fees | — | — | ~$15,000 |
-| **TOTAL** | **14** | **$12,658** | **$166,896** |
+| Starter | 20 | $1,940 | $23,280 |
+| Professional | 8 | $3,176 | $38,112 |
+| Enterprise | 2 | $1,994 | $23,928 |
+| **TOTAL** | **30** | **$7,110** | **$85,320** |
 
 **Year 2 (with growth):**
 | Tier | Clients | Monthly | Annual |
 |------|---------|---------|--------|
-| Starter | 15 | $5,955 | $71,460 |
-| Professional | 12 | $13,164 | $157,968 |
-| Enterprise | 4 | $15,988 | $191,856 |
-| Setup fees | — | — | ~$40,000 |
-| **TOTAL** | **31** | **$35,107** | **$461,284** |
+| Starter | 40 | $3,880 | $46,560 |
+| Professional | 20 | $7,940 | $95,280 |
+| Enterprise | 8 | $7,976 | $95,712 |
+| **TOTAL** | **68** | **$19,796** | **$237,552** |
