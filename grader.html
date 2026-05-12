@@ -305,7 +305,7 @@
         <a href="/#services">Services</a>
         <a href="/#proof">Results</a>
         <a href="/#pricing">Pricing</a>
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book a Call</a>
       </div>
     </div>
   </nav>
@@ -380,7 +380,7 @@
       <div class="rec-grid" id="recGrid"></div>
 
       <div class="results-cta">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book Your Free Strategy Call</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book Your Free Strategy Call</a>
         <a href="/" class="btn btn-secondary">Back to EasyAiFlows</a>
       </div>
 
@@ -526,6 +526,17 @@ function selectOption(qi, oi, el) {
   el.closest('.options').querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   el.classList.add('selected');
   document.getElementById('nextBtn').disabled = false;
+
+  // Meta Pixel — fire Quiz Started once on first interaction
+  if (!window._quizStartedFired) {
+    window._quizStartedFired = true;
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'ViewContent', {
+        content_name: 'AI Readiness Grader',
+        content_category: 'Quiz Started'
+      });
+    }
+  }
 }
 
 function updateProgress() {
@@ -601,6 +612,16 @@ function submitEmail() {
   const email = document.getElementById('emailInput').value.trim();
   if (email && email.includes('@')) {
     createGHLContact(email, calcScore());
+
+    // Meta Pixel — Lead event (email captured)
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Lead', {
+        content_name: 'AI Readiness Grader',
+        content_category: 'Email Captured',
+        value: calcScore(),
+        currency: 'USD'
+      });
+    }
   }
   showResults();
 }
@@ -695,7 +716,27 @@ function showResults() {
     `<div class="rec-card"><div class="rec-icon">${r.icon}</div><h4>${r.title}</h4><p>${r.desc}</p></div>`
   ).join('');
 
+  // Meta Pixel — Quiz Completed (fires regardless of email submission)
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'CompleteRegistration', {
+      content_name: 'AI Readiness Grader',
+      status: tier.name,
+      value: score,
+      currency: 'USD'
+    });
+  }
+
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Meta Pixel — Strategy Call Booked (fires on TidyCal link click)
+function trackBookingClick() {
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Schedule', {
+      content_name: 'AI Strategy Call',
+      content_category: 'Booking Intent'
+    });
+  }
 }
 
 // ── Sharing ──
