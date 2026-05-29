@@ -4,6 +4,25 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1609715360098067');
+fbq('track', 'PageView');
+fbq('track', 'ViewContent', {content_name: 'operator-kit-landing', content_category: 'digital-product', value: 24.97, currency: 'USD'});
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1609715360098067&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <!-- SEO -->
 <title>Claude Code Skills Bundle — 15 PRDs for iOS Apps, Meta Ads & Lead Gen | The Operator Kit</title>
 <meta name="description" content="15 Claude Code skills &amp; PRDs: how to build an iOS app with AI, run profitable Meta ads in 2026 (Pixel + CAPI), brand voice that doesn't sound like AI, social media to DMs, GHL setup, Claude Code memory hack. From an operator actually shipping. $24.97." />
@@ -465,7 +484,7 @@
     <p>15 PRDs. Instant download. Lifetime updates. 7-day refund.</p>
     <div class="price">$24.97</div>
     <div class="price-sub">one-time payment</div>
-    <a href="https://azteampossibility.gumroad.com/l/claude-code-operator-kit" class="btn btn-primary">Get instant access</a>
+    <a href="https://azteampossibility.gumroad.com/l/claude-code-operator-kit" class="btn btn-primary" id="buy-cta" data-pixel="ic">Get instant access</a>
   </div>
 </div>
 
@@ -525,5 +544,14 @@
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll('a[data-pixel="ic"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'InitiateCheckout', {content_name: 'claude-code-operator-kit', value: 24.97, currency: 'USD'});
+      }
+    });
+  });
+</script>
 </body>
 </html>
