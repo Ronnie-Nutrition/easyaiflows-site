@@ -484,7 +484,7 @@ src="https://www.facebook.com/tr?id=1609715360098067&ev=PageView&noscript=1"
     <p>15 PRDs. Instant download. Lifetime updates. 7-day refund.</p>
     <div class="price">$24.97</div>
     <div class="price-sub">one-time payment</div>
-    <a href="https://azteampossibility.gumroad.com/l/claude-code-operator-kit" class="btn btn-primary" id="buy-cta" data-pixel="ic">Get instant access</a>
+    <a href="https://azteampossibility.gumroad.com/l/claude-code-operator-kit" class="btn btn-primary" id="buy-cta" data-pixel="lead">Get instant access</a>
   </div>
 </div>
 
@@ -545,10 +545,10 @@ src="https://www.facebook.com/tr?id=1609715360098067&ev=PageView&noscript=1"
 </footer>
 
 <script>
-  document.querySelectorAll('a[data-pixel="ic"]').forEach(function(el){
+  document.querySelectorAll('a[data-pixel="lead"]').forEach(function(el){
     el.addEventListener('click', function(){
       if (typeof fbq !== 'undefined') {
-        fbq('track', 'InitiateCheckout', {content_name: 'claude-code-operator-kit', value: 24.97, currency: 'USD'});
+        fbq('track', 'Lead', {content_name: 'claude-code-operator-kit', value: 24.97, currency: 'USD'});
       }
     });
   });
