@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ── SEO ── -->
+  <title>Builders' Inner Circle — One money-making AI build a week | EasyAiFlows</title>
+  <meta name="description" content="The inside track for the Claude AI Builds community. Every week I hand you one quick, no-rabbit-hole AI build that actually makes money — plus a private members' room. $4.99/mo, cancel anytime.">
+  <link rel="canonical" href="https://easyaiflows.com/inner-circle/">
+  <meta name="robots" content="index, follow">
+
+  <!-- ── Open Graph (Facebook link preview) ── -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://easyaiflows.com/inner-circle/">
+  <meta property="og:title" content="Builders' Inner Circle — Stop watching. Start building.">
+  <meta property="og:description" content="One quick, money-making AI build a week — the exact workflows I use in my own businesses. Private members' room. $4.99/mo, cancel anytime.">
+  <meta property="og:image" content="https://easyaiflows.com/logo.png">
+  <meta property="og:site_name" content="EasyAiFlows">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Builders' Inner Circle — Stop watching. Start building.">
+  <meta name="twitter:description" content="One quick, money-making AI build a week. Private members' room. $4.99/mo.">
+  <meta name="twitter:image" content="https://easyaiflows.com/logo.png">
+
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <!-- ── FAQ rich-result schema ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type":"Question","name":"How much time does it take?","acceptedAnswer":{"@type":"Answer","text":"A few minutes a week. Each build is short and designed to be done in one sitting — no 3-hour videos."}},
+      {"@type":"Question","name":"Do I need to be technical?","acceptedAnswer":{"@type":"Answer","text":"No. We start at \"install this app\" and build from there. If you can follow a recipe, you can do this."}},
+      {"@type":"Question","name":"What do I get first?","acceptedAnswer":{"@type":"Answer","text":"Immediate access to the first build — connecting VS Code to Claude Code — plus the private members' room. A new build unlocks as you finish each one."}},
+      {"@type":"Question","name":"Can I cancel?","acceptedAnswer":{"@type":"Answer","text":"Anytime, in two clicks. No contracts."}}
+    ]
+  }
+  </script>
+
+  <!-- ── Meta Pixel ── -->
+  <script>
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+  n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+  document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init','1609715360098067');fbq('track','PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=1609715360098067&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    :root{
+      --navy:#1B3A6B; --navy-dark:#0F2344; --cyan:#00BCD4; --cyan-light:#E0F7FA;
+      --gray-50:#F8FAFC; --gray-100:#F1F5F9; --gray-200:#E2E8F0; --gray-400:#94A3B8;
+      --gray-600:#475569; --gray-800:#1E293B; --white:#FFF; --green:#10B981; --orange:#F59E0B;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:var(--gray-800);line-height:1.6;background:var(--white);}
+    .container{max-width:720px;margin:0 auto;padding:0 1.5rem;}
+    a{color:inherit;}
+
+    .badge{display:inline-block;background:rgba(0,188,212,0.15);color:var(--cyan);font-weight:700;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase;padding:.4rem .9rem;border-radius:999px;margin-bottom:1.25rem;}
+
+    .hero{background:linear-gradient(135deg,var(--navy-dark) 0%,var(--navy) 100%);color:var(--white);padding:4rem 0 3.5rem;text-align:center;}
+    .hero h1{font-size:2.6rem;font-weight:800;line-height:1.1;margin-bottom:1rem;}
+    .hero h1 span{color:var(--cyan);}
+    .hero p.sub{color:rgba(255,255,255,.85);font-size:1.15rem;max-width:560px;margin:0 auto 2rem;}
+
+    .btn{display:inline-block;background:var(--orange);color:var(--white);font-weight:700;font-size:1.15rem;padding:1rem 2.4rem;border-radius:10px;text-decoration:none;transition:all .2s;box-shadow:0 8px 24px rgba(245,158,11,.35);}
+    .btn:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(245,158,11,.45);}
+    .btn-note{display:block;color:rgba(255,255,255,.7);font-size:.9rem;margin-top:.8rem;}
+
+    section{padding:3.25rem 0;}
+    section.alt{background:var(--gray-50);}
+    h2{font-size:1.9rem;font-weight:800;color:var(--navy);margin-bottom:1.25rem;text-align:center;}
+    .lead{font-size:1.1rem;color:var(--gray-600);text-align:center;max-width:580px;margin:0 auto 1.5rem;}
+
+    .list{list-style:none;max-width:560px;margin:0 auto;}
+    .list li{display:flex;gap:.85rem;align-items:flex-start;padding:.7rem 0;font-size:1.05rem;}
+    .list li .ic{flex-shrink:0;font-size:1.3rem;line-height:1.4;}
+
+    .price-box{background:var(--white);border:2px solid var(--cyan);border-radius:16px;padding:2.25rem;max-width:480px;margin:0 auto;text-align:center;box-shadow:0 12px 40px rgba(0,0,0,.08);}
+    .price-box .amt{font-size:3rem;font-weight:800;color:var(--navy);}
+    .price-box .amt small{font-size:1.1rem;color:var(--gray-400);font-weight:600;}
+    .price-box p{color:var(--gray-600);margin:.5rem 0 1.5rem;}
+    .price-box .btn{font-size:1.2rem;}
+
+    .faq{max-width:600px;margin:0 auto;}
+    .faq details{border-bottom:1px solid var(--gray-200);padding:1rem 0;}
+    .faq summary{font-weight:700;color:var(--navy);cursor:pointer;font-size:1.05rem;list-style:none;}
+    .faq summary::-webkit-details-marker{display:none;}
+    .faq summary::before{content:"+ ";color:var(--cyan);font-weight:800;}
+    .faq details[open] summary::before{content:"– ";}
+    .faq p{color:var(--gray-600);margin-top:.6rem;}
+
+    footer{background:var(--navy-dark);color:rgba(255,255,255,.6);text-align:center;padding:2rem 0;font-size:.9rem;}
+    footer a{color:var(--cyan);text-decoration:none;}
+
+    @media(max-width:600px){.hero h1{font-size:2rem;}h2{font-size:1.5rem;}}
+  </style>
+</head>
+<body>
+
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="container">
+      <span class="badge">★ Members-only · Inner Circle</span>
+      <h1>Stop watching tutorials.<br><span>Start building.</span></h1>
+      <p class="sub">You're already in the room with 21,000+ builders. This is the inside track — where I hand you <strong>one quick, money-making AI build every week</strong> and you actually ship it.</p>
+      <a href="https://link.fastpaydirect.com/payment-link/6a3d91c3390a6e280643aaa2" class="btn" onclick="fbq('track','InitiateCheckout',{value:4.99,currency:'USD'})">Claim Your Spot — $4.99/mo →</a>
+      <span class="btn-note">Less than a coffee. Cancel anytime, two clicks.</span>
+    </div>
+  </section>
+
+  <!-- ── The pitch ── -->
+  <section>
+    <div class="container">
+      <h2>Most "AI tutorials" leave you with 40 open tabs and nothing built.</h2>
+      <p class="lead">The Inner Circle is the opposite. It's a small, private group where every week I give you <strong>one short build</strong> — the exact, no-fluff workflows that have made me the most money in my businesses — and you put it into action that same day.</p>
+    </div>
+  </section>
+
+  <!-- ── What you get ── -->
+  <section class="alt">
+    <div class="container">
+      <h2>What's inside</h2>
+      <ul class="list">
+        <li><span class="ic">✅</span><span><strong>One short build a week</strong> (4–15 min). Do it, don't just watch it.</span></li>
+        <li><span class="ic">🔓</span><span><strong>Unlock-as-you-go.</strong> Finish one, unlock the next. No binge, no overwhelm.</span></li>
+        <li><span class="ic">💬</span><span><strong>A private members' room</strong> to ask questions and show what you built.</span></li>
+        <li><span class="ic">🚀</span><span><strong>Your first build is live now:</strong> connect VS Code to Claude Code — the 10-minute setup everything is built on.</span></li>
+        <li><span class="ic">🗺️</span><span><strong>The full path:</strong> folders → work sessions → GitHub → publishing a real page live on the internet.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Who it's for ── -->
+  <section>
+    <div class="container">
+      <h2>Who it's for</h2>
+      <p class="lead">Business owners, solopreneurs, and side-hustlers who want AI <em>working for them</em> — fast — without drowning in theory. You don't need to be technical. If you can follow a recipe, you can do this.</p>
+    </div>
+  </section>
+
+  <!-- ── Price / CTA ── -->
+  <section class="alt">
+    <div class="container">
+      <h2>Why $4.99?</h2>
+      <p class="lead">Because I want zero excuses not to start. It's less than a coffee — and you'll actually have something built by next week.</p>
+      <div class="price-box">
+        <div class="amt">$4.99<small> /month</small></div>
+        <p>Cancel anytime. New build every week.</p>
+        <a href="https://link.fastpaydirect.com/payment-link/6a3d91c3390a6e280643aaa2" class="btn" onclick="fbq('track','InitiateCheckout',{value:4.99,currency:'USD'})">Get Instant Access →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ── -->
+  <section>
+    <div class="container">
+      <h2>Quick questions</h2>
+      <div class="faq">
+        <details><summary>How much time does it take?</summary><p>A few minutes a week. Each build is short and built to be done in one sitting — no 3-hour videos.</p></details>
+        <details><summary>Do I need to be technical?</summary><p>No. We start at "install this app" and build from there. If you can follow a recipe, you can do this.</p></details>
+        <details><summary>What do I get first?</summary><p>Immediate access to the first build — connecting VS Code to Claude Code — plus the private members' room. A new build unlocks as you finish each one.</p></details>
+        <details><summary>Can I cancel?</summary><p>Anytime, in two clicks. No contracts.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Final CTA ── -->
+  <section class="alt" style="text-align:center;">
+    <div class="container">
+      <h2>You've watched enough. Let's build.</h2>
+      <p class="lead">Join the Inner Circle and have something real shipped by next week.</p>
+      <a href="https://link.fastpaydirect.com/payment-link/6a3d91c3390a6e280643aaa2" class="btn" onclick="fbq('track','InitiateCheckout',{value:4.99,currency:'USD'})">Claim Your Spot — $4.99/mo →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 EasyAiFlows · <a href="https://easyaiflows.com">easyaiflows.com</a> · Built by Ronnie Craig</p>
+    </div>
+  </footer>
+
+</body>
+</html>
