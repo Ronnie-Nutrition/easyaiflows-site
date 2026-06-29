@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How to Publish a Claude-Designed Website Live (and Use Your Own Domain) | EasyAiFlows</title>
+  <meta name="description" content="You designed a site with Claude — now how do you make it a real, live website on your own domain? Step-by-step: hosting options, connecting a Hostinger domain, and whether you need a developer. No-BS 2026 guide.">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I publish a Claude-designed website as a real live website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "First, export the actual code from Claude (the HTML/CSS, or a downloadable project). Then put those files on a web host. The three easiest options are: GitHub Pages (free, great for a single HTML page), Netlify or Vercel (free, drag-and-drop or connect a repo), or your existing host like Hostinger by uploading the files to the public_html folder. Once the files are live, point your domain at them. A simple one-page site can be live in under 30 minutes with no developer."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use my existing Hostinger domain for a new Claude-designed site?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Your domain and your website files are separate things. You can keep your existing domain registered at Hostinger and either (a) upload the new site files into Hostinger's hosting so the domain shows them, or (b) host the files elsewhere (GitHub Pages, Netlify, Vercel) and point the domain there by updating the DNS records in Hostinger. You do not need to buy a new domain."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best way to move a Claude design into Hostinger hosting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "If your Claude design is plain HTML/CSS, log into Hostinger's hPanel, open the File Manager, go to the public_html folder, and upload your index.html and any asset files there. That replaces or adds to your current site. If it is a React app, you must first run a build step to turn it into static files, then upload the contents of the build/dist folder. For most small business one-pagers, the plain HTML route is the simplest."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need a developer to publish an AI-designed website?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually not for a simple static site. If Claude gave you HTML/CSS, you can publish it yourself by uploading the files to a host. You only really need a developer if the design is a React/Next.js app that needs a build pipeline, if you want it converted into WordPress, or if you want custom functionality like logins or databases. For a one-page marketing or landing site, doing it yourself is realistic in an afternoon."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "How to Publish a Claude-Designed Website Live (and Use Your Own Domain)",
+    "description": "Step-by-step guide to turning a Claude-designed website into a real, live site on your own domain.",
+    "author": { "@type": "Person", "name": "Ronnie Craig", "url": "https://easyaiflows.com" },
+    "publisher": { "@type": "Organization", "name": "EasyAiFlows", "url": "https://easyaiflows.com" },
+    "datePublished": "2026-06-29",
+    "dateModified": "2026-06-29"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">How-To</span>
+      <h1>How to Publish a Claude-Designed Website Live (and Use Your Own Domain)</h1>
+      <p class="article-meta">By Ronnie Craig &bull; June 29, 2026 &bull; 7 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>This is one of the most common questions I get: "I designed a website with Claude and it looks great &mdash; now how do I actually <em>put it on the internet</em>, using the domain I already own?" People assume they're stuck hiring a developer. Usually, you're not. Let me walk you through exactly how it works.</p>
+
+    <div class="takeaway-box">
+      <p><strong>The short version:</strong> Your design (the files) and your domain (the address) are two separate things. You put the files on a host, then point your domain at them. For a simple one-page site, you can do the whole thing yourself in well under an hour &mdash; no developer required.</p>
+    </div>
+
+    <h2>First, understand what "Claude designed my website" actually means</h2>
+    <p>When Claude builds you a site, you usually end up with one of three things. Knowing which one you have decides everything else:</p>
+    <ul>
+      <li><strong>Plain HTML/CSS</strong> &mdash; a self-contained <code>index.html</code> file (sometimes with a CSS file and images). This is the easiest to publish. Most "one-page" sites are this.</li>
+      <li><strong>A React / Next.js project</strong> &mdash; a folder of code that needs a "build" step before it can go live. A little more involved, but still doable without a developer.</li>
+      <li><strong>A Claude Design / visual mockup</strong> &mdash; a picture of a website, not working code yet. You (or Claude) need to turn it into real HTML first. Just ask Claude: "Export this as a single HTML file with inline CSS."</li>
+    </ul>
+    <p>If you're not sure which you have, ask Claude directly: <em>"Is this a static HTML site or a React app, and can you give me the files I need to publish it?"</em></p>
+
+    <h2>Step 1: Get the actual files out of Claude</h2>
+    <p>Ask Claude to give you the finished code. For a simple site, say: <em>"Combine everything into one index.html file with the CSS inline so I can upload it to a web host."</em> Save that file somewhere you can find it. If there are images, keep them in the same folder.</p>
+
+    <h2>Step 2: Pick where the files will live (your hosting)</h2>
+    <p>You have three solid, beginner-friendly options. All three work with a domain you already own.</p>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Option</th>
+          <th>Best for</th>
+          <th>Cost</th>
+          <th>Difficulty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Use your Hostinger hosting</strong></td>
+          <td>You already pay for Hostinger and want everything in one place</td>
+          <td>Already paying</td>
+          <td>Easy</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub Pages</strong></td>
+          <td>A simple static site you want hosted free, forever</td>
+          <td>Free</td>
+          <td>Easy</td>
+        </tr>
+        <tr>
+          <td><strong>Netlify / Vercel</strong></td>
+          <td>React apps, or drag-and-drop publishing with auto-updates</td>
+          <td>Free tier</td>
+          <td>Easy&ndash;Medium</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Step 3a: Publish it on your existing Hostinger hosting</h2>
+    <p>Since you already have Hostinger and a domain there, this is often the path of least resistance for plain HTML:</p>
+    <ol>
+      <li>Log into Hostinger and open <strong>hPanel</strong>.</li>
+      <li>Open the <strong>File Manager</strong>.</li>
+      <li>Navigate to the <strong>public_html</strong> folder &mdash; this is the folder your domain shows to the world.</li>
+      <li>Upload your <code>index.html</code> and any image/CSS files here. (If there's an old site you're replacing, back it up first, then remove the old <code>index.html</code>.)</li>
+      <li>Visit your domain &mdash; your new Claude-designed site is live.</li>
+    </ol>
+    <p>That's it. Because the domain is already attached to that Hostinger hosting, you don't have to touch DNS at all.</p>
+
+    <h2>Step 3b: Host it free elsewhere and point your Hostinger domain at it</h2>
+    <p>If you'd rather host on GitHub Pages or Netlify (free, fast, auto-renewing security), you keep your domain at Hostinger and just <strong>point it</strong> at the new host:</p>
+    <ol>
+      <li>Publish your site on GitHub Pages, Netlify, or Vercel (each gives you a temporary URL to confirm it works).</li>
+      <li>In that host's settings, add your custom domain &mdash; it'll show you the DNS records to use.</li>
+      <li>In Hostinger, go to <strong>Domains &rarr; DNS / Name Servers</strong> and update the records (usually an <code>A</code> record and/or a <code>CNAME</code>) to match what the host gave you.</li>
+      <li>Wait for DNS to update (minutes to a few hours). Your domain now shows the new site.</li>
+    </ol>
+
+    <h2>So &mdash; do you need a developer?</h2>
+    <p>Here's the honest answer:</p>
+    <ul>
+      <li><strong>Simple one-page HTML site?</strong> No. You can publish it yourself with the steps above.</li>
+      <li><strong>React/Next.js app?</strong> You'll need to run a "build" command, then upload the output. Doable solo with a little patience &mdash; or a quick task for a developer.</li>
+      <li><strong>Want it in WordPress?</strong> That's a conversion project. Often it's easier to just publish the HTML directly than to force it into WordPress.</li>
+      <li><strong>Need logins, payments, or a database?</strong> That's where a developer (or a done-for-you service) earns their keep.</li>
+    </ul>
+
+    <div class="takeaway-box">
+      <p><strong>My take:</strong> Don't pay someone hundreds of dollars to upload a single HTML file. Publishing a static site is a skill you can learn once and use forever &mdash; and AI tools make it easier than it's ever been.</p>
+    </div>
+
+    <h2>The fastest way to learn this for good</h2>
+    <p>Publishing your own site &mdash; folders, GitHub, and getting a real page live on the internet &mdash; is exactly what I teach inside the <strong>Builders' Inner Circle</strong>. It's a step-by-step path that takes you from "I have a design" to "it's live on my domain," in short builds you actually finish. If you'd rather have it done for you, that's what EasyAiFlows does too.</p>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          How do I publish a Claude-designed website as a real live website?
+        </button>
+        <div class="faq-answer">
+          First, export the actual code from Claude (the HTML/CSS, or a downloadable project). Then put those files on a web host. The three easiest options are: GitHub Pages (free, great for a single HTML page), Netlify or Vercel (free, drag-and-drop or connect a repo), or your existing host like Hostinger by uploading the files to the public_html folder. Once the files are live, point your domain at them. A simple one-page site can be live in under 30 minutes with no developer.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Can I use my existing Hostinger domain for a new Claude-designed site?
+        </button>
+        <div class="faq-answer">
+          Yes. Your domain and your website files are separate things. You can keep your existing domain registered at Hostinger and either (a) upload the new site files into Hostinger's hosting so the domain shows them, or (b) host the files elsewhere (GitHub Pages, Netlify, Vercel) and point the domain there by updating the DNS records in Hostinger. You do not need to buy a new domain.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          What is the best way to move a Claude design into Hostinger hosting?
+        </button>
+        <div class="faq-answer">
+          If your Claude design is plain HTML/CSS, log into Hostinger's hPanel, open the File Manager, go to the public_html folder, and upload your index.html and any asset files there. That replaces or adds to your current site. If it is a React app, you must first run a build step to turn it into static files, then upload the contents of the build/dist folder. For most small business one-pagers, the plain HTML route is the simplest.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Do I need a developer to publish an AI-designed website?
+        </button>
+        <div class="faq-answer">
+          Usually not for a simple static site. If Claude gave you HTML/CSS, you can publish it yourself by uploading the files to a host. You only really need a developer if the design is a React/Next.js app that needs a build pipeline, if you want it converted into WordPress, or if you want custom functionality like logins or databases. For a one-page marketing or landing site, doing it yourself is realistic in an afternoon.
+        </div>
+      </div>
+    </div>
+
+    <div class="article-cta">
+      <h3>Want to learn to publish your own sites &mdash; for good?</h3>
+      <p>The Builders' Inner Circle walks you from "I have a design" to "it's live on my domain," one short build at a time. $4.99/mo, cancel anytime.</p>
+      <a href="https://easyaiflows.com/inner-circle/" class="btn btn-primary">Join the Builders' Inner Circle &rarr;</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows. All rights reserved. | <a href="../">Home</a> | <a href="./">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+</body>
+</html>
