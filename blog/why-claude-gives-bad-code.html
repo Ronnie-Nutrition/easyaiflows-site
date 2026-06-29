@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Does Claude Give Me Bad Code? (And How to Actually Use Claude Code) | EasyAiFlows</title>
+  <meta name="description" content="Claude giving you wrong code, looping in circles, hallucinating package versions, or Claude Code taking forever? Here's why it happens and the exact workflow to make Claude actually help — from someone who uses it every day.">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why does Claude give me incorrect code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most bad code comes from missing context, not a bad model. If Claude doesn't know your exact framework, library versions, and file structure, it fills the gaps with educated guesses — which is where wrong code and hallucinated package versions come from. Give it your package.json (or the exact versions you use), point it at your real files, and scope each request to one small change. Accuracy jumps dramatically."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Claude loop in circles or keep repeating the same fix?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Looping usually means the conversation has too much conflicting context, or Claude is guessing at an error it can't actually see. Stop, start a fresh session, restate the goal in one or two sentences, and paste the exact error message and the relevant file. A clean context with the real error almost always breaks the loop faster than continuing to push in the same thread."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why does Claude hallucinate different versions of my packages?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Because it doesn't know which versions you have unless you tell it. Without your package.json or requirements file, Claude defaults to the most common patterns from its training, which may be a different version than yours. Paste your dependency file at the start, or in Claude Code let it read the file directly, and tell it explicitly: only use the versions in this project."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why is Claude Code so slow in VS Code and how do I speed it up?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Claude Code feels slow when it's reading a lot of files, asking permission on every step, or working a vague, oversized request. Speed it up by scoping the task small and specific, telling it which files to look at instead of letting it search the whole project, using plan mode for bigger tasks so it thinks before acting, and starting a fresh session when the context gets bloated. Specific, well-scoped requests return fast; vague ones make it wander."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Why Does Claude Give Me Bad Code? (And How to Actually Use Claude Code)",
+    "description": "Why Claude produces wrong code, loops, and hallucinates package versions — and the workflow that fixes it.",
+    "author": { "@type": "Person", "name": "Ronnie Craig", "url": "https://easyaiflows.com" },
+    "publisher": { "@type": "Organization", "name": "EasyAiFlows", "url": "https://easyaiflows.com" },
+    "datePublished": "2026-06-29",
+    "dateModified": "2026-06-29"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">How-To</span>
+      <h1>Why Does Claude Give Me Bad Code? (And How to Actually Use Claude Code)</h1>
+      <p class="article-meta">By Ronnie Craig &bull; June 29, 2026 &bull; 8 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>I hear this one constantly: "I'm paying for Claude, I'm using Claude Code in VS Code, and it gives me wrong code, loops in circles, makes up package versions I'm not using, and takes forever to answer simple questions &mdash; sometimes with nothing to show for it. What am I doing wrong?"</p>
+
+    <p>Here's the honest truth: <strong>it's almost never the model, and it's almost never you being dumb.</strong> It's a context problem. Claude is incredible when it knows what it's working with, and it guesses badly when it doesn't. Once you fix how you feed it information, the wrong code, the loops, and the wasted time mostly disappear. Let me show you exactly how I use it.</p>
+
+    <div class="takeaway-box">
+      <p><strong>The one-sentence fix:</strong> Treat Claude like a brilliant new developer on day one &mdash; it's smart, but it knows nothing about <em>your</em> project until you tell it. Give it context, scope the task small, and point it at your real files.</p>
+    </div>
+
+    <h2>Why it gives you wrong code (and hallucinated package versions)</h2>
+    <p>When Claude doesn't know your exact setup, it fills the gaps with the most common patterns from its training. That's where the "wrong version of the package" problem comes from &mdash; it's guessing at versions because you never told it which ones you have.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Give it your dependencies up front.</strong> Paste your <code>package.json</code> (or <code>requirements.txt</code>) at the start, or in Claude Code let it read the file directly. Then say: <em>"Only use the versions in this project."</em></li>
+      <li><strong>Tell it your stack in one line.</strong> "This is a React 18 + Vite + Tailwind project" removes a huge amount of guessing.</li>
+      <li><strong>Let it see real files, not your description of them.</strong> In Claude Code, the whole point is it can read your actual code. Tell it which file to look at instead of explaining the file from memory.</li>
+    </ul>
+
+    <h2>Why it loops in circles</h2>
+    <p>Looping &mdash; where it keeps "fixing" the same thing and never gets there &mdash; almost always means one of two things: the conversation has gotten cluttered with conflicting attempts, or it's guessing at an error it can't actually see.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Start a fresh session.</strong> When a thread gets long and messy, the clutter works against you. Open a clean session, state the goal in one or two sentences, and paste only what matters.</li>
+      <li><strong>Paste the exact error.</strong> Don't say "it's not working." Copy the real error message and the relevant snippet. A precise error breaks a loop fast.</li>
+      <li><strong>Make it slow down.</strong> Ask: <em>"Before you change anything, tell me what you think is wrong and your plan."</em> Catching a wrong assumption before it writes code saves three rounds of looping.</li>
+    </ul>
+
+    <h2>Why Claude Code feels painfully slow</h2>
+    <p>Claude Code gets slow when it's hunting through a big project, asking permission at every step, or chewing on a vague, oversized request. It's not broken &mdash; it's wandering because the task wasn't scoped.</p>
+    <p><strong>The fix:</strong></p>
+    <ul>
+      <li><strong>Scope it small.</strong> "Fix the login button's spacing in Header.jsx" returns fast. "Improve my website" makes it crawl through everything.</li>
+      <li><strong>Point it at the file.</strong> Naming the file means it doesn't have to search your whole project to find it.</li>
+      <li><strong>Use plan mode for bigger jobs.</strong> Let it lay out a plan first, approve it, then let it execute. You get fewer wrong turns.</li>
+      <li><strong>Add a project context file.</strong> A <code>CLAUDE.md</code> in your project that describes your stack, conventions, and key files means you stop re-explaining the basics every session.</li>
+    </ul>
+
+    <h2>The workflow I actually use</h2>
+    <p>Here's the simple loop that turns Claude from frustrating into a genuine teammate:</p>
+    <ol>
+      <li><strong>Set the stage once.</strong> Tell it the stack, paste/point to dependencies, and (in Claude Code) keep a <code>CLAUDE.md</code> so it always has context.</li>
+      <li><strong>Ask for one thing.</strong> One clear, specific change at a time &mdash; not five.</li>
+      <li><strong>Make it plan before it codes</strong> on anything non-trivial.</li>
+      <li><strong>Feed it real errors,</strong> not descriptions, when something breaks.</li>
+      <li><strong>Reset when it drifts.</strong> Fresh session, restate the goal, continue. Don't fight a cluttered thread.</li>
+    </ol>
+
+    <div class="takeaway-box">
+      <p><strong>Bottom line:</strong> The people getting magic out of Claude aren't using a different Claude. They've just learned to give it context and scope &mdash; the same way you'd brief a sharp new hire. It's a skill, and it clicks fast once someone shows you the moves.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Why does Claude give me incorrect code?
+        </button>
+        <div class="faq-answer">
+          Most bad code comes from missing context, not a bad model. If Claude doesn't know your exact framework, library versions, and file structure, it fills the gaps with educated guesses — which is where wrong code and hallucinated package versions come from. Give it your package.json (or the exact versions you use), point it at your real files, and scope each request to one small change. Accuracy jumps dramatically.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Why does Claude loop in circles or keep repeating the same fix?
+        </button>
+        <div class="faq-answer">
+          Looping usually means the conversation has too much conflicting context, or Claude is guessing at an error it can't actually see. Stop, start a fresh session, restate the goal in one or two sentences, and paste the exact error message and the relevant file. A clean context with the real error almost always breaks the loop faster than continuing to push in the same thread.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Why does Claude hallucinate different versions of my packages?
+        </button>
+        <div class="faq-answer">
+          Because it doesn't know which versions you have unless you tell it. Without your package.json or requirements file, Claude defaults to the most common patterns from its training, which may be a different version than yours. Paste your dependency file at the start, or in Claude Code let it read the file directly, and tell it explicitly: only use the versions in this project.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Why is Claude Code so slow in VS Code and how do I speed it up?
+        </button>
+        <div class="faq-answer">
+          Claude Code feels slow when it's reading a lot of files, asking permission on every step, or working a vague, oversized request. Speed it up by scoping the task small and specific, telling it which files to look at instead of letting it search the whole project, using plan mode for bigger tasks so it thinks before acting, and starting a fresh session when the context gets bloated. Specific, well-scoped requests return fast; vague ones make it wander.
+        </div>
+      </div>
+    </div>
+
+    <div class="article-cta">
+      <h3>Want to learn the right way to build with Claude?</h3>
+      <p>The Builders' Inner Circle teaches the exact workflows that make AI actually help — one short, money-making build every week. $4.99/mo, cancel anytime.</p>
+      <a href="https://easyaiflows.com/inner-circle/" class="btn btn-primary">Join the Builders' Inner Circle &rarr;</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows. All rights reserved. | <a href="../">Home</a> | <a href="./">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+</body>
+</html>
