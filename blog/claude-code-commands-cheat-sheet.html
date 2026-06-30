@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code Slash Commands: The Cheat Sheet (What Each One Does) | EasyAiFlows</title>
+  <meta name="description" content="Most people use Claude Code without knowing the slash commands that make it 10x faster. Here's a clear, accurate cheat sheet of the commands worth knowing — organized by when you'd actually use them.">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What are slash commands in Claude Code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Slash commands are shortcuts you type in Claude Code starting with a forward slash (like /clear or /model) that trigger built-in actions instead of being sent to the AI as a prompt. They let you manage your session, switch models, review code, set up your project, and control tools quickly — without explaining what you want in plain English every time."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the difference between /clear and /compact in Claude Code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "/clear wipes the conversation and starts you fresh with an empty context — use it when you're switching to a totally different task. /compact keeps going but summarizes the conversation so far to free up context space — use it when you want to continue the same task but the chat has gotten long. In short: /clear for a fresh start, /compact to keep momentum while trimming the clutter."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I check my usage and limits in Claude Code?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Type /usage. It shows your cost, current usage limits, and session stats. (/cost and /stats are aliases for the same command.) To configure extra usage credits, use /usage-credits."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What Claude Code command sets up a project?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "/init creates a CLAUDE.md file — a project guide that tells Claude about your stack, conventions, and key files so it has context every session. Pair it with /memory to edit that file or manage auto-memory, and /add-dir to give Claude access to additional folders. Setting these up once dramatically improves the quality of everything that follows."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Claude Code Slash Commands: The Cheat Sheet (What Each One Does)",
+    "description": "An accurate, practical cheat sheet of Claude Code slash commands organized by when you'd use them.",
+    "author": { "@type": "Person", "name": "Ronnie Craig", "url": "https://easyaiflows.com" },
+    "publisher": { "@type": "Organization", "name": "EasyAiFlows", "url": "https://easyaiflows.com" },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">How-To</span>
+      <h1>Claude Code Slash Commands: The Cheat Sheet (What Each One Does)</h1>
+      <p class="article-meta">By Ronnie Craig &bull; June 30, 2026 &bull; 5 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>Most people use Claude Code with zero idea that <strong>slash commands</strong> exist &mdash; and then wonder why it feels slow or forgetful. These little commands (you just type a <code>/</code>) are the difference between fighting the tool and flying. Here's a clean, accurate cheat sheet of the ones actually worth knowing, grouped by <em>when</em> you'd reach for them.</p>
+
+    <div class="takeaway-box">
+      <p><strong>What's a slash command?</strong> A shortcut you type starting with <code>/</code> that triggers a built-in action instead of being sent to the AI as a prompt. <code>/clear</code>, <code>/model</code>, <code>/usage</code> &mdash; that kind of thing.</p>
+    </div>
+
+    <h2>🚀 Setting up a project</h2>
+    <table class="comparison-table">
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>/init</code></td><td>Creates a CLAUDE.md project guide so Claude knows your stack, conventions, and key files</td></tr>
+        <tr><td><code>/memory</code></td><td>Edit your CLAUDE.md files or manage auto-memory</td></tr>
+        <tr><td><code>/add-dir &lt;path&gt;</code></td><td>Give Claude access to an additional folder during the session</td></tr>
+        <tr><td><code>/config</code></td><td>Open the settings interface (alias: <code>/settings</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>💬 Managing your session &amp; context</h2>
+    <table class="comparison-table">
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>/clear</code></td><td>Start fresh with empty context (aliases: <code>/reset</code>, <code>/new</code>)</td></tr>
+        <tr><td><code>/compact</code></td><td>Summarize the conversation to free up context while continuing</td></tr>
+        <tr><td><code>/context</code></td><td>Visualize how much context you're using</td></tr>
+        <tr><td><code>/resume</code></td><td>Resume or switch between past conversations (alias: <code>/continue</code>)</td></tr>
+        <tr><td><code>/branch</code></td><td>Fork the conversation at the current point to explore an alternative</td></tr>
+        <tr><td><code>/rewind</code></td><td>Roll back code/conversation to an earlier checkpoint (aliases: <code>/checkpoint</code>, <code>/undo</code>)</td></tr>
+        <tr><td><code>/export</code></td><td>Export the conversation to a file or clipboard</td></tr>
+      </tbody>
+    </table>
+
+    <h2>🧠 Models &amp; usage</h2>
+    <table class="comparison-table">
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>/model</code></td><td>Switch the AI model and save it as your default</td></tr>
+        <tr><td><code>/effort</code></td><td>Set the reasoning effort level (low / medium / high, etc.)</td></tr>
+        <tr><td><code>/usage</code></td><td>Show your cost, usage limits, and stats (aliases: <code>/cost</code>, <code>/stats</code>)</td></tr>
+        <tr><td><code>/usage-credits</code></td><td>Configure extra usage credits (this replaced the old <code>/extra-usage</code>)</td></tr>
+      </tbody>
+    </table>
+
+    <h2>🛠️ Building &amp; reviewing code</h2>
+    <table class="comparison-table">
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>/plan</code></td><td>Enter plan mode — Claude maps out the work before touching anything</td></tr>
+        <tr><td><code>/diff</code></td><td>Open an interactive viewer of your uncommitted changes</td></tr>
+        <tr><td><code>/code-review</code></td><td>Review your diff for bugs and cleanups (can auto-fix or comment)</td></tr>
+        <tr><td><code>/security-review</code></td><td>Analyze pending changes for security vulnerabilities</td></tr>
+      </tbody>
+    </table>
+
+    <h2>🔌 Tools, integrations &amp; customization</h2>
+    <table class="comparison-table">
+      <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+      <tbody>
+        <tr><td><code>/mcp</code></td><td>Manage MCP server connections (the way Claude plugs into your other tools)</td></tr>
+        <tr><td><code>/agents</code></td><td>Configure subagents</td></tr>
+        <tr><td><code>/skills</code></td><td>List available skills</td></tr>
+        <tr><td><code>/permissions</code></td><td>Manage allow/ask/deny rules for tools (alias: <code>/allowed-tools</code>)</td></tr>
+        <tr><td><code>/theme</code></td><td>Change the color theme</td></tr>
+        <tr><td><code>/help</code></td><td>Show help and the full list of available commands</td></tr>
+      </tbody>
+    </table>
+
+    <div class="takeaway-box">
+      <p><strong>The 5 to learn first:</strong> <code>/init</code> (give it context), <code>/clear</code> (fresh start), <code>/compact</code> (trim a long chat), <code>/model</code> (right model for the job), and <code>/usage</code> (watch your limits). Those five alone fix most of the "Claude Code is slow/forgetful" complaints.</p>
+    </div>
+
+    <p style="font-size:.95rem;color:var(--gray-400,#94A3B8);">Claude Code adds and updates commands over time, and many have aliases. For the complete, current list, type <code>/help</code> inside Claude Code or check the official docs. This cheat sheet covers the commands most people actually use day to day.</p>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          What are slash commands in Claude Code?
+        </button>
+        <div class="faq-answer">
+          Slash commands are shortcuts you type in Claude Code starting with a forward slash (like /clear or /model) that trigger built-in actions instead of being sent to the AI as a prompt. They let you manage your session, switch models, review code, set up your project, and control tools quickly — without explaining what you want in plain English every time.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          What is the difference between /clear and /compact in Claude Code?
+        </button>
+        <div class="faq-answer">
+          /clear wipes the conversation and starts you fresh with an empty context — use it when you're switching to a totally different task. /compact keeps going but summarizes the conversation so far to free up context space — use it when you want to continue the same task but the chat has gotten long. In short: /clear for a fresh start, /compact to keep momentum while trimming the clutter.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          How do I check my usage and limits in Claude Code?
+        </button>
+        <div class="faq-answer">
+          Type /usage. It shows your cost, current usage limits, and session stats. (/cost and /stats are aliases for the same command.) To configure extra usage credits, use /usage-credits.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          What Claude Code command sets up a project?
+        </button>
+        <div class="faq-answer">
+          /init creates a CLAUDE.md file — a project guide that tells Claude about your stack, conventions, and key files so it has context every session. Pair it with /memory to edit that file or manage auto-memory, and /add-dir to give Claude access to additional folders. Setting these up once dramatically improves the quality of everything that follows.
+        </div>
+      </div>
+    </div>
+
+    <div class="article-cta">
+      <h3>Want to actually master tools like Claude Code?</h3>
+      <p>The Builders' Inner Circle takes you from "what's a slash command?" to shipping real projects — one short build a week. $4.99/mo, cancel anytime.</p>
+      <a href="https://easyaiflows.com/inner-circle/" class="btn btn-primary">Join the Builders' Inner Circle &rarr;</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows. All rights reserved. | <a href="../">Home</a> | <a href="./">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+</body>
+</html>
