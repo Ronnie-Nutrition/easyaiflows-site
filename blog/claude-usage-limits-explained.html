@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Usage Limits Explained: Session vs Weekly (And When to Start a New Chat) | EasyAiFlows</title>
+  <meta name="description" content="Confused why Claude says 100% used in your session but only 17% weekly? Here's how Claude's usage limits actually work — session vs weekly limits, why you hit them, and when starting a new chat helps (and when it doesn't).">
+  <link rel="stylesheet" href="blog-style.css">
+  <link rel="icon" href="../logo.png" type="image/png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the difference between Claude's session limit and weekly limit?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "On Claude's paid plans there are two separate limits. The session limit is a shorter rolling window (often described as around 5 hours) that caps how much you can use in that block before it resets. The weekly limit is a larger cap across all models that resets once a week. They're tracked independently — which is why you can be at 100% of your current session but only 17% of your weekly limit. Hitting one doesn't mean you've hit the other."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "If my session is 100% used but weekly is low, should I start a new chat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Starting a new chat does not reset your session usage — the session limit is tied to time, not to the conversation. If you've hit the session cap, you generally have to wait for that rolling window to reset (it shows a reset timer). Starting a new chat is useful for a different reason: keeping the conversation focused and fast. So start fresh chats to manage context, but to recover from a hit session limit, you wait for the reset."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Why am I hitting Claude's limits so fast?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Usually because of heavy context and long conversations. Big pasted documents, very long back-and-forth threads, and using the most powerful models all consume your allowance faster. Working in shorter, focused chats, not pasting more than you need, and using a lighter model for simple tasks all stretch your usage much further."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I make my Claude usage last longer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start a fresh chat for each distinct task instead of one giant thread, only paste the context you actually need, use a lighter/faster model for simple questions and save the most powerful model for hard work, and clear or compact long conversations. If you consistently need more, upgrading your plan raises both the session and weekly ceilings."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Claude Usage Limits Explained: Session vs Weekly (And When to Start a New Chat)",
+    "description": "How Claude's session and weekly usage limits work, why you hit them, and how to make usage last.",
+    "author": { "@type": "Person", "name": "Ronnie Craig", "url": "https://easyaiflows.com" },
+    "publisher": { "@type": "Organization", "name": "EasyAiFlows", "url": "https://easyaiflows.com" },
+    "datePublished": "2026-06-30",
+    "dateModified": "2026-06-30"
+  }
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div class="container">
+      <a href="../" class="nav-logo">
+        <img src="../logo.png" alt="EasyAiFlows">
+        <span>EasyAiFlows</span>
+      </a>
+      <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
+      <div class="nav-links">
+        <a href="../#services">Services</a>
+        <a href="../#pricing">Pricing</a>
+        <a href="../grader.html">AI Grader</a>
+        <a href="./">Blog</a>
+        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="article-header">
+    <div class="container">
+      <span class="tag">AI Explained</span>
+      <h1>Claude Usage Limits Explained: Session vs Weekly (And When to Start a New Chat)</h1>
+      <p class="article-meta">By Ronnie Craig &bull; June 30, 2026 &bull; 5 min read</p>
+    </div>
+  </header>
+
+  <article class="article-body">
+
+    <p>This one confuses almost everyone: you open Claude, you've barely done anything, and it says your <strong>current session is 100% used</strong> &mdash; but your <strong>weekly limit is only 17% used</strong>. So which is it? Are you out or not? Let me clear it up, because once you understand the two limits, you can make your usage go a lot further.</p>
+
+    <div class="takeaway-box">
+      <p><strong>The short answer:</strong> Claude's paid plans have <em>two separate</em> limits running at once &mdash; a short <strong>session</strong> limit (a rolling window, often ~5 hours) and a bigger <strong>weekly</strong> limit across all models. They're counted independently, so you can max one while the other's barely touched.</p>
+    </div>
+
+    <h2>The two limits, side by side</h2>
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Limit</th>
+          <th>What it is</th>
+          <th>When it resets</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Session limit</strong></td>
+          <td>A cap on how much you use within a short rolling window (often described as ~5 hours)</td>
+          <td>After the rolling window passes (it shows a countdown like "resets in 3 hr 27 min")</td>
+        </tr>
+        <tr>
+          <td><strong>Weekly limit</strong></td>
+          <td>A larger cap across all models for the week</td>
+          <td>Once a week (shows a day/time, e.g. "resets Mon 4:59 AM")</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>Because they're tracked separately, "100% session / 17% weekly" just means: you've used up this short block, but you have plenty left for the week overall. You're not out for the week &mdash; you're paused until the session window resets.</p>
+
+    <h2>So should I start a new chat?</h2>
+    <p>Here's the key thing people get wrong: <strong>starting a new chat does NOT reset your session usage.</strong> The session limit is tied to <em>time</em>, not to your conversation. If you've hit it, a new chat won't give you more &mdash; you wait for the reset timer.</p>
+    <p>Starting a fresh chat is still a good habit, just for a <em>different</em> reason: it keeps the conversation focused and fast (a giant, cluttered thread makes Claude slower and burns through more of your allowance). So:</p>
+    <ul>
+      <li><strong>Hit your session limit?</strong> Wait for the reset timer. A new chat won't help.</li>
+      <li><strong>Conversation getting long and messy?</strong> Start a fresh chat to stay fast and focused.</li>
+    </ul>
+
+    <h2>Why you hit the limits so fast</h2>
+    <p>It's almost always about <strong>context weight</strong>:</p>
+    <ul>
+      <li><strong>Big pastes.</strong> Dropping huge documents into the chat eats your allowance quickly.</li>
+      <li><strong>Marathon threads.</strong> Long back-and-forth conversations carry all that history every message.</li>
+      <li><strong>Always using the most powerful model.</strong> The heaviest model burns faster than a lighter one.</li>
+    </ul>
+
+    <h2>How to make your usage last way longer</h2>
+    <ol>
+      <li><strong>One chat per task.</strong> Don't run your whole week in one thread &mdash; start fresh for each distinct job.</li>
+      <li><strong>Paste only what's needed.</strong> Trim documents to the relevant part instead of dumping everything.</li>
+      <li><strong>Match the model to the job.</strong> Use a lighter, faster model for simple questions; save the most powerful one for the hard stuff.</li>
+      <li><strong>Clear or compact long chats</strong> when they balloon.</li>
+      <li><strong>Still capped often?</strong> Upgrading your plan raises both the session and weekly ceilings.</li>
+    </ol>
+
+    <div class="takeaway-box">
+      <p><strong>Bottom line:</strong> Two limits, counted separately. Session = a short rolling window you wait out. Weekly = your bigger weekly budget. New chats manage <em>focus</em>, not session limits. Lighter context = far more usage.</p>
+    </div>
+
+    <p style="font-size:.95rem;color:var(--gray-400,#94A3B8);">Note: exact limits vary by plan and change over time &mdash; check Claude's official usage/limits page for current numbers. This guide explains how the system works, not specific quotas.</p>
+
+    <!-- FAQ -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          What is the difference between Claude's session limit and weekly limit?
+        </button>
+        <div class="faq-answer">
+          On Claude's paid plans there are two separate limits. The session limit is a shorter rolling window (often described as around 5 hours) that caps how much you can use in that block before it resets. The weekly limit is a larger cap across all models that resets once a week. They're tracked independently — which is why you can be at 100% of your current session but only 17% of your weekly limit. Hitting one doesn't mean you've hit the other.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          If my session is 100% used but weekly is low, should I start a new chat?
+        </button>
+        <div class="faq-answer">
+          Starting a new chat does not reset your session usage — the session limit is tied to time, not to the conversation. If you've hit the session cap, you generally have to wait for that rolling window to reset (it shows a reset timer). Starting a new chat is useful for a different reason: keeping the conversation focused and fast. So start fresh chats to manage context, but to recover from a hit session limit, you wait for the reset.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          Why am I hitting Claude's limits so fast?
+        </button>
+        <div class="faq-answer">
+          Usually because of heavy context and long conversations. Big pasted documents, very long back-and-forth threads, and using the most powerful models all consume your allowance faster. Working in shorter, focused chats, not pasting more than you need, and using a lighter model for simple tasks all stretch your usage much further.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.classList.toggle('active');this.nextElementSibling.classList.toggle('active')">
+          How can I make my Claude usage last longer?
+        </button>
+        <div class="faq-answer">
+          Start a fresh chat for each distinct task instead of one giant thread, only paste the context you actually need, use a lighter/faster model for simple questions and save the most powerful model for hard work, and clear or compact long conversations. If you consistently need more, upgrading your plan raises both the session and weekly ceilings.
+        </div>
+      </div>
+    </div>
+
+    <div class="article-cta">
+      <h3>Want to actually get more out of AI?</h3>
+      <p>The Builders' Inner Circle teaches the workflows that make AI fast, focused, and genuinely useful — one short build a week. $4.99/mo, cancel anytime.</p>
+      <a href="https://easyaiflows.com/inner-circle/" class="btn btn-primary">Join the Builders' Inner Circle &rarr;</a>
+    </div>
+
+  </article>
+
+  <footer>
+    <p>&copy; 2026 EasyAiFlows. All rights reserved. | <a href="../">Home</a> | <a href="./">Blog</a> | <a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></p>
+  </footer>
+
+</body>
+</html>
