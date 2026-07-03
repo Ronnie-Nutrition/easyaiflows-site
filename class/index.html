@@ -368,29 +368,33 @@
 
       if (!email || !email.includes('@')) return;
 
-      // Create contact in GHL
-      try {
-        const res = await fetch(GHL_API + '/contacts/upsert', {
-          method: 'POST',
-          headers: GHL_HEADERS,
-          body: JSON.stringify({
-            locationId: GHL_LOC,
-            firstName: name,
-            email: email,
-            source: 'ai-class-apr8',
-            tags: ['class-attendee']
-          })
-        });
-        const data = await res.json();
-        const contactId = data.contact?.id;
-        if (contactId) {
-          await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
+      // Create contact in GHL — retry once on failure; never block the notes
+      for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+          const res = await fetch(GHL_API + '/contacts/upsert', {
             method: 'POST',
             headers: GHL_HEADERS,
-            body: JSON.stringify({ tags: ['class-attendee'] })
+            body: JSON.stringify({
+              locationId: GHL_LOC,
+              firstName: name,
+              email: email,
+              source: 'ai-class-apr8',
+              tags: ['class-attendee']
+            })
           });
-        }
-      } catch (err) { /* fail silently */ }
+          if (!res.ok) throw new Error('upsert HTTP ' + res.status);
+          const data = await res.json();
+          const contactId = data.contact?.id;
+          if (contactId) {
+            await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
+              method: 'POST',
+              headers: GHL_HEADERS,
+              body: JSON.stringify({ tags: ['class-attendee'] })
+            });
+          }
+          break;
+        } catch (err) { /* retry once */ }
+      }
 
       // Show notes
       document.getElementById('emailGate').style.display = 'none';

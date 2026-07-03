@@ -347,8 +347,9 @@
         <p>Enter your email to see your personalized results and get a copy sent to your inbox.</p>
         <div class="email-form">
           <input type="email" id="emailInput" placeholder="you@business.com" autocomplete="email">
-          <button class="btn-next" onclick="submitEmail()">See My Score</button>
+          <button class="btn-next" id="emailSubmitBtn" onclick="submitEmail()">See My Score</button>
         </div>
+        <p id="emailError" style="display:none; color:#e74c3c; font-size:0.9rem; margin-top:0.75rem;">We couldn't save your email just now &mdash; tap the button to try again, or skip below. Your results will still show either way.</p>
         <button class="email-skip" onclick="skipEmail()">Skip — just show my results</button>
       </div>
 
@@ -379,6 +380,8 @@
       <h3 style="margin-bottom: 1.25rem; color: var(--navy-dark);">Your Top Recommendations</h3>
       <div class="rec-grid" id="recGrid"></div>
 
+      <div id="tierOffer"></div>
+
       <div class="results-cta">
         <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book Your Free Strategy Call</a>
         <a href="/" class="btn btn-secondary">Back to EasyAiFlows</a>
@@ -407,6 +410,9 @@
           <h4 style="margin-bottom:0.75rem">Quick Links</h4>
           <a href="/#services" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Services</a>
           <a href="/#pricing" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Pricing</a>
+          <a href="/inner-circle/" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Builders' Inner Circle</a>
+          <a href="/operator-kit/" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Operator Kit</a>
+          <a href="/blog/" style="display:block;color:rgba(255,255,255,0.6);margin-bottom:0.4rem;text-decoration:none">Blog</a>
           <a href="/grader" style="display:block;color:var(--cyan);margin-bottom:0.4rem;text-decoration:none">AI Readiness Grader</a>
         </div>
         <div>
@@ -583,45 +589,59 @@ const GHL_HEADERS = {
 };
 
 async function createGHLContact(email, score) {
-  try {
-    // 1. Create or update contact
-    const contactRes = await fetch(GHL_API + '/contacts/upsert', {
-      method: 'POST',
-      headers: GHL_HEADERS,
-      body: JSON.stringify({
-        locationId: GHL_LOC,
-        email: email,
-        source: 'ai-readiness-grader',
-        customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
-      })
-    });
-    const contactData = await contactRes.json();
-    const contactId = contactData.contact?.id;
-    if (!contactId) return;
+  // Upsert is idempotent, so a retry after a network blip is safe.
+  for (let attempt = 0; attempt < 2; attempt++) {
+    try {
+      const contactRes = await fetch(GHL_API + '/contacts/upsert', {
+        method: 'POST',
+        headers: GHL_HEADERS,
+        body: JSON.stringify({
+          locationId: GHL_LOC,
+          email: email,
+          source: 'ai-readiness-grader',
+          customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
+        })
+      });
+      if (!contactRes.ok) throw new Error('upsert HTTP ' + contactRes.status);
+      const contactData = await contactRes.json();
+      const contactId = contactData.contact?.id;
+      if (!contactId) throw new Error('no contact id in response');
 
-    // 2. Add tag
-    await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
-      method: 'POST',
-      headers: GHL_HEADERS,
-      body: JSON.stringify({ tags: ['ai-grader-lead'] })
-    });
-  } catch (e) { /* fail silently — don't block the user */ }
+      await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
+        method: 'POST',
+        headers: GHL_HEADERS,
+        body: JSON.stringify({ tags: ['ai-grader-lead'] })
+      });
+      return true;
+    } catch (e) { /* retry once, then report failure */ }
+  }
+  return false;
 }
 
-function submitEmail() {
+async function submitEmail() {
   const email = document.getElementById('emailInput').value.trim();
-  if (email && email.includes('@')) {
-    createGHLContact(email, calcScore());
+  if (!email || !email.includes('@')) { showResults(); return; }
 
-    // Meta Pixel — Lead event (email captured)
-    if (typeof fbq !== 'undefined') {
-      fbq('track', 'Lead', {
-        content_name: 'AI Readiness Grader',
-        content_category: 'Email Captured',
-        value: calcScore(),
-        currency: 'USD'
-      });
-    }
+  const btn = document.getElementById('emailSubmitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+
+  const saved = await createGHLContact(email, calcScore());
+  if (!saved) {
+    btn.disabled = false;
+    btn.textContent = 'See My Score';
+    document.getElementById('emailError').style.display = 'block';
+    return;
+  }
+
+  // Meta Pixel — Lead event (email captured)
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', {
+      content_name: 'AI Readiness Grader',
+      content_category: 'Email Captured',
+      value: calcScore(),
+      currency: 'USD'
+    });
   }
   showResults();
 }
@@ -648,7 +668,13 @@ const tiers = [
       { icon: "\uD83D\uDCAC", title: "AI Chatbot for FAQs", desc: "Automate the 20 questions you answer every single day \u2014 hours back instantly." },
       { icon: "\uD83D\uDCC5", title: "Smart Appointment Booking", desc: "Let AI handle scheduling, reminders, and no-show follow-ups 24/7." },
       { icon: "\uD83D\uDCF1", title: "Auto Social Media Posts", desc: "Generate and schedule a week of posts in 10 minutes instead of 5 hours." }
-    ]
+    ],
+    offer: {
+      title: "Best next step at your stage: one small win a week",
+      desc: "The Builders' Inner Circle sends you one quick, money-making AI build every week \u2014 no tech background needed. $4.99/mo, cancel anytime.",
+      label: "Join the Inner Circle \u2014 $4.99/mo",
+      href: "/inner-circle/"
+    }
   },
   {
     name: "Growing \u2014 Ready to Automate",
@@ -659,7 +685,13 @@ const tiers = [
       { icon: "\uD83D\uDD25", title: "Lead Follow-Up Sequences", desc: "AI follows up with every lead in under 60 seconds \u2014 before they go cold." },
       { icon: "\uD83C\uDFA4", title: "AI Voice Agent", desc: "Never miss a call again. AI answers, qualifies, and books \u2014 even at 2 AM." },
       { icon: "\u26A1", title: "Workflow Automation", desc: "Connect your tools so invoicing, reminders, and data entry happen automatically." }
-    ]
+    ],
+    offer: {
+      title: "Want to build these yourself first?",
+      desc: "The Claude Code Operator Kit is 15 ready-to-run AI project blueprints built for businesses exactly at your stage \u2014 $24.97, one time.",
+      label: "See What's Inside \u2014 $24.97",
+      href: "/operator-kit/"
+    }
   },
   {
     name: "Ready to Scale",
@@ -716,6 +748,15 @@ function showResults() {
     `<div class="rec-card"><div class="rec-icon">${r.icon}</div><h4>${r.title}</h4><p>${r.desc}</p></div>`
   ).join('');
 
+  // Tier-matched offer (Ready to Scale goes straight to the strategy call below)
+  const offerEl = document.getElementById('tierOffer');
+  offerEl.innerHTML = tier.offer ? `
+    <div class="rec-card" style="max-width:560px; margin:0 auto 2rem; text-align:center; border:2px solid ${tier.color};">
+      <h4 style="margin-bottom:0.5rem;">${tier.offer.title}</h4>
+      <p style="margin-bottom:1.25rem;">${tier.offer.desc}</p>
+      <a href="${tier.offer.href}" class="btn btn-primary" onclick="trackOfferClick('${tier.name}')">${tier.offer.label}</a>
+    </div>` : '';
+
   // Meta Pixel — Quiz Completed (fires regardless of email submission)
   if (typeof fbq !== 'undefined') {
     fbq('track', 'CompleteRegistration', {
@@ -727,6 +768,16 @@ function showResults() {
   }
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Meta Pixel — tier-matched offer clicked on results screen
+function trackOfferClick(tierName) {
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'ViewContent', {
+      content_name: 'Grader Tier Offer',
+      content_category: tierName
+    });
+  }
 }
 
 // Meta Pixel — Strategy Call Booked (fires on TidyCal link click)

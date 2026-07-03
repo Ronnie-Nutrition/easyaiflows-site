@@ -242,8 +242,9 @@
       <div class="cap-form">
         <input type="text" id="nameInput" placeholder="Your first name" autocomplete="given-name">
         <input type="email" id="emailInput" placeholder="Your best email" autocomplete="email">
-        <button onclick="submitCapture()">Send Me the Kit</button>
+        <button id="captureBtn" onclick="submitCapture()">Send Me the Kit</button>
       </div>
+      <p id="captureError" style="display:none; color:#ef4444; font-size:0.9rem; margin-top:0.75rem;">Something went wrong sending your kit &mdash; please tap the button to try again, or email <a href="mailto:ronnie@easyaiflows.com" style="color:#ef4444;">ronnie@easyaiflows.com</a> and I'll send it personally.</p>
       <p class="cap-note">No spam. Just the kit + one follow-up. Unsubscribe anytime.</p>
     </div>
 
@@ -352,7 +353,7 @@
   </footer>
 
 <script>
-function submitCapture() {
+async function submitCapture() {
   const name = document.getElementById('nameInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
 
@@ -361,17 +362,38 @@ function submitCapture() {
     return;
   }
 
-  // Fire to GHL webhook
-  fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/6bb80381-738f-4f98-b830-3a39f4f3ae8d', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: name,
-      email: email,
-      source: 'perfect-pitch-kit',
-      tag: 'lead-magnet-pitch-kit'
-    })
-  }).catch(() => {});
+  const btn = document.getElementById('captureBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  // Fire to GHL webhook — retry once, and tell the user if it still fails
+  let sent = false;
+  for (let attempt = 0; attempt < 2 && !sent; attempt++) {
+    try {
+      const res = await fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/6bb80381-738f-4f98-b830-3a39f4f3ae8d', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          source: 'perfect-pitch-kit',
+          tag: 'lead-magnet-pitch-kit'
+        })
+      });
+      sent = res.ok;
+    } catch (e) { /* retry once */ }
+  }
+
+  if (!sent) {
+    btn.disabled = false;
+    btn.textContent = 'Send Me the Kit';
+    document.getElementById('captureError').style.display = 'block';
+    return;
+  }
+
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', { content_name: 'Perfect Pitch Kit', content_category: 'Email Captured' });
+  }
 
   // Show thank you + upsell
   document.getElementById('captureCard').style.display = 'none';
