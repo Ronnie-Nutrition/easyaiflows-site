@@ -242,6 +242,10 @@
       <div class="cap-form">
         <input type="text" id="nameInput" placeholder="Your first name" autocomplete="given-name">
         <input type="email" id="emailInput" placeholder="Your best email" autocomplete="email">
+        <input type="tel" id="phoneInput" placeholder="Mobile (optional — for text tips)" autocomplete="tel">
+        <label id="smsConsentWrap" style="display:none;font-size:0.75rem;color:#6b7280;line-height:1.4;text-align:left;cursor:pointer">
+          <input type="checkbox" id="smsConsent" style="width:14px;height:14px;vertical-align:-2px;margin-right:5px">I agree to receive automated marketing &amp; informational texts from EasyAiFlows at the number provided. Consent is not a condition of purchase. Msg freq varies. Msg &amp; data rates may apply. Reply STOP to cancel. See <a href="/privacy/" target="_blank">Privacy Policy</a>.
+        </label>
         <button id="captureBtn" onclick="submitCapture()">Send Me the Kit</button>
       </div>
       <p id="captureError" style="display:none; color:#ef4444; font-size:0.9rem; margin-top:0.75rem;">Something went wrong sending your kit &mdash; please tap the button to try again, or email <a href="mailto:ronnie@easyaiflows.com" style="color:#ef4444;">ronnie@easyaiflows.com</a> and I'll send it personally.</p>
@@ -353,14 +357,27 @@
   </footer>
 
 <script>
+document.getElementById('phoneInput').addEventListener('input', function () {
+  document.getElementById('smsConsentWrap').style.display = this.value.trim() ? 'block' : 'none';
+});
+
 async function submitCapture() {
   const name = document.getElementById('nameInput').value.trim();
   const email = document.getElementById('emailInput').value.trim();
+  const phone = document.getElementById('phoneInput').value.trim();
+  const smsConsent = !!(document.getElementById('smsConsent') && document.getElementById('smsConsent').checked);
 
   if (!email || !email.includes('@')) {
     document.getElementById('emailInput').style.borderColor = '#ef4444';
     return;
   }
+  if (phone && !smsConsent) {
+    const err = document.getElementById('captureError');
+    err.innerHTML = 'Please check the consent box so we can text you &mdash; or clear the phone field to get the kit by email only.';
+    err.style.display = 'block';
+    return;
+  }
+  document.getElementById('captureError').style.display = 'none';
 
   const btn = document.getElementById('captureBtn');
   btn.disabled = true;
@@ -389,6 +406,23 @@ async function submitCapture() {
     btn.textContent = 'Send Me the Kit';
     document.getElementById('captureError').style.display = 'block';
     return;
+  }
+
+  // Phone + consent go via the contacts API (the kit webhook only maps name/email);
+  // upsert merges by email, and the note is the auditable TCPA consent record.
+  if (phone && smsConsent) {
+    const H = { 'Authorization': 'Bearer pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0', 'Version': '2021-07-28', 'Content-Type': 'application/json' };
+    fetch('https://services.leadconnectorhq.com/contacts/upsert', {
+      method: 'POST', headers: H,
+      body: JSON.stringify({ locationId: 'k5gu12TNotD5eV866JKZ', email: email, phone: phone, tags: ['sms-opt-in'] })
+    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      const cid = d && d.contact && d.contact.id;
+      if (cid) fetch('https://services.leadconnectorhq.com/contacts/' + cid + '/notes', {
+        method: 'POST', headers: H,
+        body: JSON.stringify({ body: 'SMS OPT-IN via easyaiflows.com/perfect-pitch on ' + new Date().toISOString()
+          + '. Checkbox consent to recurring automated marketing & informational texts. Msg freq varies; msg & data rates may apply; reply STOP to cancel.' })
+      });
+    }).catch(function () {});
   }
 
   if (typeof fbq !== 'undefined') {

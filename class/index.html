@@ -369,7 +369,8 @@
       if (!email || !email.includes('@')) return;
 
       // Create contact in GHL — retry once on failure; never block the notes
-      for (let attempt = 0; attempt < 2; attempt++) {
+      let saved = false;
+      for (let attempt = 0; attempt < 2 && !saved; attempt++) {
         try {
           const res = await fetch(GHL_API + '/contacts/upsert', {
             method: 'POST',
@@ -392,14 +393,20 @@
               body: JSON.stringify({ tags: ['class-attendee'] })
             });
           }
-          break;
+          saved = true;
         } catch (err) { /* retry once */ }
       }
 
-      // Show notes
+      // Show notes (always — the content promise comes first), but say so if the save failed
       document.getElementById('emailGate').style.display = 'none';
       document.getElementById('successMsg').classList.add('active');
       document.getElementById('classNotes').classList.add('active');
+      if (!saved) {
+        const warn = document.createElement('p');
+        warn.style.cssText = 'color:#b45309;font-size:0.9rem;margin-top:0.5rem';
+        warn.innerHTML = 'Heads up: we couldn\'t save your email just now &mdash; the notes are below, but email <a href="mailto:ronnie@easyaiflows.com">ronnie@easyaiflows.com</a> if you want the follow-ups.';
+        document.getElementById('successMsg').appendChild(warn);
+      }
 
       // Save to localStorage
       localStorage.setItem('classOptIn', JSON.stringify({ name, email, date: new Date().toISOString() }));

@@ -180,6 +180,42 @@
       <a href="https://easyaiflows.com/inner-circle/" class="btn btn-primary">Join the Builders' Inner Circle &rarr;</a>
     </div>
 
+  
+    <!-- Free weekly build — email capture (added 2026-07-05) -->
+    <div id="eafCapture" style="margin:2.5rem 0;padding:1.6rem 1.4rem;border-radius:14px;background:linear-gradient(135deg,#1B3A6B,#122a4f);color:#fff;text-align:center">
+      <h3 style="margin:0 0 .4rem;font-size:1.25rem;color:#fff">Get one free AI build in your inbox 🔨</h3>
+      <p style="margin:0 0 1rem;color:rgba(255,255,255,.85);font-size:.95rem">The exact 10-minute build my paid members start with — free. No spam, unsubscribe anytime.</p>
+      <div style="display:flex;gap:.5rem;max-width:420px;margin:0 auto;flex-wrap:wrap;justify-content:center">
+        <input type="email" id="eafCapEmail" placeholder="you@business.com" autocomplete="email" style="flex:1;min-width:200px;padding:.7rem .9rem;border-radius:8px;border:none;font-size:1rem">
+        <button id="eafCapBtn" onclick="eafCapture()" style="padding:.7rem 1.2rem;border-radius:8px;border:none;background:#00BCD4;color:#0c2340;font-weight:700;font-size:1rem;cursor:pointer">Send it</button>
+      </div>
+      <p id="eafCapMsg" style="display:none;margin:.75rem 0 0;font-size:.9rem"></p>
+    </div>
+    <script>
+    async function eafCapture(){
+      var em=document.getElementById('eafCapEmail').value.trim();
+      var msg=document.getElementById('eafCapMsg'), btn=document.getElementById('eafCapBtn');
+      if(!em||em.indexOf('@')<0){msg.style.display='block';msg.style.color='#ffb4a2';msg.textContent='Please enter a valid email.';return;}
+      btn.disabled=true;btn.textContent='Sending\u2026';
+      var ok=false;
+      for(var i=0;i<2&&!ok;i++){
+        try{
+          var r=await fetch('https://services.leadconnectorhq.com/contacts/upsert',{method:'POST',headers:{'Authorization':'Bearer pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0','Version':'2021-07-28','Content-Type':'application/json'},body:JSON.stringify({locationId:'k5gu12TNotD5eV866JKZ',email:em,source:'free-build-'+location.pathname,tags:['free-build-lead','blog-capture']})});
+          ok=r.ok;
+        }catch(e){}
+      }
+      msg.style.display='block';
+      if(ok){
+        msg.style.color='#9be7c4';msg.textContent="Done! Check your inbox in the next few minutes. \uD83D\uDD28";
+        document.getElementById('eafCapEmail').value='';btn.textContent='Sent \u2713';
+        if(typeof fbq!=='undefined'){fbq('track','Lead',{content_name:'Free Build Capture',content_category:location.pathname});}
+      }else{
+        msg.style.color='#ffb4a2';msg.textContent="Hmm, that didn't go through \u2014 try again or email ronnie@easyaiflows.com";
+        btn.disabled=false;btn.textContent='Send it';
+      }
+    }
+    </script>
+
   </article>
 
   <footer>

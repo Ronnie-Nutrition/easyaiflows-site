@@ -349,6 +349,12 @@
           <input type="email" id="emailInput" placeholder="you@business.com" autocomplete="email">
           <button class="btn-next" id="emailSubmitBtn" onclick="submitEmail()">See My Score</button>
         </div>
+        <div style="max-width:420px;margin:0.75rem auto 0;text-align:left">
+          <input type="tel" id="phoneInput" placeholder="Mobile (optional — for text tips)" autocomplete="tel" style="width:100%;padding:0.7rem 0.9rem;border-radius:8px;border:1px solid #d1d5db;font-size:1rem">
+          <label id="smsConsentWrap" style="display:none;margin-top:0.5rem;font-size:0.78rem;color:#6b7280;line-height:1.4;cursor:pointer">
+            <input type="checkbox" id="smsConsent" style="width:15px;height:15px;vertical-align:-2px;margin-right:6px">I agree to receive automated marketing &amp; informational texts from EasyAiFlows at the number provided. Consent is not a condition of purchase. Msg freq varies. Msg &amp; data rates may apply. Reply STOP to cancel. See <a href="/privacy/" target="_blank">Privacy Policy</a>.
+          </label>
+        </div>
         <p id="emailError" style="display:none; color:#e74c3c; font-size:0.9rem; margin-top:0.75rem;">We couldn't save your email just now &mdash; tap the button to try again, or skip below. Your results will still show either way.</p>
         <button class="email-skip" onclick="skipEmail()">Skip — just show my results</button>
       </div>
@@ -588,49 +594,81 @@ const GHL_HEADERS = {
   'Content-Type': 'application/json'
 };
 
-async function createGHLContact(email, score) {
+async function createGHLContact(email, score, phone, smsConsent) {
   // Upsert is idempotent, so a retry after a network blip is safe.
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
+      const body = {
+        locationId: GHL_LOC,
+        email: email,
+        source: 'ai-readiness-grader',
+        customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
+      };
+      if (phone && smsConsent) body.phone = phone;
       const contactRes = await fetch(GHL_API + '/contacts/upsert', {
         method: 'POST',
         headers: GHL_HEADERS,
-        body: JSON.stringify({
-          locationId: GHL_LOC,
-          email: email,
-          source: 'ai-readiness-grader',
-          customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
-        })
+        body: JSON.stringify(body)
       });
       if (!contactRes.ok) throw new Error('upsert HTTP ' + contactRes.status);
       const contactData = await contactRes.json();
       const contactId = contactData.contact?.id;
       if (!contactId) throw new Error('no contact id in response');
 
+      const tags = ['ai-grader-lead'];
+      if (phone && smsConsent) tags.push('sms-opt-in');
       await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
         method: 'POST',
         headers: GHL_HEADERS,
-        body: JSON.stringify({ tags: ['ai-grader-lead'] })
+        body: JSON.stringify({ tags: tags })
       });
+      // TCPA consent record — auditable note proving the opt-in (never blocks the flow)
+      if (phone && smsConsent) {
+        fetch(GHL_API + '/contacts/' + contactId + '/notes', {
+          method: 'POST',
+          headers: GHL_HEADERS,
+          body: JSON.stringify({ body: 'SMS OPT-IN via easyaiflows.com/grader on ' + new Date().toISOString()
+            + '. Checkbox consent to recurring automated marketing & informational texts. Msg freq varies; msg & data rates may apply; reply STOP to cancel.' })
+        }).catch(function(){});
+      }
       return true;
     } catch (e) { /* retry once, then report failure */ }
   }
   return false;
 }
 
+// Consent checkbox only appears once a phone number is typed
+document.addEventListener('DOMContentLoaded', function () {
+  const ph = document.getElementById('phoneInput');
+  if (ph) ph.addEventListener('input', function () {
+    document.getElementById('smsConsentWrap').style.display = ph.value.trim() ? 'block' : 'none';
+  });
+});
+
 async function submitEmail() {
   const email = document.getElementById('emailInput').value.trim();
   if (!email || !email.includes('@')) { showResults(); return; }
+
+  const phone = (document.getElementById('phoneInput') ? document.getElementById('phoneInput').value.trim() : '');
+  const smsConsent = !!(document.getElementById('smsConsent') && document.getElementById('smsConsent').checked);
+  if (phone && !smsConsent) {
+    const err = document.getElementById('emailError');
+    err.textContent = 'Please check the consent box so we can text you — or clear the phone field to continue with email only.';
+    err.style.display = 'block';
+    return;
+  }
 
   const btn = document.getElementById('emailSubmitBtn');
   btn.disabled = true;
   btn.textContent = 'Saving…';
 
-  const saved = await createGHLContact(email, calcScore());
+  const saved = await createGHLContact(email, calcScore(), phone, smsConsent);
   if (!saved) {
     btn.disabled = false;
     btn.textContent = 'See My Score';
-    document.getElementById('emailError').style.display = 'block';
+    const err = document.getElementById('emailError');
+    err.textContent = "We couldn't save your email just now — tap the button to try again, or skip below. Your results will still show either way.";
+    err.style.display = 'block';
     return;
   }
 
