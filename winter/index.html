@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0E5A4E">
+<title>Territory Map — Winter Netters</title>
+<style>
+:root{
+  --paper:#F1F4F1; --card:#FFFFFF; --ink:#132420; --ink-soft:#4A5A54; --line:#DDE4DF;
+  --pine:#0E5A4E; --pine-2:#15816F; --gold:#B5822B; --gold-soft:#F0E4C8; --coral:#DD5636;
+  --fresh:#1E9E76; --shadow:20 40 34;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --paper:#0B1613; --card:#12211C; --ink:#EAF1ED; --ink-soft:#9FB3AB; --line:#22332D;
+    --pine:#3FBCA6; --pine-2:#5DD3BD; --gold:#D6A94E; --gold-soft:#2A2418; --coral:#F0765A; --fresh:#4FCFA3; --shadow:0 0 0; }
+}
+:root[data-theme="light"]{ --paper:#F1F4F1; --card:#FFFFFF; --ink:#132420; --ink-soft:#4A5A54; --line:#DDE4DF; --pine:#0E5A4E; --pine-2:#15816F; --gold:#B5822B; --gold-soft:#F0E4C8; --coral:#DD5636; --fresh:#1E9E76; --shadow:20 40 34; }
+:root[data-theme="dark"]{ --paper:#0B1613; --card:#12211C; --ink:#EAF1ED; --ink-soft:#9FB3AB; --line:#22332D; --pine:#3FBCA6; --pine-2:#5DD3BD; --gold:#D6A94E; --gold-soft:#2A2418; --coral:#F0765A; --fresh:#4FCFA3; --shadow:0 0 0; }
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:-apple-system,"SF Pro Text",system-ui,"Segoe UI",sans-serif;line-height:1.5;
+  -webkit-font-smoothing:antialiased;}
+.serif{font-family:ui-serif,"New York",Georgia,"Times New Roman",serif;}
+.wrap{max-width:1080px;margin:0 auto;padding:clamp(20px,4vw,44px);}
+/* header */
+.brand{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+.brand .ey{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--pine-2);font-weight:600;}
+.brand h1{font-family:ui-serif,"New York",Georgia,serif;font-weight:600;font-size:clamp(28px,4.4vw,42px);
+  margin:.15em 0 .1em;line-height:1.05;text-wrap:balance;letter-spacing:-.01em;}
+.brand .sub{color:var(--ink-soft);font-size:15px;margin:0;}
+.forwhom{text-align:right;border-left:2px solid var(--gold);padding:2px 0 2px 14px;}
+.forwhom small{display:block;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);}
+.forwhom b{font-family:ui-serif,"New York",Georgia,serif;font-weight:600;font-size:18px;}
+/* stat bar */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:26px 0 30px;}
+.stat{background:var(--card);padding:16px 18px;}
+.stat .n{font-family:ui-serif,"New York",Georgia,serif;font-size:26px;font-weight:600;
+  font-variant-numeric:tabular-nums;line-height:1;color:var(--pine);}
+.stat .l{font-size:11.5px;color:var(--ink-soft);margin-top:5px;letter-spacing:.02em;}
+@media(max-width:620px){.stats{grid-template-columns:repeat(2,1fr)}}
+/* section label */
+.seclabel{display:flex;align-items:center;gap:12px;margin:8px 0 16px;}
+.seclabel h2{font-family:ui-serif,"New York",Georgia,serif;font-weight:600;font-size:20px;margin:0;}
+.seclabel .rule{flex:1;height:1px;background:var(--line);}
+.seclabel .count{font-size:12px;color:var(--ink-soft);letter-spacing:.03em;}
+/* card grid */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 15px;
+  position:relative;box-shadow:0 1px 2px rgb(var(--shadow)/.05),0 8px 24px -18px rgb(var(--shadow)/.35);}
+.reveal{border-left:4px solid var(--pine);}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
+.who h3{font-family:ui-serif,"New York",Georgia,serif;font-weight:600;font-size:18.5px;margin:0 0 3px;
+  line-height:1.15;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.cred{font-family:-apple-system,system-ui,sans-serif;font-size:10px;font-weight:700;letter-spacing:.05em;
+  background:var(--gold-soft);color:var(--gold);padding:2px 7px;border-radius:20px;white-space:nowrap;}
+.role{margin:0;font-size:13px;color:var(--ink-soft);}
+.score{flex-shrink:0;width:46px;height:46px;border-radius:50%;border:2px solid var(--pine);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--pine);}
+.score span{font-family:ui-serif,Georgia,serif;font-weight:600;font-size:17px;line-height:1;font-variant-numeric:tabular-nums;}
+.score small{font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;opacity:.8;}
+.phone{display:inline-flex;align-items:center;gap:8px;margin:14px 0 10px;text-decoration:none;
+  color:var(--ink);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums;letter-spacing:.01em;}
+.phone svg{color:var(--pine-2);flex-shrink:0;}
+.meta-row{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--ink-soft);}
+.pin{color:var(--gold);font-size:11px;}
+.card-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:14px;
+  padding-top:11px;border-top:1px solid var(--line);}
+.verified{font-size:11.5px;font-weight:600;color:var(--fresh);}
+.source{font-size:10.5px;color:var(--ink-soft);letter-spacing:.02em;}
+/* locked */
+.locked{border-left:4px solid var(--line);}
+.locked .lockdot{font-size:13px;opacity:.65;}
+.blur{filter:blur(5.5px);user-select:none;pointer-events:none;}
+.locked-phone{margin:14px 0 10px;font-size:18px;font-weight:600;color:var(--ink-soft);}
+.lockwrap{position:relative;}
+.fade{position:absolute;left:0;right:0;bottom:0;height:62%;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--paper) 82%);border-radius:0 0 16px 16px;}
+/* unlock CTA */
+.unlock{margin-top:26px;border-radius:18px;padding:clamp(22px,3.5vw,32px);
+  background:linear-gradient(135deg,var(--pine),var(--pine-2));color:#fff;position:relative;overflow:hidden;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;}
+.unlock::before{content:"🔒";position:absolute;right:-8px;top:-24px;font-size:130px;opacity:.08;transform:rotate(-12deg);}
+.unlock .u-head{font-family:ui-serif,Georgia,serif;font-size:clamp(20px,3vw,26px);font-weight:600;margin:0 0 6px;line-height:1.15;}
+.unlock .u-sub{margin:0;font-size:14px;opacity:.9;max-width:46ch;}
+.u-gold{color:var(--gold);background:#fff;}
+.btn{background:var(--gold);color:#1c1405;font-weight:700;font-size:15px;border:none;border-radius:12px;
+  padding:15px 26px;text-decoration:none;white-space:nowrap;box-shadow:0 8px 20px -8px rgba(0,0,0,.5);cursor:pointer;}
+.btn small{display:block;font-weight:600;font-size:11px;opacity:.7;margin-top:2px;}
+/* footer */
+.foot{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);display:flex;gap:18px;
+  flex-wrap:wrap;justify-content:space-between;font-size:11.5px;color:var(--ink-soft);}
+.foot .srcs{display:flex;gap:14px;flex-wrap:wrap;}
+.foot b{color:var(--ink);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="brand">
+    <div>
+      <span class="ey">EasyAiFlows · Territory Intelligence</span>
+      <h1>Your Referral Territory,<br>Mapped &amp; Ready to Call</h1>
+      <p class="sub">Sugar Land &amp; West Houston · ZIPs 77478 · 77479 · 77496 · 77498</p>
+    </div>
+    <div class="forwhom">
+      <small>Prepared for</small>
+      <b>Winter Netters</b>
+      <small style="letter-spacing:.02em;text-transform:none;margin-top:3px;">Right at Home</small>
+    </div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><div class="n">147</div><div class="l">Referral sources in your territory</div></div>
+    <div class="stat"><div class="n">40</div><div class="l">Curated for your pack</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">Facility types covered</div></div>
+    <div class="stat"><div class="n">Monthly</div><div class="l">Auto-refreshed &amp; re-verified</div></div>
+  </section>
+
+  <div class="seclabel">
+    <h2>Unlocked for you</h2><span class="rule"></span><span class="count">3 of 147 · live contact details</span>
+  </div>
+  <div class="grid">
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="who">
+            <h3>Alexandra Funchess <span class="cred">LCSW</span></h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <div class="score" title="Territory match"><span>94</span><small>match</small></div>
+        </div>
+        <a class="phone" href="tel:713-825-6974"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(713) 825-6974</a>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND, TX 77478</div>
+        <div class="card-foot">
+          <span class="verified">✓ Verified</span>
+          <span class="source">NPPES + Firecrawl</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="who">
+            <h3>Alicia Barber <span class="cred">LMSW, MSSW</span></h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <div class="score" title="Territory match"><span>91</span><small>match</small></div>
+        </div>
+        <a class="phone" href="tel:281-277-8811"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(281) 277-8811</a>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND, TX 77478</div>
+        <div class="card-foot">
+          <span class="verified">✓ Verified</span>
+          <span class="source">NPPES</span>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="card-top">
+          <div class="who">
+            <h3>Acura Hospice Care, LLC</h3>
+            <p class="role">Hospice Care, Community Based</p>
+          </div>
+          <div class="score" title="Territory match"><span>88</span><small>match</small></div>
+        </div>
+        <a class="phone" href="tel:281-566-1122"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(281) 566-1122</a>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND, TX 77478</div>
+        <div class="card-foot">
+          <span class="verified">✓ Verified</span>
+          <span class="source">NPPES + CMS</span>
+        </div>
+      </article>
+  </div>
+
+  <div class="seclabel" style="margin-top:34px;">
+    <h2>The rest of your territory</h2><span class="rule"></span><span class="count">144 more · locked</span>
+  </div>
+  <div class="lockwrap">
+    <div class="grid">
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Alyssia Anderson</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Andrea FARB</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Ashton Holmes</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">BIJU JOHN</h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Carla Carter</h3>
+            <p class="role">Registered Nurse</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77498</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Charlene Clement</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Christopher Bryant</h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">DANA Humphrey</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Dayna Gurley</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Debbie Frank</h3>
+            <p class="role">Social Worker, Clinical</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Deirdre Raven</h3>
+            <p class="role">Registered Nurse, Psych/Mental Health, Adult</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77498</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Dorothy Anugwom</h3>
+            <p class="role">Case Management</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77478</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Evelyn CRUZ</h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">Gerardo Guzman</h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77479</div>
+      </article>
+      <article class="card locked">
+        <div class="card-top">
+          <div class="who">
+            <h3 class="blur">GUL Abdali</h3>
+            <p class="role">Social Worker</p>
+          </div>
+          <span class="lockdot">🔒</span>
+        </div>
+        <div class="phone locked-phone"><span class="blur">(•••) •••-••••</span></div>
+        <div class="meta-row"><span class="pin">◈</span>Sugar LAND 77498</div>
+      </article>
+    </div>
+    <div class="fade"></div>
+  </div>
+
+  <section class="unlock">
+    <div>
+      <p class="u-head">Unlock all 147 — names, direct lines, every facility.</p>
+      <p class="u-sub">Your full territory pack, refreshed and re-verified every month, loaded straight into your call list. You just show up and talk — we keep the pipeline full.</p>
+    </div>
+    <a class="btn" href="https://tidycal.com/ronnieysela/ai-strategy-call">Unlock my territory<small>Book 15 min with Ronnie</small></a>
+  </section>
+
+  <footer class="foot">
+    <div class="srcs">
+      <span>Sourced from <b>NPPES NPI Registry</b></span>
+      <span><b>CMS Provider Data</b></span>
+      <span>Enriched via <b>Firecrawl</b></span>
+    </div>
+    <div>Built by <b>EasyAiFlows</b> · easyaiflows.com</div>
+  </footer>
+</div>
+</body>
+</html>
