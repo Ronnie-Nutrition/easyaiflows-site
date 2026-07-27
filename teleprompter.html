@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>EasyAiFlows Teleprompter</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow: hidden;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+
+  /* ── Controls Bar ── */
+  .controls {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(0,0,0,0.9);
+    padding: 12px 16px;
+    z-index: 100;
+    display: flex; gap: 10px; flex-wrap: wrap;
+    align-items: center; justify-content: center;
+    border-bottom: 1px solid #222;
+  }
+  .controls button {
+    background: #0066ff;
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    min-width: 80px;
+  }
+  .controls button:hover { background: #0052cc; }
+  .controls button.pause { background: #ff3b30; }
+  .controls button.script { background: #34c759; }
+  .controls select, .controls input {
+    background: #1c1c1e;
+    color: #fff;
+    border: 1px solid #333;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  .controls label {
+    font-size: 13px;
+    color: #aaa;
+    margin-right: 4px;
+  }
+
+  /* ── Teleprompter Reading Area ── */
+  .prompter {
+    height: 100vh;
+    overflow-y: scroll;
+    padding-top: 50vh;
+    padding-bottom: 80vh;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .prompter::-webkit-scrollbar { display: none; }
+
+  .text-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 30px;
+    text-align: center;
+    font-size: var(--text-size, 64px);
+    line-height: 1.45;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .text-container p { margin-bottom: 1.5em; }
+  .text-container .stage {
+    color: #888;
+    font-size: 0.5em;
+    font-style: italic;
+    font-weight: 400;
+    margin-bottom: 1em;
+  }
+  .text-container .emphasis {
+    color: #34c759;
+    font-weight: 900;
+  }
+  .text-container .url {
+    color: #00bcd4;
+    font-weight: 900;
+    font-size: 1.1em;
+    display: inline-block;
+    padding: 0.3em 0.6em;
+    border: 3px solid #00bcd4;
+    border-radius: 12px;
+    margin: 0.3em 0;
+  }
+
+  /* ── Reading guide line ── */
+  .guide-line {
+    position: fixed;
+    top: 50vh; left: 0; right: 0;
+    height: 2px;
+    background: rgba(255, 59, 48, 0.4);
+    pointer-events: none;
+    z-index: 50;
+  }
+  .guide-arrow {
+    position: fixed;
+    top: calc(50vh - 12px); left: 20px;
+    color: rgba(255, 59, 48, 0.6);
+    font-size: 24px;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  /* ── Mirror Mode (for true teleprompter setups) ── */
+  body.mirror .prompter {
+    transform: scaleX(-1);
+  }
+
+  /* ── Mobile adjustments ── */
+  @media (max-width: 768px) {
+    .text-container { font-size: var(--text-size, 38px); padding: 0 20px; }
+    .controls button { padding: 8px 12px; font-size: 13px; min-width: 60px; }
+    .controls label { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <button id="playBtn" onclick="togglePlay()">▶ Start</button>
+  <button id="resetBtn" onclick="resetScroll()">⏮ Reset</button>
+
+  <label>Speed</label>
+  <select id="speedSelect" onchange="setSpeed()">
+    <option value="20">Slow</option>
+    <option value="40" selected>Normal</option>
+    <option value="60">Fast</option>
+    <option value="80">Very Fast</option>
+  </select>
+
+  <label>Size</label>
+  <select id="sizeSelect" onchange="setSize()">
+    <option value="48">Small</option>
+    <option value="64" selected>Medium</option>
+    <option value="80">Large</option>
+    <option value="96">XL</option>
+  </select>
+
+  <label>Script</label>
+  <select id="scriptSelect" onchange="loadScript()">
+    <option value="1">#1 Daughter Story (45s)</option>
+    <option value="2">#2 Quick Demo (25s)</option>
+    <option value="3">#3 Hospice Nurse (30s)</option>
+  </select>
+
+  <button onclick="toggleMirror()">⇄ Mirror</button>
+</div>
+
+<div class="guide-arrow">▶</div>
+<div class="guide-line"></div>
+
+<div class="prompter" id="prompter">
+  <div class="text-container" id="textContainer"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+//  SCRIPTS
+// ══════════════════════════════════════════════════════
+const scripts = {
+  1: [
+    { type: 'text', content: 'Two years ago,' },
+    { type: 'text', content: 'I got my heart broken.' },
+    { type: 'stage', content: '[ pause — let it land ]' },
+    { type: 'text', content: 'My daughter told me' },
+    { type: 'text', content: "she didn't want to follow me" },
+    { type: 'text', content: 'into nursing.' },
+    { type: 'text', content: 'After <span class="emphasis">30 years</span> in healthcare' },
+    { type: 'text', content: 'and <span class="emphasis">15 years</span>' },
+    { type: 'text', content: 'running my own business —' },
+    { type: 'text', content: 'that made me ask myself' },
+    { type: 'text', content: 'a hard question:' },
+    { type: 'text', content: '<span class="emphasis">What\'s next for me?</span>' },
+    { type: 'stage', content: '[ lean slightly forward ]' },
+    { type: 'text', content: "That's when I found AI." },
+    { type: 'text', content: 'And now I want to ask <span class="emphasis">YOU</span>' },
+    { type: 'text', content: 'three questions.' },
+    { type: 'stage', content: '[ hold up one finger ]' },
+    { type: 'text', content: '<span class="emphasis">One —</span>' },
+    { type: 'text', content: 'Are you ready for AI?' },
+    { type: 'stage', content: '[ two fingers ]' },
+    { type: 'text', content: '<span class="emphasis">Two —</span>' },
+    { type: 'text', content: 'What tasks do you keep pushing off?' },
+    { type: 'text', content: 'Bookkeeping?' },
+    { type: 'text', content: 'Social media?' },
+    { type: 'text', content: 'Following up with leads' },
+    { type: 'text', content: 'that fall through the cracks?' },
+    { type: 'stage', content: '[ three fingers ]' },
+    { type: 'text', content: '<span class="emphasis">Three —</span>' },
+    { type: 'text', content: 'If you had a personal assistant' },
+    { type: 'text', content: 'working 24 hours a day —' },
+    { type: 'text', content: 'what would you name them?' },
+    { type: 'stage', content: '[ smile, direct to camera ]' },
+    { type: 'text', content: 'Take my free 2-minute' },
+    { type: 'text', content: 'AI Readiness Quiz at:' },
+    { type: 'text', content: '<span class="url">easyaiflows.com/grader</span>' },
+    { type: 'text', content: "Let's find out what AI" },
+    { type: 'text', content: 'could do for <span class="emphasis">your</span> business.' },
+    { type: 'stage', content: '[ hold 1 sec, then cut ]' }
+  ],
+  2: [
+    { type: 'text', content: 'Quick question for business owners:' },
+    { type: 'text', content: 'How many leads' },
+    { type: 'text', content: 'fell through the cracks' },
+    { type: 'text', content: 'this week?' },
+    { type: 'text', content: 'How many hours did you waste' },
+    { type: 'text', content: 'on bookkeeping' },
+    { type: 'text', content: 'and social media?' },
+    { type: 'stage', content: '[ lean in ]' },
+    { type: 'text', content: 'What if you had an AI' },
+    { type: 'text', content: 'personal assistant' },
+    { type: 'text', content: 'that handled all of it —' },
+    { type: 'text', content: '<span class="emphasis">24 hours a day.</span>' },
+    { type: 'text', content: 'Never sick.' },
+    { type: 'text', content: 'Never quits.' },
+    { type: 'text', content: 'Take my <span class="emphasis">free 2-minute</span>' },
+    { type: 'text', content: 'AI Readiness Quiz at:' },
+    { type: 'text', content: '<span class="url">easyaiflows.com/grader</span>' },
+    { type: 'text', content: 'Find out what AI' },
+    { type: 'text', content: 'could do for <span class="emphasis">your</span> business.' },
+    { type: 'stage', content: '[ smile, cut ]' }
+  ],
+  3: [
+    { type: 'text', content: "I'm a hospice nurse." },
+    { type: 'stage', content: '[ pause — let it land ]' },
+    { type: 'text', content: 'For 30 years' },
+    { type: 'text', content: "I've taken care of people" },
+    { type: 'text', content: 'at the end of their lives.' },
+    { type: 'text', content: 'And I just spent two years' },
+    { type: 'text', content: 'building AI systems' },
+    { type: 'text', content: 'that run my <span class="emphasis">other</span> business' },
+    { type: 'text', content: 'on autopilot.' },
+    { type: 'stage', content: '[ smile ]' },
+    { type: 'text', content: 'If a hospice nurse' },
+    { type: 'text', content: 'can use AI to get hours' },
+    { type: 'text', content: 'back every week —' },
+    { type: 'text', content: '<span class="emphasis">you can too.</span>' },
+    { type: 'text', content: 'Take my free 2-minute' },
+    { type: 'text', content: 'AI Readiness Quiz at:' },
+    { type: 'text', content: '<span class="url">easyaiflows.com/grader</span>' },
+    { type: 'stage', content: '[ cut ]' }
+  ]
+};
+
+// ══════════════════════════════════════════════════════
+//  STATE
+// ══════════════════════════════════════════════════════
+let isPlaying = false;
+let scrollSpeed = 40; // pixels per second
+let lastTimestamp = 0;
+const prompter = document.getElementById('prompter');
+const textContainer = document.getElementById('textContainer');
+
+// ══════════════════════════════════════════════════════
+//  LOAD SCRIPT
+// ══════════════════════════════════════════════════════
+function loadScript() {
+  const scriptId = document.getElementById('scriptSelect').value;
+  const script = scripts[scriptId];
+  textContainer.innerHTML = script.map(line => {
+    if (line.type === 'stage') {
+      return `<p class="stage">${line.content}</p>`;
+    }
+    return `<p>${line.content}</p>`;
+  }).join('');
+  resetScroll();
+}
+
+// ══════════════════════════════════════════════════════
+//  PLAY / PAUSE / RESET
+// ══════════════════════════════════════════════════════
+function togglePlay() {
+  isPlaying = !isPlaying;
+  const btn = document.getElementById('playBtn');
+  if (isPlaying) {
+    btn.textContent = '⏸ Pause';
+    btn.classList.add('pause');
+    lastTimestamp = 0;
+    requestAnimationFrame(scrollStep);
+  } else {
+    btn.textContent = '▶ Start';
+    btn.classList.remove('pause');
+  }
+}
+
+function scrollStep(timestamp) {
+  if (!isPlaying) return;
+  if (!lastTimestamp) lastTimestamp = timestamp;
+  const elapsed = (timestamp - lastTimestamp) / 1000;
+  lastTimestamp = timestamp;
+  prompter.scrollTop += scrollSpeed * elapsed;
+
+  // Auto-stop at end
+  if (prompter.scrollTop + prompter.clientHeight >= prompter.scrollHeight - 20) {
+    isPlaying = false;
+    const btn = document.getElementById('playBtn');
+    btn.textContent = '▶ Start';
+    btn.classList.remove('pause');
+    return;
+  }
+  requestAnimationFrame(scrollStep);
+}
+
+function resetScroll() {
+  isPlaying = false;
+  document.getElementById('playBtn').textContent = '▶ Start';
+  document.getElementById('playBtn').classList.remove('pause');
+  prompter.scrollTop = 0;
+}
+
+function setSpeed() {
+  scrollSpeed = parseInt(document.getElementById('speedSelect').value);
+}
+
+function setSize() {
+  const size = document.getElementById('sizeSelect').value;
+  textContainer.style.setProperty('--text-size', size + 'px');
+}
+
+function toggleMirror() {
+  document.body.classList.toggle('mirror');
+}
+
+// ══════════════════════════════════════════════════════
+//  KEYBOARD SHORTCUTS
+// ══════════════════════════════════════════════════════
+document.addEventListener('keydown', (e) => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    togglePlay();
+  }
+  if (e.key === 'r' || e.key === 'R') resetScroll();
+  if (e.key === 'ArrowUp') {
+    scrollSpeed = Math.min(scrollSpeed + 10, 120);
+    document.getElementById('speedSelect').value =
+      scrollSpeed >= 70 ? '80' : scrollSpeed >= 50 ? '60' : scrollSpeed >= 30 ? '40' : '20';
+  }
+  if (e.key === 'ArrowDown') {
+    scrollSpeed = Math.max(scrollSpeed - 10, 10);
+    document.getElementById('speedSelect').value =
+      scrollSpeed >= 70 ? '80' : scrollSpeed >= 50 ? '60' : scrollSpeed >= 30 ? '40' : '20';
+  }
+});
+
+// ══════════════════════════════════════════════════════
+//  INITIAL LOAD
+// ══════════════════════════════════════════════════════
+loadScript();
+</script>
+
+</body>
+</html>
