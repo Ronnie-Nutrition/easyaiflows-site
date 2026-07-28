@@ -18,7 +18,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 # (loc, source file for lastmod)
 entries = [("/", "index.html")]
 
-for page in ["grader", "perfect-pitch", "perfect-pitch-kit", "nonprofit",
+for page in ["grader", "pricing", "perfect-pitch", "perfect-pitch-kit", "nonprofit",
              "ai-automation-pearland", "ai-automation-houston"]:
     entries.append((f"/{page}", f"{page}.html"))
 
