@@ -155,16 +155,36 @@ of the verification pattern alongside 148's "insertions should equal deletions w
 |---|---|---|
 | 1 | ~~`git push`~~ ✅ done — `1dbd479`, verified live | — |
 | 2 | ~~Request indexing for `/ai-for/churches/`~~ ✅ Ronnie did it 8/11 8:11 AM — churches was already indexed | — |
-| 3 | Verify the nonprofits FAQ claim *"the client roster is national"* | **Ronnie — I still cannot verify** |
+| 3 | ~~Verify the nonprofits FAQ claim~~ ✅ closed 8/11 — Ronnie confirmed multiple nonprofits, grant research. Rewritten + live (`10b1d71`) |
 | 4 | **Restart the blog** — cold since 7/5. The 5 church GSC queries are 5 ready-made titles | Claude drafts |
 | 5 | 18 pages still on the plain template (546–608 words, 36–40% dup) | Claude, one at a time |
 | 6 | Resubmit `sitemap.xml` in GSC after the push (20 `/ai-for/` lastmods changed) | Ronnie |
 
-**On #3 —** unchanged from 148 and deliberately not guessed at. The nonprofits FAQ says *"we do work
-with a number of local organizations, but the client roster is national."* Both halves need a real
-answer: how many *local* organizations, and does "national" mean more than one out-of-state client.
-The footer's *"Serving clients nationwide"* is a service-area statement and is fine as-is — this line
-is different because it describes a roster.
+**On #3 — CLOSED 8/11 (`10b1d71`, live).** Ronnie: *"I've worked with multiple nonprofits helping them
+research grants for their business."* That substantiates the plural but **not the geography** — and
+geography is what the FAQ question actually asks (*"Do you work with nonprofits outside Texas?"*).
+
+⭐ **The old answer replied to a location question with a roster boast.** The fix was not to verify
+the boast, it was to answer the question with the *mechanism*: the build is remote, calls are video,
+nothing needs anyone on site — **true regardless of where any client is**, and more useful to a
+reader in Ohio than a roster size. 🔑 **When a claim can't be verified, check whether the sentence was
+even answering the question. Often the honest version is also the better answer.**
+
+Two lines got **stronger**, not weaker: both deep dives said *"we write grants for **a charitable
+foundation**"* — singular, when Ronnie has several. Now "grant research for several nonprofit
+organizations." Used his own scope word (*research*); **did not upgrade to "write"** without asking,
+even though memory logs [[client_lphf]] as a grant-*writing* engagement.
+
+**Still open on this thread (2 questions for Ronnie):**
+1. Is the LPHF work full grant **writing**, not just research? If so the line can say so — a
+   materially better credential that costs nothing if true.
+2. ⚠️ **`nonprofit.html` (the paid 501(c)(3) formation service page) claims the templates were
+   *"refined over multiple successful filings"* and *"We've done this before."*** Same species of
+   claim, on a page selling a service, and **not yet verified**. How many filings have actually gone
+   through? If it is one, or one in progress, that line needs the same treatment.
+
+The footer's *"Serving clients nationwide"* is a service-area statement and is fine as-is — that
+line describes where the company will work, not a roster it has.
 
 ## 🔍 GSC reality check — Ronnie inspected 16 URLs, 8/11 ~8:15 AM
 
