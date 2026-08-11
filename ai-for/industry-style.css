@@ -378,6 +378,47 @@ footer ul li { margin-bottom: 0.5rem; }
 }
 
 /* ── Responsive ── */
+/* ── Deep Dive (optional long-form section) ── */
+.deep-dive {
+  padding: 5rem 0;
+  background: var(--white);
+}
+.deep-dive h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1.25rem;
+}
+.deep-intro {
+  max-width: 760px;
+  margin: 0 auto 3rem;
+  text-align: center;
+  font-size: 1.05rem;
+  color: var(--gray-600);
+  line-height: 1.7;
+}
+.deep-block {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--gray-200);
+}
+.deep-block:last-child { border-bottom: none; }
+.deep-block h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 0.6rem;
+}
+.deep-block p {
+  color: var(--gray-600);
+  line-height: 1.75;
+}
+.deep-block a {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .industry-hero { padding: 8rem 0 4rem; }
   .industry-hero h1 { font-size: 2rem; }
@@ -399,6 +440,9 @@ footer ul li { margin-bottom: 0.5rem; }
   .auto-grid,
   .results-grid,
   .steps-grid { grid-template-columns: 1fr; }
+
+  .deep-dive { padding: 3.5rem 0; }
+  .deep-block { padding: 1.5rem 0; }
 
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
 }

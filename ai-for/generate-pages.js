@@ -543,10 +543,27 @@ const industries = [
       { number: "0", label: "Missed grant deadlines" },
       { number: "15+", label: "Staff hours saved per week" }
     ],
+    deepDive: {
+      heading: "What Nonprofit Workflow Automation Actually Looks Like",
+      intro: "Most nonprofits do not have a technology problem. They have a capacity problem — three people doing the work of eight, and the admin work always wins because it has a deadline. Automation is not about replacing anyone. It is about making sure the follow-up still happens on the week everyone is buried. Here is what that looks like in practice.",
+      blocks: [
+        { title: "The donor journey, from first gift to renewal", body: "A first-time donor gives online. Within the hour they get a real thank-you, not a receipt. A few days later they get one short story about what their gift paid for. A month in, they see the program in action. When renewal season comes, the appeal they receive already knows what they gave to last time and what it did. None of that requires a staff member to remember it on the right day — but every step of it is written by you, in your voice, once. The system just makes sure it goes out." },
+        { title: "A grant calendar that runs itself", body: "Most missed grant deadlines are not a knowledge problem. Somebody knew. It was on a spreadsheet nobody opened that week. We build the grant calendar as a live system: every application and every report gets an owner, a due date, and an escalating reminder that starts far enough out to actually be useful. Interim reports, final reports, and renewal windows all get tracked the same way. It will not write your narrative, and we will not pretend otherwise — it makes sure you are never writing it the night before." },
+        { title: "Volunteers: recruit once, then keep them", body: "The gap that costs nonprofits most is between someone signing up and their first shift. That is where enthusiasm dies. Automated onboarding closes it — the application confirmation, the orientation details, the shift reminder, the thank-you afterward, and a check-in when a regular volunteer has not been on the schedule for a while. Your coordinator stops chasing logistics and goes back to the part only a person can do." },
+        { title: "The board report nobody has time to build", body: "If your monthly or quarterly board report is assembled by hand from four different places the week it is due, that is a workflow, and it can be automated. Gifts, new donors, retention, volunteer hours, and grant status can be pulled into the same format every time, so the report is a review rather than a rebuild. The same numbers feed your annual report and your grant reporting later." },
+        { title: "What we will not automate — and you should not either", body: "The ask itself. The major-donor relationship. The call after a loss. Anything where the point is that a human chose to spend their time on you. We have watched organizations automate the wrong half and turn warm donors cold, and it is not recoverable in a single season. The rule we use: automate the reliability, never the relationship. If a message would be insulting to receive from a robot, a person sends it." },
+        { title: "It works with the donor CRM you already have", body: "You do not need to migrate your database to start. These workflows sit on top of the tools nonprofits already run — the donation platform, the donor CRM, the email list, the volunteer signup sheet. We connect them so a gift in one place triggers the right follow-up everywhere else. Replacing your CRM is a much bigger project than fixing your follow-up, and it is usually not the thing standing between you and better retention." },
+        { title: "Why we care about this one", body: "EasyAiFlows is run by Ronnie Craig, an RN who spends his working life in hospice care — so the nonprofit and community-health world is not an industry vertical we picked off a list. We also do 501(c)(3) formation work, so we see organizations at the very beginning, before any of these systems exist. If you are still at that stage, start there instead: see our <a href=\"/nonprofit\">501(c)(3) formation service</a>." }
+      ]
+    },
     faqs: [
-      { q: "How does AI help nonprofits retain donors?", a: "AI automates the donor stewardship journey — thank-you messages within 24 hours of a gift, quarterly impact updates, birthday/anniversary acknowledgments, and personalized renewal appeals. Consistent communication is the #1 driver of donor retention." },
-      { q: "Can AI help with grant management?", a: "AI tracks grant deadlines, sends reminders to responsible staff, monitors reporting requirements, and flags upcoming applications. It won't write the grant, but it ensures nothing falls through the cracks." },
-      { q: "Is AI automation affordable for nonprofits?", a: "Yes. Many AI tools offer nonprofit pricing (50-75% off). EasyAiFlows also offers special nonprofit rates. The time saved on admin alone justifies the investment — your staff can focus on programs instead of spreadsheets." }
+      { q: "What is nonprofit workflow automation?", a: "It is connecting the tools you already use so routine work happens without someone remembering it. A gift triggers a thank-you and adds the donor to a stewardship sequence. A grant deadline triggers reminders to the staff member who owns it. A volunteer signup triggers onboarding. The workflows are designed around how your organization actually operates, then they run on their own." },
+      { q: "How does AI help nonprofits retain donors?", a: "AI automates the donor stewardship journey — thank-you messages within 24 hours of a gift, quarterly impact updates, birthday and anniversary acknowledgments, and personalized renewal appeals. Consistent communication is the single biggest driver of donor retention, and consistency is exactly what a short-staffed team cannot guarantee by hand." },
+      { q: "Can AI help with grant management?", a: "AI tracks grant deadlines, sends reminders to responsible staff, monitors reporting requirements, and flags upcoming applications. It will not write the grant narrative for you, but it makes sure nothing falls through the cracks between application, award, interim report and renewal." },
+      { q: "We are a small team with almost no budget. Is this realistic?", a: "Usually yes, and small teams tend to get more out of it than large ones because there is no slack in the schedule to absorb dropped follow-up. Many of the underlying tools offer significant nonprofit discounts, and we start with the one or two workflows that give back the most staff hours rather than automating everything at once. Book a strategy call and we will tell you honestly if the answer is no." },
+      { q: "Will this make our communication feel impersonal?", a: "Only if you write it that way. Every message is drafted in your voice and approved by you before it ever sends — automation controls the timing, not the sentiment. In practice most donors hear from automated organizations more warmly than from overwhelmed ones, because the overwhelmed ones go quiet for months at a time." },
+      { q: "Is our donor data safe?", a: "Your donor records stay in your existing systems. We connect those tools rather than exporting your database somewhere new, we limit each integration to the data it actually needs, and access stays under your control so you can revoke it at any time. If your organization has a written data policy, bring it to the strategy call and we will build inside it." },
+      { q: "Do you work with nonprofits outside Texas?", a: "Yes. The workflows are built and run remotely, so location does not matter for the automation work. EasyAiFlows is based in Pearland, Texas, and we do work with a number of local organizations, but the client roster is national." }
     ]
   }
 ];
@@ -556,6 +573,21 @@ function generatePage(industry, allIndustries) {
     .filter(i => i.slug !== industry.slug)
     .map(i => `        <a href="/ai-for/${i.slug}">${i.name}</a>`)
     .join('\n');
+
+  // Optional long-form section. Industries that omit `deepDive` render exactly as before.
+  const deepDive = !industry.deepDive ? '' : `  <!-- ── Deep Dive ── -->
+  <section class="deep-dive">
+    <div class="container">
+      <h2>${industry.deepDive.heading}</h2>
+      <p class="deep-intro">${industry.deepDive.intro}</p>
+${industry.deepDive.blocks.map(b => `      <div class="deep-block">
+        <h3>${b.title}</h3>
+        <p>${b.body}</p>
+      </div>`).join('\n')}
+    </div>
+  </section>
+
+`;
 
   const faqSchema = industry.faqs.map(f => `      {
         "@type": "Question",
@@ -573,9 +605,9 @@ function generatePage(industry, allIndustries) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Automation for ${industry.name} | EasyAiFlows</title>
   <meta name="description" content="${industry.metaDescription}">
-  <link rel="stylesheet" href="industry-style.css">
-  <link rel="icon" href="../logo.png" type="image/png">
-  <link rel="canonical" href="https://easyaiflows.com/ai-for/${industry.slug}">
+  <link rel="stylesheet" href="/ai-for/industry-style.css">
+  <link rel="icon" href="/logo.png" type="image/png">
+  <link rel="canonical" href="https://easyaiflows.com/ai-for/${industry.slug}/">
 
   <!-- FAQ Schema -->
   <script type="application/ld+json">
@@ -611,7 +643,7 @@ ${faqSchema}
   <nav>
     <div class="container">
       <a href="/" class="nav-logo">
-        <img src="../logo.png" alt="EasyAiFlows">
+        <img src="/logo.png" alt="EasyAiFlows">
         <span>EasyAiFlows</span>
       </a>
       <button class="nav-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">&#9776;</button>
@@ -680,7 +712,7 @@ ${industry.stats.map(s => `        <div class="result-item">
     </div>
   </section>
 
-  <!-- ── How It Works ── -->
+${deepDive}  <!-- ── How It Works ── -->
   <section class="how-it-works">
     <div class="container">
       <h2>How It Works</h2>
