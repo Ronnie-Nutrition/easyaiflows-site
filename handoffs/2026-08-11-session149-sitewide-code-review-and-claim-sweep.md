@@ -6,9 +6,9 @@
 **Edit `ai-for/generate-pages.js`, never the HTML.** Still true. Everything below that touches
 `/ai-for/` was done in the generator and regenerated.
 
-**⏸️ COMMITTED LOCALLY, NOT PUSHED.** The copy changes rewrite live marketing claims Ronnie has not
-read. Session 148 got his sign-off before shipping the stat reframe; same standard applies here.
-`git push` when he approves.
+**✅ PUSHED AND VERIFIED LIVE** (`569d595..1dbd479`). Ronnie approved after reviewing the copy changes.
+All 20 pages re-fetched from easyaiflows.com: 0 no-slash links, 0 missing OG/breadcrumb/canonical,
+0 invalid JSON-LD, all 20 CTAs correct, proof link live, fabricated case studies gone.
 
 ---
 
@@ -153,8 +153,8 @@ of the verification pattern alongside 148's "insertions should equal deletions w
 
 | # | Item | Who |
 |---|---|---|
-| 1 | **`git push`** — everything below is committed but unpushed, pending Ronnie reading the copy changes | **Ronnie approves, Claude pushes** |
-| 2 | **Request indexing for `/ai-for/churches/`** in GSC (carried from 148, still not done) | **Ronnie** |
+| 1 | ~~`git push`~~ ✅ done — `1dbd479`, verified live | — |
+| 2 | ~~Request indexing for `/ai-for/churches/`~~ ✅ Ronnie did it 8/11 8:11 AM — churches was already indexed | — |
 | 3 | Verify the nonprofits FAQ claim *"the client roster is national"* | **Ronnie — I still cannot verify** |
 | 4 | **Restart the blog** — cold since 7/5. The 5 church GSC queries are 5 ready-made titles | Claude drafts |
 | 5 | 18 pages still on the plain template (546–608 words, 36–40% dup) | Claude, one at a time |
@@ -165,6 +165,40 @@ with a number of local organizations, but the client roster is national."* Both 
 answer: how many *local* organizations, and does "national" mean more than one out-of-state client.
 The footer's *"Serving clients nationwide"* is a service-area statement and is fine as-is — this line
 is different because it describes a roster.
+
+## 🔍 GSC reality check — Ronnie inspected 16 URLs, 8/11 ~8:15 AM
+
+**9 indexed, 7 not.** The misses are not random:
+
+| Not indexed | Status |
+|---|---|
+| `/ai-for/` | Discovered – currently not indexed |
+| `/blog/` | Discovered – currently not indexed |
+| `/blog/ai-automation-roi-small-business.html` | Crawled – not indexed (last crawl Jul 29) |
+| `/blog/automate-lead-generation-ai.html` | Discovered – not indexed |
+| `/blog/automate-appointment-booking-ai.html` | **URL unknown to Google** |
+| `/ai-for/hvac/` | **URL unknown to Google** |
+| `/pricing` | **URL unknown to Google** |
+
+⭐ **Both hub pages are unindexed.** `/ai-for/` and `/blog/` feed crawl discovery to 54 children —
+that is the shape of the problem, not 7 unrelated misses. Indexing requests submitted for all 7.
+
+⚠️ **The three "unknown to Google" URLs all reported *"No referring sitemaps detected."* That is NOT
+a sitemap bug** — all three are in the live sitemap, it serves 200, and the URL forms match exactly.
+GSC simply has no attribution data for a URL it has never fetched. **Don't chase that string as a
+symptom; verify against the live sitemap first.**
+
+✅ **But chasing it found a real one:** `/pricing` had **2 internal links while 26 pages pointed at
+`/#pricing`**, a homepage anchor. In the sitemap since 7/28, never fetched. 🔑 **A page orphaned in
+the internal link graph is one Google feels no obligation to crawl, sitemap listing or not.** Fixed
+in the generator plus 7 hand-written pages (`grader`, `assistant`, `perfect-pitch`, both city pages,
+the hub) — **2 → 28 internal links**, commit `1dbd479`. The same mechanism plausibly explains
+`/ai-for/hvac/`: until this push every internal route to it was a 301.
+
+⚠️ **I gave Ronnie one wrong recommendation and corrected it.** I said don't bother submitting the 14
+remaining `/ai-for/` pages since "only meta changed" — that assumed they were indexed. HVAC is
+unknown to Google entirely. **Use Indexing → Pages for the real indexed/not-indexed split across all
+70 URLs; do not submit from a guess about what changed.**
 
 **On #5 — do not deepen by word count, deepen by demand.** Pull GSC queries first and pick the page
 with real query volume behind it, the way churches was picked in 148. Word count is the output, not
