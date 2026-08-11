@@ -11,10 +11,11 @@ const path = require('path');
 const industries = [
   {
     slug: "dentists",
+    ctaNoun: "Dental Practice",
     name: "Dentists",
     headline: "AI Automation for <span>Dental Practices</span>",
     description: "Automate appointment reminders, patient follow-ups, and front desk workflows so your dental practice runs smoothly — even when you're chairside.",
-    metaDescription: "AI automation for dental practices: automate appointment reminders, patient follow-ups, insurance verification, and front desk workflows. Set up, trained, and supported from $97/mo.",
+    metaDescription: "AI automation for dental practices: appointment reminders, patient follow-ups, insurance verification, and front desk workflows. From $97/mo.",
     painPoints: [
       { icon: "&#128197;", title: "No-Shows Eating Your Revenue", desc: "Missed appointments cost the average dental practice $150K+/year. Manual reminder calls don't scale and staff forget to follow up." },
       { icon: "&#128222;", title: "Front Desk Overwhelmed", desc: "Your receptionist is juggling phones, check-ins, insurance verification, and scheduling — all at once. Patients wait, calls go to voicemail." },
@@ -38,6 +39,7 @@ const industries = [
   },
   {
     slug: "restaurants",
+    ctaNoun: "Restaurant",
     name: "Restaurants",
     headline: "AI Automation for <span>Restaurants</span>",
     description: "Automate online orders, reservation management, and customer engagement so you can focus on the food — not the phone.",
@@ -69,7 +71,7 @@ const industries = [
     name: "HVAC Companies",
     headline: "AI Automation for <span>HVAC Companies</span>",
     description: "Automate dispatch scheduling, customer follow-ups, and seasonal marketing so your HVAC business grows without adding office staff.",
-    metaDescription: "AI automation for HVAC companies: automate dispatch, scheduling, customer follow-ups, and seasonal marketing campaigns. Set up, trained, and supported from $97/mo.",
+    metaDescription: "AI automation for HVAC companies: dispatch, scheduling, customer follow-ups, and seasonal marketing campaigns. Set up and supported from $97/mo.",
     painPoints: [
       { icon: "&#128222;", title: "Missed Calls = Lost Jobs", desc: "When you're on a roof or under a house, calls go to voicemail. By the time you call back, the customer already hired someone else." },
       { icon: "&#128197;", title: "Scheduling Chaos", desc: "Double-bookings, no-shows, and last-minute cancellations wreck your day. Dispatching techs efficiently is a constant headache." },
@@ -93,6 +95,7 @@ const industries = [
   },
   {
     slug: "real-estate",
+    ctaNoun: "Real Estate Business",
     name: "Real Estate Agents",
     headline: "AI Automation for <span>Real Estate Agents</span>",
     description: "Automate lead follow-up, listing marketing, and client communication so you close more deals without working more hours.",
@@ -120,6 +123,7 @@ const industries = [
   },
   {
     slug: "fitness-studios",
+    ctaNoun: "Fitness Studio",
     name: "Fitness Studios",
     headline: "AI Automation for <span>Fitness Studios</span>",
     description: "Automate class bookings, member retention, and lead conversion so your gym grows on autopilot.",
@@ -147,6 +151,7 @@ const industries = [
   },
   {
     slug: "barbershops",
+    ctaNoun: "Barbershop",
     name: "Barbershops",
     headline: "AI Automation for <span>Barbershops</span>",
     description: "Automate appointment booking, client reminders, and rebooking so your chairs stay full and your phone stays quiet.",
@@ -174,6 +179,7 @@ const industries = [
   },
   {
     slug: "nail-salons",
+    ctaNoun: "Nail Salon",
     name: "Nail Salons",
     headline: "AI Automation for <span>Nail Salons</span>",
     description: "Automate booking, reminders, and client loyalty so your techs stay booked and clients keep coming back.",
@@ -201,6 +207,7 @@ const industries = [
   },
   {
     slug: "med-spas",
+    ctaNoun: "Med Spa",
     name: "Med Spas",
     headline: "AI Automation for <span>Med Spas</span>",
     description: "Automate consultations, treatment follow-ups, and membership management so your med spa delivers luxury at scale.",
@@ -228,6 +235,7 @@ const industries = [
   },
   {
     slug: "chiropractors",
+    ctaNoun: "Chiropractic Practice",
     name: "Chiropractors",
     headline: "AI Automation for <span>Chiropractic Practices</span>",
     description: "Automate patient scheduling, treatment plan adherence, and reactivation so your patients stay on track and your schedule stays full.",
@@ -255,6 +263,7 @@ const industries = [
   },
   {
     slug: "insurance-agents",
+    ctaNoun: "Insurance Agency",
     name: "Insurance Agents",
     headline: "AI Automation for <span>Insurance Agents</span>",
     description: "Automate lead follow-up, policy renewals, and client communication so you write more policies without hiring more staff.",
@@ -282,6 +291,7 @@ const industries = [
   },
   {
     slug: "mortgage-brokers",
+    ctaNoun: "Mortgage Business",
     name: "Mortgage Brokers",
     headline: "AI Automation for <span>Mortgage Brokers</span>",
     description: "Automate lead nurture, rate alerts, and borrower communication so you close more loans without drowning in follow-ups.",
@@ -309,6 +319,7 @@ const industries = [
   },
   {
     slug: "photographers",
+    ctaNoun: "Photography Business",
     name: "Photographers",
     headline: "AI Automation for <span>Photography Businesses</span>",
     description: "Automate inquiry response, booking management, and client delivery so you spend more time behind the camera.",
@@ -336,6 +347,7 @@ const industries = [
   },
   {
     slug: "event-planners",
+    ctaNoun: "Event Planning Business",
     name: "Event Planners",
     headline: "AI Automation for <span>Event Planners</span>",
     description: "Automate vendor coordination, client communication, and timeline management so every event runs flawlessly.",
@@ -363,6 +375,7 @@ const industries = [
   },
   {
     slug: "cleaning-services",
+    ctaNoun: "Cleaning Business",
     name: "Cleaning Services",
     headline: "AI Automation for <span>Cleaning Services</span>",
     description: "Automate booking, reminders, and customer follow-ups so your cleaning business grows without you answering every call.",
@@ -390,6 +403,7 @@ const industries = [
   },
   {
     slug: "landscapers",
+    ctaNoun: "Landscaping Business",
     name: "Landscapers",
     headline: "AI Automation for <span>Landscaping Companies</span>",
     description: "Automate estimates, scheduling, and seasonal marketing so your landscaping business grows while you're in the field.",
@@ -417,6 +431,7 @@ const industries = [
   },
   {
     slug: "auto-repair",
+    ctaNoun: "Auto Repair Shop",
     name: "Auto Repair Shops",
     headline: "AI Automation for <span>Auto Repair Shops</span>",
     description: "Automate appointment booking, service reminders, and customer updates so your bays stay full and customers stay informed.",
@@ -444,6 +459,7 @@ const industries = [
   },
   {
     slug: "pet-groomers",
+    ctaNoun: "Grooming Business",
     name: "Pet Groomers",
     headline: "AI Automation for <span>Pet Groomers</span>",
     description: "Automate booking, reminders, and rebooking so your grooming schedule stays packed and pet parents keep coming back.",
@@ -471,6 +487,7 @@ const industries = [
   },
   {
     slug: "daycares",
+    ctaNoun: "Daycare",
     name: "Daycares",
     headline: "AI Automation for <span>Daycare Centers</span>",
     description: "Automate enrollment inquiries, parent communication, and waitlist management so you can focus on the kids.",
@@ -502,7 +519,7 @@ const industries = [
     ctaNoun: "Church's Visitor and Volunteer Follow-Up",
     headline: "AI Automation for <span>Churches</span>",
     description: "No-code workflow automation for visitor follow-up, volunteer coordination, and event communication — running on the church management software you already use, so your staff can focus on ministry.",
-    metaDescription: "No-code AI workflow automation for churches: automate visitor follow-up, volunteer follow-up and scheduling, and multi-channel event communication. Works with Planning Center, Breeze, and the ChMS you already run.",
+    metaDescription: "No-code AI workflow automation for churches: visitor follow-up, volunteer scheduling, and multi-channel event communication. Works with Planning Center and Breeze.",
     painPoints: [
       { icon: "&#128100;", title: "First-Time Visitors Never Return", desc: "Someone visits Sunday morning, fills out a card, and never hears from you until they've already found another church. Follow-up is inconsistent." },
       { icon: "&#128232;", title: "Event Communication Is Scattered", desc: "Announcements go out via email, bulletin, social media, and text — but not everyone sees everything. Attendance suffers." },
@@ -590,10 +607,25 @@ const industries = [
 ];
 
 function generatePage(industry, allIndustries) {
-  const related = allIndustries
-    .filter(i => i.slug !== industry.slug)
-    .map(i => `        <a href="/ai-for/${i.slug}">${i.name}</a>`)
+  // Cross-links. Two things were wrong here for four months:
+  //   1. Every href omitted the trailing slash. GitHub Pages 301s /ai-for/x -> /ai-for/x/, so all
+  //      408 internal links on this property were redirect hops. That same missing slash is what
+  //      caused the unstyled-CSS bug fixed on 8/10 — verify links WITH the slash.
+  //   2. Every page linked to all 19 siblings, which reads as a link farm and splits the equity
+  //      20 ways. Six siblings (rotating by array position, so the set differs per page and every
+  //      page still receives ~6 inbound links) plus one link to the hub.
+  const idx = allIndustries.findIndex(i => i.slug === industry.slug);
+  const related = Array.from({ length: 6 }, (_, n) => allIndustries[(idx + n + 1) % allIndustries.length])
+    .map(i => `        <a href="/ai-for/${i.slug}/">${i.name}</a>`)
     .join('\n');
+
+  // Lowercasing the display name for mid-sentence use used to be a bare .toLowerCase(), which
+  // turned "HVAC Companies" into "hvac companies" on two paragraphs of the HVAC page. Preserve any
+  // token that is already all-caps (an acronym); lowercase the rest.
+  const lowerName = industry.name
+    .split(' ')
+    .map(w => (w.length > 1 && w === w.toUpperCase() ? w : w.toLowerCase()))
+    .join(' ');
 
   // Closing-CTA noun. The old inline singularizer ran /s$/ before /ies$/, so the `ies` rule could
   // never fire — "HVAC Companies" rendered as "Companie" and "Churches" as "Churche". Order matters,
@@ -619,14 +651,19 @@ ${industry.deepDive.blocks.map(b => `      <div class="deep-block">
 
 `;
 
+  // JSON.stringify, not a hand-rolled quote replace. The old version escaped `"` only, so a
+  // backslash, newline, or tab in any future FAQ string would have emitted invalid JSON-LD and
+  // silently killed the rich result for that page.
   const faqSchema = industry.faqs.map(f => `      {
         "@type": "Question",
-        "name": "${f.q.replace(/"/g, '\\"')}",
+        "name": ${JSON.stringify(f.q)},
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "${f.a.replace(/"/g, '\\"')}"
+          "text": ${JSON.stringify(f.a)}
         }
       }`).join(',\n');
+
+  const pageUrl = `https://easyaiflows.com/ai-for/${industry.slug}/`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -637,7 +674,35 @@ ${industry.deepDive.blocks.map(b => `      <div class="deep-block">
   <meta name="description" content="${industry.metaDescription}">
   <link rel="stylesheet" href="/ai-for/industry-style.css">
   <link rel="icon" href="/logo.png" type="image/png">
-  <link rel="canonical" href="https://easyaiflows.com/ai-for/${industry.slug}/">
+  <link rel="canonical" href="${pageUrl}">
+
+  <!-- Open Graph / social share -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="EasyAiFlows">
+  <meta property="og:url" content="${pageUrl}">
+  <meta property="og:title" content="AI Automation for ${industry.name} | EasyAiFlows">
+  <meta property="og:description" content="${industry.metaDescription}">
+  <meta property="og:image" content="https://easyaiflows.com/images/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="EasyAiFlows — AI automation for ${lowerName}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AI Automation for ${industry.name} | EasyAiFlows">
+  <meta name="twitter:description" content="${industry.metaDescription}">
+  <meta name="twitter:image" content="https://easyaiflows.com/images/og-image.png">
+
+  <!-- Breadcrumb Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://easyaiflows.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Industries", "item": "https://easyaiflows.com/ai-for/" },
+      { "@type": "ListItem", "position": 3, "name": ${JSON.stringify(industry.name)}, "item": "${pageUrl}" }
+    ]
+  }
+  </script>
 
   <!-- FAQ Schema -->
   <script type="application/ld+json">
@@ -718,7 +783,7 @@ ${industry.painPoints.map(p => `        <div class="pain-card">
   <section class="automations">
     <div class="container">
       <h2>How AI Solves These Problems</h2>
-      <p>Here are 3 automations that transform how ${industry.name.toLowerCase()} operate — no coding required.</p>
+      <p>Here are 3 automations that transform how ${lowerName} operate — no coding required.</p>
       <div class="auto-grid">
 ${industry.automations.map(a => `        <div class="auto-card">
           <div class="auto-icon">${a.icon}</div>
@@ -739,6 +804,7 @@ ${industry.stats.map(s => `        <div class="result-item">
           <div class="result-label">${s.label}</div>
         </div>`).join('\n')}
       </div>
+      <p class="results-note">Those are capabilities &mdash; what the system does, not what we promise it will earn you. We don't publish other people's numbers. The one set we can stand behind is our own: <a href="/blog/automate-follow-ups-small-business.html#real-results">what follow-up automation did for our nutrition club</a>, written up with the actual figures.</p>
     </div>
   </section>
 
@@ -755,7 +821,7 @@ ${deepDive}  <!-- ── How It Works ── -->
         <div class="step-card">
           <div class="step-number">2</div>
           <h3>We Build It for You</h3>
-          <p>Our team builds your custom AI workflows — booking systems, follow-up sequences, marketing campaigns — tailored to how ${industry.name.toLowerCase()} actually work.</p>
+          <p>Our team builds your custom AI workflows — booking systems, follow-up sequences, marketing campaigns — tailored to how ${lowerName} actually work.</p>
         </div>
         <div class="step-card">
           <div class="step-number">3</div>
@@ -798,6 +864,7 @@ ${industry.faqs.map(f => `        <div class="faq-item">
       <div class="related-links">
 ${related}
       </div>
+      <p style="text-align:center;margin-top:2rem;"><a href="/ai-for/">See all ${allIndustries.length} industries &rarr;</a></p>
     </div>
   </section>
 
@@ -813,7 +880,7 @@ ${related}
           <h4>Quick Links</h4>
           <ul>
             <li><a href="/#services">Services</a></li>
-            <li><a href="/#pricing">Pricing</a></li>
+            <li><a href="/pricing">Pricing</a></li>
             <li><a href="/ai-for/">Industries</a></li>
             <li><a href="/blog/">Blog</a></li>
             <li><a href="/grader">AI Readiness Grader</a></li>

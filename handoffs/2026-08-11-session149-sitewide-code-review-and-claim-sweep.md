@@ -1,0 +1,193 @@
+# Session 149 — 2026-08-11 — easyaiflows-site code review: generator bugs, sitewide claim sweep, technical SEO
+
+⭐ **Authority is the PRD + memory, not this file:** `/Users/apple/GTM-Workspace/SEO-MASTER-PRD.md`
+(Workstream C) and memory `project_easyaiflows_industry_pages`.
+
+**Edit `ai-for/generate-pages.js`, never the HTML.** Still true. Everything below that touches
+`/ai-for/` was done in the generator and regenerated.
+
+**⏸️ COMMITTED LOCALLY, NOT PUSHED.** The copy changes rewrite live marketing claims Ronnie has not
+read. Session 148 got his sign-off before shipping the stat reframe; same standard applies here.
+`git push` when he approves.
+
+---
+
+## The review scope from session 148, and what it found
+
+| # | Scoped item | Result |
+|---|---|---|
+| 1 | `generate-pages.js` — look for more naive string transforms | **4 more bugs found**, all rendered-verified |
+| 2 | Rest of site for the same claim defect | **7 claim defects**, worst is 3 fabricated case studies |
+| 3 | `og:image` propagation | Done — 0 → **70 indexable pages** |
+| 4 | Whatever the review turns up | The 408-link redirect defect, the sitemap landmine, a duplicate-content pair |
+
+---
+
+## 🐛 Generator bugs (all confirmed against rendered HTML, not source)
+
+### 1. 408 internal links were redirect hops — the big one
+Every `/ai-for/` cross-link on the property omitted the trailing slash: `href="/ai-for/dentists"`.
+GitHub Pages 301s that to `/ai-for/dentists/`. **408 links sitewide**, every one a redirect.
+
+This is the *same missing slash* that caused the four-month unstyled-CSS bug fixed on 8/10. It was
+fixed in the CSS path then and left everywhere else.
+
+Fixed in the generator, the hub, and both city pages. **Sitewide count is now 0.**
+
+### 2. `.toLowerCase()` ate an acronym
+`${industry.name.toLowerCase()}` rendered *"transform how **hvac companies** operate"* and
+*"tailored to how **hvac companies** actually work"* — two paragraphs, live for four months.
+Exactly the singularizer's species: a naive string transform nobody read the output of.
+
+Replaced with a `lowerName` that preserves any already-all-caps token.
+
+### 3. The singularizer was fixed but its output was still wrong
+Session 148 fixed the *ordering* bug, so the strings became grammatical. They were still
+commercially wrong, because "\<singular\> Business" is the wrong register for most of these trades:
+
+> Ready to Automate Your **Dentist** Business? · Your **Chiropractor** Business? · Your
+> **Photographer** Business? · Your **Auto Repair Shop** Business? · Your **Pet Groomer** Business?
+
+⭐ **A grammar fix is not a copy fix.** The `ctaNoun` escape hatch already existed from 148 — it was
+just only used on 3 industries. Now set explicitly on **all 20**, so the regex is a fallback that
+never actually fires. Verified by reading all 20 rendered H2s.
+
+### 4. JSON-LD was assembled with a hand-rolled quote escape
+`f.q.replace(/"/g,'\\"')` escapes `"` and nothing else. One backslash, newline or tab in a future FAQ
+string emits invalid JSON-LD and silently kills that page's rich result. Now `JSON.stringify`.
+**All 133 JSON-LD blocks sitewide now parse.**
+
+### 5. `_gen_sitemap.py` was a loaded gun
+Its docstring said *"ai-for industry pages: extensionless (/ai-for/dentists)"* and the code wrote
+exactly that — **no trailing slash**, contradicting the canonical on every one of those pages. The
+committed `sitemap.xml` happened to have slashes, so nothing was broken *yet*; the next run of the
+script would have submitted 20 redirecting URLs to Google. Fixed and regenerated.
+
+---
+
+## 🔴 Claim defects outside `/ai-for/` — the sweep 148 didn't do
+
+Homepage body and `pricing.html` came back **clean**. The blog did not.
+
+**The worst: `blog/ai-automation-roi-small-business.html` had three fabricated case studies** under
+the heading **"Real-World Examples"**, with named-sounding clients and specific outcomes —
+*"Net impact: +$2,400/month"*, *"$585/month in saved revenue"*, *"Total impact: $3,000/month"*, plus
+*"I've seen businesses hit 15-20x"*. Presented as delivered client results.
+
+Reframed to **"Run It on Three Kinds of Business"** — worked examples of the ROI formula, explicitly
+labelled *"These are worked examples, not client results."* The math stays (it's the useful part);
+the claim that we produced it for someone goes. Each example now also names the assumption it rests
+on, which is more honest *and* better copy. `blog/index.html` card and the JSON-LD description said
+"case studies" — both fixed.
+
+Other claims removed:
+
+| Claim | Where | Why |
+|---|---|---|
+| *"Research shows 80% of sales require 5+ follow-ups, but 44% give up after one"* | 3 posts + blog index, **and in FAQPage schema** | Circulates everywhere, traces to no identifiable study. "Research shows" is borrowed credibility |
+| *"Restaurants that implement this see their Google review count jump 40-60% in 90 days"* | restaurants post, **in schema** | Outcome claim about our customers |
+| *"cut churn by 20-30%. That's thousands in saved revenue every month"* | restaurants post, **in schema** | Same. Kept the industry-context half (gyms lose 30-50% of new members) — that's the prospect's own problem, per 148's rule |
+| *"Most business owners report saving 60-75%"* | social posts article, **in schema** | A survey nobody ran |
+| *"I've seen it happen with every single client"* | booking post | Unverifiable universal |
+| *"save business owners 10+ hours every week"* | **homepage** meta description ×4 copies | Outcome claim in the site's most-shown snippet |
+
+⚠️ **The homepage one had FOUR copies**, not one — meta description, `og:description`,
+`twitter:description`, and a second og variant. Session 148's rule (*"every FAQ string renders twice,
+visibly and in schema"*) generalises: **grep the string, don't edit the tag you found it in.** The
+follow-ups post's stat also lived in 2 places, and the restaurant churn claim in 2.
+
+### ✅ Proof restored — pending item #3 closed
+The `/ai-for/` pages carried **zero** proof after 148 stripped the fake stats. Every page now ends its
+stats band with a line pointing at the one honest set of numbers on the property — Ronnie's own
+Nutrition Hub follow-up results in `blog/automate-follow-ups-small-business.html`, first-person and
+hedged. Added `id="real-results"` to that heading as the anchor target. Rendered on all 20.
+
+---
+
+## 🔧 Technical SEO
+
+| Item | Before | After |
+|---|---|---|
+| Indexable pages missing `<link rel="canonical">` | **48** (incl. the homepage) | 0 |
+| Indexable pages missing `og:image` | 69 of 70 | 0 |
+| Internal `/ai-for/` links that 301 | 408 | 0 |
+| Invalid JSON-LD blocks | 0 of 133 | 0 of 133 |
+| Sitemap URLs disagreeing with the page's own canonical | 33 | 0 |
+| Titles > 62 chars | 22 | 0 over 80 except 3 |
+| Meta descriptions > 200 chars | 12 | 0 |
+| `BreadcrumbList` schema on `/ai-for/` | none | all 20 |
+
+Also fixed:
+- **Cross-link block trimmed 19 → 6 + "See all 20".** Nineteen sibling links on every page reads as a
+  link farm and splits the equity 20 ways. Six rotate by array position, so the set differs per page
+  and every page still receives ~6 inbound.
+- **`/blog/*` canonicals were extensionless, the sitemap said `.html`.** Matched them to `.html` —
+  the form Google has been crawling since 7/15. A canonical that disagrees with the sitemap is worse
+  than either choice alone.
+- **`assistant.html` and `assistant/index.html`** are near-identical pages at two URLs, each
+  canonicalising to itself. Both now point at `/assistant/`.
+- **`operator-kit`'s `og:image` was a relative path** (`content="og-image.png"`) — scrapers need an
+  absolute URL, so that share preview never worked. Now absolute.
+- **`champions/` ("Tracker Mockup") was in the sitemap.** Now `noindex` and delisted, with
+  `teleprompter.html`.
+- Meta descriptions added to `assistant`, `perfect-pitch-kit`, `kolab`.
+- Footer "Pricing" linked to `/#pricing` (a homepage anchor) instead of the real `/pricing` page.
+
+---
+
+## ⚠️ Mistake worth recording
+
+Trimming meta descriptions with `s.replace(f'content="{old}"', new)` where `old` came from a regex
+`content="(.*?)"` with `re.S` — on `operator-kit/index.html`, which writes its metas as `" />`, the
+non-greedy ran past the intended tag to the next `">` and **deleted 272 lines** including the entire
+`<style>` block. Caught by `git diff --stat`, reverted with `git checkout`, redone with exact-string
+edits.
+
+⭐ **`git diff --numstat | awk '$2>$1'` after any scripted multi-file edit.** Any file with more
+deletions than insertions when you were only swapping copy is structural loss. That check is now part
+of the verification pattern alongside 148's "insertions should equal deletions when swapping 1:1."
+
+---
+
+## ⏳ Pending
+
+| # | Item | Who |
+|---|---|---|
+| 1 | **`git push`** — everything below is committed but unpushed, pending Ronnie reading the copy changes | **Ronnie approves, Claude pushes** |
+| 2 | **Request indexing for `/ai-for/churches/`** in GSC (carried from 148, still not done) | **Ronnie** |
+| 3 | Verify the nonprofits FAQ claim *"the client roster is national"* | **Ronnie — I still cannot verify** |
+| 4 | **Restart the blog** — cold since 7/5. The 5 church GSC queries are 5 ready-made titles | Claude drafts |
+| 5 | 18 pages still on the plain template (546–608 words, 36–40% dup) | Claude, one at a time |
+| 6 | Resubmit `sitemap.xml` in GSC after the push (20 `/ai-for/` lastmods changed) | Ronnie |
+
+**On #3 —** unchanged from 148 and deliberately not guessed at. The nonprofits FAQ says *"we do work
+with a number of local organizations, but the client roster is national."* Both halves need a real
+answer: how many *local* organizations, and does "national" mean more than one out-of-state client.
+The footer's *"Serving clients nationwide"* is a service-area statement and is fine as-is — this line
+is different because it describes a roster.
+
+**On #5 — do not deepen by word count, deepen by demand.** Pull GSC queries first and pick the page
+with real query volume behind it, the way churches was picked in 148. Word count is the output, not
+the target. Use the `deepDive` field so the other pages stay byte-identical.
+
+---
+
+## 🧪 The verification pattern (now three checks)
+
+After regenerating:
+1. `git status --short` lists *exactly* the pages you intended plus the generator.
+2. `git diff --numstat | awk '$2>$1 {print}'` is **empty** — no file lost net content.
+3. Read the **rendered** H1/H2/paragraph output of all 20 pages, not the source. Both bugs this
+   session and the singularizer in 148 were invisible in the source and obvious in the output.
+
+Then `curl` the live URL **with the trailing slash** — GitHub Pages lags the push a minute or two,
+and it 301s the no-slash form.
+
+---
+
+## Standing rule that keeps proving itself
+
+⭐ **A claim sweep is only coherent at page scope, never at element scope** (148) — and the same is
+true at *site* scope. 148 swept `/ai-for/` and the identical claims were sitting in the blog, in
+schema, eligible for rich results, the whole time. When a claim is found, grep the whole property for
+the string before fixing the instance in front of you.

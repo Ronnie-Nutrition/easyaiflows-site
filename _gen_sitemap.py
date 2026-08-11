@@ -5,7 +5,7 @@ Run from the repo root after adding/removing pages: python3 _gen_sitemap.py
 URL conventions (match internal links / canonicals):
   - root marketing pages: extensionless (/grader)
   - directory pages: trailing slash (/kolab/)
-  - ai-for industry pages: extensionless (/ai-for/dentists)
+  - ai-for industry pages: trailing slash (/ai-for/dentists/) — must match the canonical
   - blog articles: .html (/blog/slug.html)
 """
 import datetime
@@ -22,14 +22,16 @@ for page in ["grader", "pricing", "perfect-pitch", "perfect-pitch-kit", "nonprof
              "ai-automation-pearland", "ai-automation-houston"]:
     entries.append((f"/{page}", f"{page}.html"))
 
-for d in ["assistant", "kolab", "operator-kit", "inner-circle", "champions", "class"]:
+# champions/ is a mockup and is noindex — deliberately not listed.
+for d in ["assistant", "kolab", "operator-kit", "inner-circle", "class",
+          "privacy", "terms"]:
     if os.path.isfile(os.path.join(ROOT, d, "index.html")):
         entries.append((f"/{d}/", f"{d}/index.html"))
 
 entries.append(("/ai-for/", "ai-for/index.html"))
 for path in sorted(glob.glob(os.path.join(ROOT, "ai-for", "*", "index.html"))):
     slug = os.path.basename(os.path.dirname(path))
-    entries.append((f"/ai-for/{slug}", f"ai-for/{slug}/index.html"))
+    entries.append((f"/ai-for/{slug}/", f"ai-for/{slug}/index.html"))
 
 entries.append(("/blog/", "blog/index.html"))
 for path in sorted(glob.glob(os.path.join(ROOT, "blog", "*.html"))):

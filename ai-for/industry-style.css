@@ -243,6 +243,25 @@ nav .container {
   color: rgba(255,255,255,0.7);
   font-size: 1rem;
 }
+.results-note {
+  max-width: 640px;
+  margin: 3rem auto 0;
+  text-align: center;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.95rem;
+  line-height: 1.65;
+}
+.results-note a {
+  color: var(--cyan);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.related-links + p a {
+  color: var(--cyan);
+  font-weight: 600;
+  text-decoration: none;
+}
+.related-links + p a:hover { text-decoration: underline; }
 
 /* ── How It Works ── */
 .how-it-works {
