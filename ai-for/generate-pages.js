@@ -65,6 +65,7 @@ const industries = [
   },
   {
     slug: "hvac",
+    ctaNoun: "HVAC Business",
     name: "HVAC Companies",
     headline: "AI Automation for <span>HVAC Companies</span>",
     description: "Automate dispatch scheduling, customer follow-ups, and seasonal marketing so your HVAC business grows without adding office staff.",
@@ -220,7 +221,7 @@ const industries = [
       { number: "Auto", label: "Member credits tracked and reminded" }
     ],
     faqs: [
-      { q: "How does AI help med spas convert more consultations?", a: "Speed wins in med spa sales. AI responds to every lead instantly, answers common questions about treatments and pricing, and books consultations 24/7. Practices using AI see consultation booking rates double." },
+      { q: "How does AI help med spas convert more consultations?", a: "Speed wins in med spa sales. AI responds to every lead instantly, answers common questions about treatments and pricing, and books consultations 24/7. The inquiry that comes in at 9pm gets an answer at 9pm, instead of on Monday when they have already booked somewhere else." },
       { q: "Can AI handle HIPAA-compliant patient communication?", a: "Yes. AI automation platforms designed for healthcare (like GoHighLevel in HIPAA mode) encrypt patient data and maintain compliance while automating communication." },
       { q: "Is AI automation appropriate for a luxury med spa brand?", a: "Absolutely. AI enables the white-glove experience your clients expect — instant responses, personalized follow-ups, and seamless booking. The luxury feel comes from responsiveness, not from making people wait." }
     ]
@@ -498,9 +499,10 @@ const industries = [
   {
     slug: "churches",
     name: "Churches",
+    ctaNoun: "Church's Visitor and Volunteer Follow-Up",
     headline: "AI Automation for <span>Churches</span>",
-    description: "Automate visitor follow-up, event communication, and volunteer coordination so your church staff can focus on ministry.",
-    metaDescription: "AI automation for churches: automate visitor follow-up, event communication, volunteer coordination, and donation reminders. Support ministry, not admin.",
+    description: "No-code workflow automation for visitor follow-up, volunteer coordination, and event communication — running on the church management software you already use, so your staff can focus on ministry.",
+    metaDescription: "No-code AI workflow automation for churches: automate visitor follow-up, volunteer follow-up and scheduling, and multi-channel event communication. Works with Planning Center, Breeze, and the ChMS you already run.",
     painPoints: [
       { icon: "&#128100;", title: "First-Time Visitors Never Return", desc: "Someone visits Sunday morning, fills out a card, and never hears from you until they've already found another church. Follow-up is inconsistent." },
       { icon: "&#128232;", title: "Event Communication Is Scattered", desc: "Announcements go out via email, bulletin, social media, and text — but not everyone sees everything. Attendance suffers." },
@@ -516,14 +518,33 @@ const industries = [
       { number: "4", label: "Channels for every announcement" },
       { number: "Auto", label: "Volunteer gaps filled when someone cancels" }
     ],
+    deepDive: {
+      heading: "What No-Code Workflow Automation Looks Like in a Church",
+      intro: "Churches do not usually have a technology problem. They have a Tuesday problem — the follow-up everyone agreed was important on Sunday morning is competing with a funeral, a budget meeting, and a broken HVAC unit by the middle of the week, and the follow-up is what loses. No-code workflow automation is not about replacing anyone on your staff. It is about making sure the message still goes out on the week everyone is buried. Here is what that actually looks like.",
+      blocks: [
+        { title: "The two weeks after a first visit are the whole ballgame", body: "A first-time visitor usually decides whether they are coming back before anyone on staff has had a real conversation with them. The window is short, and when follow-up does not happen it is almost never because nobody cared — it is because Sunday afternoon happened. The workflow is simple: a welcome text within a few hours, from whoever actually greeted them; a short personal email Monday from a real person with a real name, not from The Communications Team; and mid-week, an invitation to the one specific group that fits them rather than a list of twelve. The part most churches skip is the most important one — the moment a visitor replies to anything, the sequence stops and a human takes over. That single rule is the difference between a system that feels warm and one that feels like a mailing list." },
+        { title: "Volunteer follow-up is a scheduling problem wearing a recruitment costume", body: "Most churches believe they have a volunteer recruitment problem. Usually what they have is a volunteer follow-up problem: someone signs up at a table on Sunday, hears nothing for three weeks, and by the time a coordinator calls, the moment has passed. Automating that gap closes it — the signup confirmation goes out immediately, orientation details go out the same week, the shift reminder goes out two days ahead, and the thank-you goes out that night. Swap requests get handled without three separate text threads. When a regular volunteer drops off the schedule for a month, the coordinator hears about it then rather than noticing in the spring. None of this recruits anybody. It just stops you from losing the people who already raised their hand." },
+        { title: "What 'no-code' actually means, and what it does not", body: "No-code means the workflows are assembled from connected tools rather than written as software. Nobody on your staff needs to program anything, and nobody inherits a codebase to maintain after we are gone. Your communications director can open the flow, read every step in plain language, change the wording of a message, add a delay, or switch a sequence off — in an interface that looks like a flowchart, not a terminal. What no-code does not mean is that it builds itself. Somebody still has to decide what a first-time visitor should hear on day three, and that is a ministry decision, not a technical one. We build the flow. You own the words inside it." },
+        { title: "It runs on the church management software you already have", body: "You do not need to migrate your database to start. These workflows sit on top of the systems churches already run — Planning Center, Breeze, Church Community Builder, Realm, Tithe.ly, Subsplash — and connect them so an action in one shows up everywhere it should. A connection card submitted Sunday creates the person record, starts the visitor sequence, and notifies the right staff member, without anyone retyping it Monday. A volunteer signup triggers onboarding. A first gift triggers a thank-you. Replacing your ChMS is a far larger project than fixing the handoffs between the tools you have, and it is usually not the thing standing between you and better retention." },
+        { title: "The announcement everybody missed", body: "Every church has promoted an event for three weeks and still heard 'I did not know about that' on the day. The cause is rarely effort. It is that the announcement went out on four channels, at four different times, worded four different ways, and the people who needed it were not looking at the one they were on. One setup distributed to email, text, social, and the app at the same moment — with the reminder already scheduled when the announcement goes out — solves most of it. The rest is knowing who has not opened it yet, which the system can tell you while there is still time to do something about it." },
+        { title: "What we will not automate — and you should not either", body: "Prayer requests. The call after a diagnosis. The conversation with the family who quietly stopped coming. Anything where the entire point is that a person chose to spend their time on you. We have watched organizations automate the wrong half and turn warm relationships cold, and that does not come back in a single season. The rule is the same one we give nonprofits: automate the reliability, never the relationship. If a message would be insulting to receive from a robot, a person sends it — and the system's job is to make sure that person knows it needs sending." },
+        { title: "Why we care about this one", body: "EasyAiFlows is run by Ronnie Craig, an RN who spends his working life in hospice care. The question of when a message has to come from a person, and when a system should simply make sure it goes out on time, is not an abstract one here. We also do 501(c)(3) formation work and write grants for a charitable foundation, so we see the ministry and nonprofit side of this at close range. If your church runs a benevolence fund, a food pantry, or a school as its own entity, that side has the same problems — see our <a href=\"/nonprofit\">501(c)(3) formation service</a>." }
+      ]
+    },
     faqs: [
-      { q: "How does AI help churches with visitor retention?", a: "AI sends personalized follow-up messages to first-time visitors — a welcome text the same day, a personal email from the pastor, and invitations to connect groups. Churches using automated follow-up see visitor return rates double." },
-      { q: "Can AI coordinate church volunteers?", a: "Yes. AI manages volunteer sign-ups, sends weekly schedule reminders, handles swap requests when someone can't make it, and alerts coordinators about unfilled positions. It's like having a volunteer coordinator who never sleeps." },
-      { q: "Is AI appropriate for church communication?", a: "AI handles the logistical communication (scheduling, reminders, event details) so your pastoral staff can focus on personal, relational ministry. The warm, personal touches stay human — the admin becomes automated." }
+      { q: "What is no-code automation for churches?", a: "It is connecting the tools your church already uses so routine work happens without someone remembering it. A connection card triggers the visitor follow-up sequence. A volunteer signup triggers onboarding and shift reminders. An event announcement goes to every channel at once. It is called no-code because the workflows are assembled visually rather than programmed, so your staff can read and change them without a developer." },
+      { q: "How does church volunteer follow-up automation work?", a: "It closes the gap between someone signing up and their first shift, which is where most volunteers are lost. The signup confirmation sends immediately, orientation details go out that week, a shift reminder goes out two days before, and a thank-you goes out afterward. Swap requests and unfilled positions are handled automatically, and your coordinator is alerted when a regular volunteer has not been on the schedule for a while." },
+      { q: "Can church workflow automation connect to Planning Center or Breeze?", a: "Yes. The workflows sit on top of the church management software you already run — Planning Center, Breeze, Church Community Builder, Realm, Tithe.ly, Subsplash and others — rather than replacing it. We connect those tools so a connection card, a volunteer signup, or a first gift in one system triggers the right follow-up in the others. You do not need to migrate your database to start." },
+      { q: "Do we need someone technical on staff to run this?", a: "No. That is the point of building it no-code. Every step is visible in a flowchart-style interface, so whoever handles your communications can change the wording of a message, adjust timing, or pause a sequence without touching code and without calling us. We build the workflow and hand it over; you are not dependent on us to run it." },
+      { q: "How does AI help churches with visitor retention?", a: "AI sends personalized follow-up messages to first-time visitors — a welcome text the same day, a personal email from a real staff member, and an invitation to a specific group rather than a general list. Every first-time visitor gets the same follow-up on the same schedule, whether or not it was a busy week, and the sequence stops the moment someone replies so a person can take over." },
+      { q: "Is AI appropriate for church communication?", a: "It handles the logistical communication — scheduling, reminders, event details, confirmations — so your pastoral staff can spend their time on the relational work. The rule we build to is that automation controls the timing, never the sentiment. Pastoral care, prayer requests, and hard conversations stay entirely human, and the system's job there is only to make sure the right person knows to reach out." },
+      { q: "Is this realistic for a small church with part-time staff?", a: "Usually yes, and small churches often get more out of it than large ones because there is no slack in the schedule to absorb dropped follow-up. We start with the one or two workflows that give back the most staff hours — normally visitor follow-up and volunteer scheduling — rather than automating everything at once. Book a strategy call and we will tell you honestly if the answer is no." },
+      { q: "Is our member and giving data safe?", a: "Your records stay in the systems you already use. We connect those tools rather than exporting your database somewhere new, each integration is limited to the data it actually needs, and access stays under your control so you can revoke it at any time. If your church has a written data or privacy policy, bring it to the strategy call and we will build inside it." }
     ]
   },
   {
     slug: "nonprofits",
+    ctaNoun: "Nonprofit's Donor and Volunteer Follow-Up",
     name: "Nonprofits",
     headline: "AI Automation for <span>Nonprofits</span>",
     description: "Automate donor communication, volunteer management, and grant tracking so your team spends more time on mission — not admin.",
@@ -573,6 +594,15 @@ function generatePage(industry, allIndustries) {
     .filter(i => i.slug !== industry.slug)
     .map(i => `        <a href="/ai-for/${i.slug}">${i.name}</a>`)
     .join('\n');
+
+  // Closing-CTA noun. The old inline singularizer ran /s$/ before /ies$/, so the `ies` rule could
+  // never fire — "HVAC Companies" rendered as "Companie" and "Churches" as "Churche". Order matters,
+  // and -ches/-shes/-xes need their own case. An industry can override with `ctaNoun` where
+  // "<X> Business" is the wrong register (a church is not a business).
+  const ctaNoun = industry.ctaNoun || `${industry.name
+    .replace(/ies$/, 'y')
+    .replace(/(ch|sh|[sxz])es$/, '$1')
+    .replace(/s$/, '')} Business`;
 
   // Optional long-form section. Industries that omit `deepDive` render exactly as before.
   const deepDive = !industry.deepDive ? '' : `  <!-- ── Deep Dive ── -->
@@ -752,7 +782,7 @@ ${industry.faqs.map(f => `        <div class="faq-item">
   <!-- ── CTA ── -->
   <section class="cta">
     <div class="container">
-      <h2>Ready to Automate Your ${industry.name.replace(/s$/, '').replace(/ies$/, 'y')} Business?</h2>
+      <h2>Ready to Automate Your ${ctaNoun}?</h2>
       <p>Book a free 15-minute strategy call. We'll identify exactly where AI can save you the most time and money — no pressure, no pitch.</p>
       <div class="cta-buttons">
         <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" style="font-size:1.15rem; padding:1.1rem 2.5rem;">Book Your Free Call Now</a>
