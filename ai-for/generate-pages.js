@@ -14,25 +14,25 @@ const industries = [
     name: "Dentists",
     headline: "AI Automation for <span>Dental Practices</span>",
     description: "Automate appointment reminders, patient follow-ups, and front desk workflows so your dental practice runs smoothly — even when you're chairside.",
-    metaDescription: "AI automation for dental practices: automate appointment reminders, patient follow-ups, insurance verification, and front desk workflows. Save 15+ hours/week.",
+    metaDescription: "AI automation for dental practices: automate appointment reminders, patient follow-ups, insurance verification, and front desk workflows. Set up, trained, and supported from $97/mo.",
     painPoints: [
       { icon: "&#128197;", title: "No-Shows Eating Your Revenue", desc: "Missed appointments cost the average dental practice $150K+/year. Manual reminder calls don't scale and staff forget to follow up." },
       { icon: "&#128222;", title: "Front Desk Overwhelmed", desc: "Your receptionist is juggling phones, check-ins, insurance verification, and scheduling — all at once. Patients wait, calls go to voicemail." },
       { icon: "&#128203;", title: "Patient Follow-Ups Fall Through", desc: "Patients who need cleanings, crowns, or treatment plans don't come back because nobody followed up. Revenue walks out the door." }
     ],
     automations: [
-      { icon: "&#128276;", title: "Smart Appointment Reminders", desc: "AI sends text and email reminders 48hrs, 24hrs, and 2hrs before appointments — with one-tap confirm/reschedule. No-shows drop 60%+." },
+      { icon: "&#128276;", title: "Smart Appointment Reminders", desc: "AI sends text and email reminders 48hrs, 24hrs, and 2hrs before appointments — with one-tap confirm/reschedule. Every patient gets all three, every time." },
       { icon: "&#129302;", title: "AI Front Desk Assistant", desc: "An AI chatbot on your website and Google listing answers FAQs, books appointments, and handles insurance questions 24/7 — no hold times." },
       { icon: "&#128140;", title: "Automated Recall & Reactivation", desc: "AI identifies patients overdue for cleanings or treatment and sends personalized reactivation sequences. Fills your schedule with existing patients." }
     ],
     stats: [
-      { number: "60%", label: "Reduction in no-shows" },
-      { number: "15+", label: "Hours saved per week" },
-      { number: "$8K+", label: "Monthly revenue recovered" }
+      { number: "3", label: "Reminders before every appointment" },
+      { number: "24/7", label: "Front desk coverage, web and Google" },
+      { number: "1-tap", label: "Confirm or reschedule" }
     ],
     faqs: [
-      { q: "How does AI reduce no-shows at a dental practice?", a: "AI automation sends multi-channel reminders (text, email, voice) at optimal intervals before appointments. Patients can confirm or reschedule with one tap. Most practices see no-show rates drop from 15-20% to under 5%." },
-      { q: "Can AI handle dental insurance verification?", a: "Yes. AI tools can pull patient insurance details, verify coverage, and flag issues before the appointment — saving your front desk 30+ minutes per patient." },
+      { q: "How does AI reduce no-shows at a dental practice?", a: "AI automation sends multi-channel reminders (text, email, voice) at optimal intervals before appointments. Patients can confirm or reschedule with one tap. The patient who would have forgotten gets three chances to remember, and the one who genuinely cannot make it moves the slot instead of just not showing up." },
+      { q: "Can AI handle dental insurance verification?", a: "Yes. AI tools can pull patient insurance details, verify coverage, and flag issues before the appointment — so coverage problems surface the day before, not while the patient is standing at the counter." },
       { q: "Will patients feel like they're talking to a robot?", a: "Modern AI assistants use natural language and can be trained on your practice's tone. Most patients can't tell the difference — they just appreciate the fast response." }
     ]
   },
@@ -41,7 +41,7 @@ const industries = [
     name: "Restaurants",
     headline: "AI Automation for <span>Restaurants</span>",
     description: "Automate online orders, reservation management, and customer engagement so you can focus on the food — not the phone.",
-    metaDescription: "AI automation for restaurants: automate online ordering, reservation management, customer reviews, and marketing. Save 20+ hours/week.",
+    metaDescription: "AI automation for restaurants: automate online ordering, reservation management, customer reviews, and marketing. Set up, trained, and supported from $97/mo.",
     painPoints: [
       { icon: "&#128222;", title: "Phone Won't Stop Ringing", desc: "Your staff is taking orders, answering questions about the menu, and handling reservations — all while trying to serve in-house customers." },
       { icon: "&#11088;", title: "Reviews Going Unanswered", desc: "Bad reviews sit on Google and Yelp for weeks. Good reviews get no thank-you. Your online reputation suffers while you're in the kitchen." },
@@ -53,9 +53,9 @@ const industries = [
       { icon: "&#128232;", title: "Automated Marketing Campaigns", desc: "AI sends weekly specials, birthday promos, and re-engagement texts to past customers. Your marketing runs on autopilot." }
     ],
     stats: [
-      { number: "40%", label: "More online orders captured" },
-      { number: "20+", label: "Hours saved per week" },
-      { number: "4.6★", label: "Average rating after automation" }
+      { number: "24/7", label: "Phone and online order taking" },
+      { number: "3", label: "Review sites monitored and answered" },
+      { number: "4", label: "POS systems supported out of the box" }
     ],
     faqs: [
       { q: "Can AI take phone orders for my restaurant?", a: "Yes. AI voice assistants can answer calls, take orders, handle modifications, and process payments — all without a human. They work 24/7 and never get overwhelmed during rush hours." },
@@ -68,7 +68,7 @@ const industries = [
     name: "HVAC Companies",
     headline: "AI Automation for <span>HVAC Companies</span>",
     description: "Automate dispatch scheduling, customer follow-ups, and seasonal marketing so your HVAC business grows without adding office staff.",
-    metaDescription: "AI automation for HVAC companies: automate dispatch, scheduling, customer follow-ups, and seasonal marketing campaigns. Save 15+ hours/week.",
+    metaDescription: "AI automation for HVAC companies: automate dispatch, scheduling, customer follow-ups, and seasonal marketing campaigns. Set up, trained, and supported from $97/mo.",
     painPoints: [
       { icon: "&#128222;", title: "Missed Calls = Lost Jobs", desc: "When you're on a roof or under a house, calls go to voicemail. By the time you call back, the customer already hired someone else." },
       { icon: "&#128197;", title: "Scheduling Chaos", desc: "Double-bookings, no-shows, and last-minute cancellations wreck your day. Dispatching techs efficiently is a constant headache." },
@@ -80,9 +80,9 @@ const industries = [
       { icon: "&#128232;", title: "Seasonal Campaign Automation", desc: "AI runs pre-season tune-up campaigns, maintenance reminders, and referral programs automatically — keeping your pipeline full year-round." }
     ],
     stats: [
-      { number: "95%", label: "Calls answered (vs. 60% avg)" },
-      { number: "3x", label: "More maintenance plan signups" },
-      { number: "$12K+", label: "Monthly revenue from automations" }
+      { number: "24/7", label: "Call answering, nights and weekends" },
+      { number: "4", label: "Steps per call, answer to dispatch" },
+      { number: "3", label: "Seasonal campaigns run for you" }
     ],
     faqs: [
       { q: "Can AI answer calls for my HVAC business?", a: "Yes. AI voice assistants handle inbound calls 24/7 — they can describe your services, give estimates, book appointments, and dispatch techs. You never miss a lead again." },
@@ -107,9 +107,9 @@ const industries = [
       { icon: "&#128247;", title: "One-Click Listing Marketing", desc: "AI generates social posts, email campaigns, and ad copy for every new listing. Just approve and publish — marketing done in minutes." }
     ],
     stats: [
-      { number: "5x", label: "Faster lead response time" },
-      { number: "30%", label: "More deals closed" },
-      { number: "10+", label: "Hours saved per week" }
+      { number: "60s", label: "Response to every new lead" },
+      { number: "3", label: "Channels covered: text, email, DM" },
+      { number: "1-click", label: "Marketing for every new listing" }
     ],
     faqs: [
       { q: "How does AI help real estate agents follow up faster?", a: "AI monitors your lead sources (Zillow, Realtor.com, website, social) and instantly responds to new inquiries with personalized messages. It asks qualifying questions, answers common queries, and books showings — all before you even see the notification." },
@@ -129,14 +129,14 @@ const industries = [
       { icon: "&#128241;", title: "DMs and Inquiries Pile Up", desc: "Instagram DMs, Facebook messages, and website forms go unanswered for hours. Interested leads find another gym." }
     ],
     automations: [
-      { icon: "&#127947;", title: "Trial-to-Member Conversion Sequence", desc: "AI automatically follows up with trial members: a thank-you text after class, a check-in at 48 hours, and a special offer at 7 days. Conversion rates jump 40%+." },
+      { icon: "&#127947;", title: "Trial-to-Member Conversion Sequence", desc: "AI automatically follows up with trial members: a thank-you text after class, a check-in at 48 hours, and a special offer at 7 days. Nobody walks out of a trial and never hears from you again." },
       { icon: "&#128140;", title: "Proactive Retention Alerts", desc: "AI tracks attendance patterns and flags at-risk members before they cancel. Sends personalized re-engagement messages and offers." },
       { icon: "&#129302;", title: "24/7 Lead Response Bot", desc: "AI responds to every DM, form fill, and inquiry instantly — answers questions, shares class schedules, and books trial sessions." }
     ],
     stats: [
-      { number: "40%", label: "Higher trial-to-member conversion" },
-      { number: "25%", label: "Reduction in cancellations" },
-      { number: "24/7", label: "Lead response — no missed DMs" }
+      { number: "3", label: "Touchpoints in every trial follow-up" },
+      { number: "Daily", label: "Attendance checked for at-risk members" },
+      { number: "24/7", label: "DM and form-fill response" }
     ],
     faqs: [
       { q: "How does AI help fitness studios retain members?", a: "AI monitors member check-in data and identifies patterns — like someone who usually comes 3x/week but hasn't visited in 10 days. It automatically sends personalized re-engagement messages before the member decides to cancel." },
@@ -157,13 +157,13 @@ const industries = [
     ],
     automations: [
       { icon: "&#128197;", title: "Online Booking + AI Chat", desc: "Clients book through your website, IG link, or Google — 24/7. An AI chatbot answers questions and suggests open slots." },
-      { icon: "&#128276;", title: "Smart Reminders & Waitlist", desc: "AI sends reminders before appointments and automatically fills cancelled slots from your waitlist. No-shows drop dramatically." },
+      { icon: "&#128276;", title: "Smart Reminders & Waitlist", desc: "AI sends reminders before appointments and automatically fills cancelled slots from your waitlist. A gap in the book gets offered to someone before you notice it." },
       { icon: "&#128260;", title: "Auto-Rebook Sequences", desc: "AI texts clients 2-3 weeks after their last cut with a booking link. Keeps your calendar full without you lifting a finger." }
     ],
     stats: [
-      { number: "70%", label: "Fewer no-shows" },
-      { number: "2x", label: "More rebookings" },
-      { number: "5+", label: "Hours saved per week" }
+      { number: "24/7", label: "Booking from web, IG, or Google" },
+      { number: "Auto", label: "Cancelled slots filled from waitlist" },
+      { number: "2-3wk", label: "Rebook text after every cut" }
     ],
     faqs: [
       { q: "Can AI handle barbershop appointment booking?", a: "Yes. AI booking systems let clients choose their barber, pick a service, and select a time — all online, 24/7. It syncs with your calendar so there are never double-bookings." },
@@ -188,9 +188,9 @@ const industries = [
       { icon: "&#128140;", title: "Loyalty & Rebook Automation", desc: "AI tracks visit frequency and sends rebook reminders at the perfect interval. Loyalty rewards are tracked and applied automatically." }
     ],
     stats: [
-      { number: "85%", label: "Cancellation slots refilled" },
-      { number: "3x", label: "Loyalty program engagement" },
-      { number: "10+", label: "Hours saved per week" }
+      { number: "24/7", label: "Booking from web, IG, or Google" },
+      { number: "Instant", label: "Waitlist text when someone cancels" },
+      { number: "Auto", label: "Loyalty tracked and applied" }
     ],
     faqs: [
       { q: "Can AI book nail salon appointments?", a: "Yes. AI booking handles service selection, tech preference, time selection, and even deposits — all without a phone call. Clients book from Instagram DMs, your website, or Google." },
@@ -215,9 +215,9 @@ const industries = [
       { icon: "&#128179;", title: "Membership Engagement Engine", desc: "AI tracks member credit usage, sends reminders to book, and re-engages members showing signs of churn before they cancel." }
     ],
     stats: [
-      { number: "4x", label: "Faster inquiry response" },
-      { number: "35%", label: "Higher treatment rebooking rate" },
-      { number: "$15K+", label: "Saved in membership churn/year" }
+      { number: "60s", label: "Response to every consultation inquiry" },
+      { number: "2", label: "Aftercare check-ins, 24hr and 7 day" },
+      { number: "Auto", label: "Member credits tracked and reminded" }
     ],
     faqs: [
       { q: "How does AI help med spas convert more consultations?", a: "Speed wins in med spa sales. AI responds to every lead instantly, answers common questions about treatments and pricing, and books consultations 24/7. Practices using AI see consultation booking rates double." },
@@ -242,9 +242,9 @@ const industries = [
       { icon: "&#128260;", title: "Patient Reactivation Campaigns", desc: "AI identifies patients who haven't visited in 90+ days and sends personalized reactivation sequences. Fills your schedule with familiar faces." }
     ],
     stats: [
-      { number: "45%", label: "Better treatment plan completion" },
-      { number: "30%", label: "Reactivation response rate" },
-      { number: "12+", label: "Hours saved per week" }
+      { number: "3", label: "Reception channels: phone, text, chat" },
+      { number: "Auto", label: "Alert when a patient misses a visit" },
+      { number: "90d", label: "Reactivation sequence trigger" }
     ],
     faqs: [
       { q: "How does AI improve treatment plan adherence?", a: "AI sends patients reminders before each visit, educational content about why completing their plan matters, and motivational check-ins between sessions. Practices see 40-50% improvement in plan completion rates." },
@@ -269,9 +269,9 @@ const industries = [
       { icon: "&#128200;", title: "Smart Cross-Sell Engine", desc: "AI analyzes your book of business, identifies cross-sell opportunities, and sends targeted campaigns. More policies per household with zero extra effort." }
     ],
     stats: [
-      { number: "60s", label: "Average lead response time" },
-      { number: "95%", label: "Renewal retention rate" },
-      { number: "2x", label: "Policies per household" }
+      { number: "60s", label: "Contact on every new lead" },
+      { number: "60d", label: "Renewal sequence starts before expiry" },
+      { number: "Auto", label: "Cross-sell opportunities surfaced" }
     ],
     faqs: [
       { q: "How fast does AI respond to insurance leads?", a: "AI responds within 60 seconds of a lead coming in — whether it's from a quote aggregator, your website, or a social media ad. It sends a personalized text and email, collects key details, and books a call on your calendar." },
@@ -296,9 +296,9 @@ const industries = [
       { icon: "&#128200;", title: "Rate Drop Alert Campaigns", desc: "When rates move, AI instantly notifies relevant contacts — past leads, past clients eligible for refi, and pre-approved borrowers waiting to lock." }
     ],
     stats: [
-      { number: "3x", label: "More loans closed from aged leads" },
-      { number: "50%", label: "Faster document collection" },
-      { number: "20+", label: "Hours saved per week" }
+      { number: "Months", label: "Nurture runs until they are ready" },
+      { number: "Auto", label: "Missing documents chased for you" },
+      { number: "Instant", label: "Rate-drop alerts to eligible contacts" }
     ],
     faqs: [
       { q: "How does AI help mortgage brokers close more loans?", a: "AI maintains consistent, personalized communication with every lead in your pipeline — even the ones that won't convert for months. When they're finally ready, you're the broker they've been hearing from, not a stranger." },
@@ -323,9 +323,9 @@ const industries = [
       { icon: "&#128140;", title: "Client Lifecycle Automation", desc: "AI follows up with past clients at key intervals — anniversary shoots, family updates, holiday mini-sessions. Turns one-time clients into repeat customers." }
     ],
     stats: [
-      { number: "2x", label: "More inquiries converted" },
-      { number: "15+", label: "Admin hours saved per week" },
-      { number: "40%", label: "More repeat bookings" }
+      { number: "Minutes", label: "Inquiry response on any channel" },
+      { number: "4", label: "Docs sent automatically after booking" },
+      { number: "Auto", label: "Past-client follow-ups at key dates" }
     ],
     faqs: [
       { q: "How does AI help photographers book more clients?", a: "Speed is everything. Couples inquiring about wedding photography often contact 5-10 photographers at once. AI responds to every inquiry instantly with your pricing, availability, and a booking link — making you the first photographer they talk to." },
@@ -346,18 +346,18 @@ const industries = [
     ],
     automations: [
       { icon: "&#128232;", title: "Automated Vendor Communication", desc: "AI sends confirmation requests, timeline updates, and logistics details to all vendors on schedule. Everyone stays aligned without 50 emails from you." },
-      { icon: "&#129302;", title: "Client Update Portal", desc: "AI powers a client-facing portal with real-time status updates, task completion tracking, and a chat interface — reducing 'where are we?' texts by 80%." },
+      { icon: "&#129302;", title: "Client Update Portal", desc: "AI powers a client-facing portal with real-time status updates, task completion tracking, and a chat interface — so clients can answer 'where are we?' themselves, at 11pm, without texting you." },
       { icon: "&#128197;", title: "Dynamic Timeline Management", desc: "AI generates day-of timelines and automatically notifies all stakeholders when changes happen. One update, everyone knows." }
     ],
     stats: [
-      { number: "80%", label: "Fewer client status texts" },
-      { number: "3x", label: "More events managed simultaneously" },
-      { number: "10+", label: "Hours saved per event" }
+      { number: "Auto", label: "Vendor confirmations and updates sent" },
+      { number: "24/7", label: "Client portal with live status" },
+      { number: "1", label: "Timeline update notifies everyone" }
     ],
     faqs: [
       { q: "How does AI help event planners manage vendors?", a: "AI automates vendor communication — sending confirmations, timeline updates, logistics details, and payment reminders on a schedule you set. It tracks responses and flags vendors who haven't confirmed." },
       { q: "Can AI manage RSVPs?", a: "Yes. AI can send invitations, track RSVPs, send reminders to non-responders, manage dietary restrictions, and generate seating assignments — all automatically." },
-      { q: "Will AI help me take on more events?", a: "Absolutely. The biggest bottleneck for event planners is communication overhead. AI handles 80% of routine communication, letting you manage 2-3x more events without hiring an assistant." }
+      { q: "Will AI help me take on more events?", a: "Absolutely. The biggest bottleneck for event planners is communication overhead. AI handles the routine half of it — vendor confirmations, timeline updates, client status — which is the part that scales badly when you add another event to the calendar." }
     ]
   },
   {
@@ -377,9 +377,9 @@ const industries = [
       { icon: "&#128140;", title: "Rebook & Review Automation", desc: "AI follows up after every clean — asks for a review and offers a recurring discount. Turns one-time clients into weekly regulars." }
     ],
     stats: [
-      { number: "50%", label: "More recurring clients" },
-      { number: "4.8★", label: "Average Google rating" },
-      { number: "8+", label: "Hours saved per week" }
+      { number: "24/7", label: "Online booking and confirmation" },
+      { number: "Auto", label: "Daily routes optimized by location" },
+      { number: "Every", label: "Clean followed by a review request" }
     ],
     faqs: [
       { q: "Can AI book cleaning appointments?", a: "Yes. AI booking forms let clients select their service, home size, and schedule — then automatically adds the job to your calendar, sends a confirmation, and creates reminders." },
@@ -404,9 +404,9 @@ const industries = [
       { icon: "&#127793;", title: "Seasonal Campaign Automation", desc: "AI runs seasonal service campaigns to your customer list — spring cleanup in March, aeration in fall, holiday lighting in November. Revenue stays consistent." }
     ],
     stats: [
-      { number: "3x", label: "Faster estimate response" },
-      { number: "25%", label: "More seasonal upsells" },
-      { number: "15+", label: "Hours saved per week" }
+      { number: "24/7", label: "Calls and texts answered" },
+      { number: "Instant", label: "Ballpark estimate by square footage" },
+      { number: "3", label: "Seasonal campaigns: spring, fall, holiday" }
     ],
     faqs: [
       { q: "Can AI provide landscaping estimates?", a: "AI can collect property details (address, square footage, service needed) and provide instant ballpark estimates. For complex jobs, it schedules an on-site visit. This qualifies leads before you drive out." },
@@ -431,9 +431,9 @@ const industries = [
       { icon: "&#128260;", title: "Service Reminder Sequences", desc: "AI tracks mileage intervals and sends oil change, tire rotation, and inspection reminders at exactly the right time." }
     ],
     stats: [
-      { number: "60%", label: "Fewer 'is it ready?' calls" },
-      { number: "40%", label: "Higher service return rate" },
-      { number: "10+", label: "Hours saved per week" }
+      { number: "24/7", label: "Online appointment booking" },
+      { number: "Auto", label: "Status texts at every stage" },
+      { number: "3", label: "Reminders: oil, tires, inspection" }
     ],
     faqs: [
       { q: "Can AI send my customers vehicle status updates?", a: "Yes. AI integrates with your shop management system to send automated texts when a vehicle enters the bay, when additional work is found, and when it's ready for pickup. Customers love the transparency." },
@@ -454,13 +454,13 @@ const industries = [
     ],
     automations: [
       { icon: "&#128197;", title: "24/7 Online Booking", desc: "Pet parents book appointments anytime — selecting breed, service, and preferred time. AI confirms and adds to your calendar." },
-      { icon: "&#128276;", title: "No-Show Prevention", desc: "AI sends reminders at 48hrs, 24hrs, and 2hrs before appointments. Requires deposits for premium services. No-shows drop 70%." },
+      { icon: "&#128276;", title: "No-Show Prevention", desc: "AI sends reminders at 48hrs, 24hrs, and 2hrs before appointments. Requires deposits for premium services, so a booked slot stays booked." },
       { icon: "&#128054;", title: "Auto-Rebook at the Right Interval", desc: "AI knows each pet's grooming schedule and sends rebook reminders at exactly the right time. One-tap booking keeps them on track." }
     ],
     stats: [
-      { number: "70%", label: "Fewer no-shows" },
-      { number: "2x", label: "More recurring bookings" },
-      { number: "5+", label: "Hours saved per week" }
+      { number: "24/7", label: "Booking for any breed or service" },
+      { number: "3", label: "Reminders before every appointment" },
+      { number: "1-tap", label: "Rebooking at the right interval" }
     ],
     faqs: [
       { q: "Can AI handle pet grooming appointments?", a: "Yes. AI booking systems let pet parents select breed, service type, and groomer preference — then book 24/7. It handles special instructions (sensitive skin, anxiety, etc.) and syncs with your calendar." },
@@ -485,9 +485,9 @@ const industries = [
       { icon: "&#128232;", title: "Automated Parent Communication", desc: "AI sends daily updates, reminders, event notices, and billing alerts. Parents get consistent communication without staff spending hours writing messages." }
     ],
     stats: [
-      { number: "3x", label: "Faster enrollment response" },
-      { number: "90%", label: "Waitlist fill rate" },
-      { number: "10+", label: "Staff hours saved per week" }
+      { number: "24/7", label: "Enrollment questions answered" },
+      { number: "24h", label: "Waitlist moves to the next family" },
+      { number: "4", label: "Parent message types automated" }
     ],
     faqs: [
       { q: "How does AI help daycares with enrollment?", a: "AI responds to every enrollment inquiry instantly — by phone, text, email, or web form. It shares availability, pricing, and program details, then books a tour. Parents are more likely to enroll when they get fast, helpful responses." },
@@ -512,9 +512,9 @@ const industries = [
       { icon: "&#128101;", title: "Volunteer Scheduling Automation", desc: "AI manages volunteer sign-ups, sends schedule reminders, handles swap requests, and fills gaps when someone cancels." }
     ],
     stats: [
-      { number: "2x", label: "Higher visitor return rate" },
-      { number: "40%", label: "Better event attendance" },
-      { number: "8+", label: "Staff hours saved per week" }
+      { number: "3", label: "Visitor touchpoints in the first week" },
+      { number: "4", label: "Channels for every announcement" },
+      { number: "Auto", label: "Volunteer gaps filled when someone cancels" }
     ],
     faqs: [
       { q: "How does AI help churches with visitor retention?", a: "AI sends personalized follow-up messages to first-time visitors — a welcome text the same day, a personal email from the pastor, and invitations to connect groups. Churches using automated follow-up see visitor return rates double." },
@@ -539,9 +539,9 @@ const industries = [
       { icon: "&#128101;", title: "Volunteer Lifecycle Automation", desc: "AI handles volunteer applications, onboarding emails, scheduling, and post-event thank-you messages. Your team focuses on relationships." }
     ],
     stats: [
-      { number: "35%", label: "Higher donor retention" },
-      { number: "0", label: "Missed grant deadlines" },
-      { number: "15+", label: "Staff hours saved per week" }
+      { number: "24h", label: "Thank-you after every gift" },
+      { number: "Every", label: "Grant deadline tracked and flagged" },
+      { number: "Auto", label: "Volunteer onboarding and thank-yous" }
     ],
     deepDive: {
       heading: "What Nonprofit Workflow Automation Actually Looks Like",
@@ -553,7 +553,7 @@ const industries = [
         { title: "The board report nobody has time to build", body: "If your monthly or quarterly board report is assembled by hand from four different places the week it is due, that is a workflow, and it can be automated. Gifts, new donors, retention, volunteer hours, and grant status can be pulled into the same format every time, so the report is a review rather than a rebuild. The same numbers feed your annual report and your grant reporting later." },
         { title: "What we will not automate — and you should not either", body: "The ask itself. The major-donor relationship. The call after a loss. Anything where the point is that a human chose to spend their time on you. We have watched organizations automate the wrong half and turn warm donors cold, and it is not recoverable in a single season. The rule we use: automate the reliability, never the relationship. If a message would be insulting to receive from a robot, a person sends it." },
         { title: "It works with the donor CRM you already have", body: "You do not need to migrate your database to start. These workflows sit on top of the tools nonprofits already run — the donation platform, the donor CRM, the email list, the volunteer signup sheet. We connect them so a gift in one place triggers the right follow-up everywhere else. Replacing your CRM is a much bigger project than fixing your follow-up, and it is usually not the thing standing between you and better retention." },
-        { title: "Why we care about this one", body: "EasyAiFlows is run by Ronnie Craig, an RN who spends his working life in hospice care — so the nonprofit and community-health world is not an industry vertical we picked off a list. We also do 501(c)(3) formation work, so we see organizations at the very beginning, before any of these systems exist. If you are still at that stage, start there instead: see our <a href=\"/nonprofit\">501(c)(3) formation service</a>." }
+        { title: "Why we care about this one", body: "EasyAiFlows is run by Ronnie Craig, an RN who spends his working life in hospice care — so the nonprofit and community-health world is not an industry vertical we picked off a list. We write grants for a charitable foundation, which is how we know what a grant calendar actually costs a small team, and we do 501(c)(3) formation work, so we also see organizations at the very beginning, before any of these systems exist. If you are still at that stage, start there instead: see our <a href=\"/nonprofit\">501(c)(3) formation service</a>." }
       ]
     },
     faqs: [
@@ -702,7 +702,7 @@ ${industry.automations.map(a => `        <div class="auto-card">
   <!-- ── Results ── -->
   <section class="results">
     <div class="container">
-      <h2>Results ${industry.name} See with AI Automation</h2>
+      <h2>What's Automated for ${industry.name}</h2>
       <div class="results-grid">
 ${industry.stats.map(s => `        <div class="result-item">
           <div class="result-number">${s.number}</div>
