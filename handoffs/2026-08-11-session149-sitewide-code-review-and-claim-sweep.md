@@ -158,7 +158,36 @@ of the verification pattern alongside 148's "insertions should equal deletions w
 | 3 | ~~Verify the nonprofits FAQ claim~~ ✅ closed 8/11 — Ronnie confirmed multiple nonprofits, grant research. Rewritten + live (`10b1d71`) |
 | 4 | **Restart the blog** — cold since 7/5. The 5 church GSC queries are 5 ready-made titles | Claude drafts |
 | 5 | 18 pages still on the plain template (546–608 words, 36–40% dup) | Claude, one at a time |
-| 6 | Resubmit `sitemap.xml` in GSC after the push (20 `/ai-for/` lastmods changed) | Ronnie |
+| 6 | ~~Resubmit `sitemap.xml`~~ ✅ done 8/11 1:45 PM — **69 → 70 discovered pages**, Google re-read on submit |
+| 7 | **3 blog posts still need Request Indexing** — daily quota hit at 11. Do these FIRST tomorrow | **Ronnie** |
+
+## 📋 GSC actions taken 8/11 — and the two gotchas
+
+**Requested indexing (11 total, quota exhausted):**
+- 8:11–8:17 AM (7): `/ai-for/`, `/blog/`, `/pricing`, `/ai-for/hvac/`, and the ROI, lead-gen and
+  appointment-booking posts. ⚠️ **All submitted BEFORE the first push** — harmless, since Google
+  crawls what is live when it reaches the queue.
+- 12:56 PM (4): `/`, `/nonprofit`, `/ai-for/nonprofits/`, `/ai-for/churches/`.
+
+**⏳ Blocked by the daily cap — do first thing tomorrow:**
+```
+https://easyaiflows.com/blog/automate-follow-ups-small-business.html
+https://easyaiflows.com/blog/ai-for-restaurants-salons-fitness.html
+https://easyaiflows.com/blog/can-ai-write-social-media-posts.html
+```
+All three carry **FAQPage schema containing claims that were removed today**, so Google is currently
+eligible to serve rich results quoting text no longer on the page. ⚠️ **My sequencing error:** I put
+the priority note *below* the list instead of ordering the list by it, so the three that mattered
+most are the three that got cut. **Order the list by priority; do not append the priority as a note.**
+
+⭐ **"Page is indexed" describes the LAST CRAWL, not current content.** All 7 of the afternoon batch
+came back indexed — which is precisely why they needed submitting, not a reason to skip them. GSC
+even prompts for it: *"Page changed? REQUEST INDEXING."*
+
+🐛 **Sitemap resubmit on a DOMAIN property needs the full URL.** Typing `sitemap.xml` returns
+*"Invalid sitemap address"* — `sc-domain:` properties span http/https/www/non-www so GSC cannot infer
+the host. Enter `https://easyaiflows.com/sitemap.xml`. **Google had not re-read the sitemap since
+Aug 6** — five days of unread `lastmod` values. On resubmit: 69 → 70 discovered, immediately.
 
 **On #3 — CLOSED 8/11 (`10b1d71`, live).** Ronnie: *"I've worked with multiple nonprofits helping them
 research grants for their business."* That substantiates the plural but **not the geography** — and
