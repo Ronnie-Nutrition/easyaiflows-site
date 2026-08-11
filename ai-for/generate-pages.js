@@ -168,7 +168,7 @@ const industries = [
     faqs: [
       { q: "Can AI handle barbershop appointment booking?", a: "Yes. AI booking systems let clients choose their barber, pick a service, and select a time — all online, 24/7. It syncs with your calendar so there are never double-bookings." },
       { q: "How does AI get clients to rebook?", a: "AI tracks when each client last visited and sends a personalized text at the right interval (e.g., 3 weeks for fades, 5 weeks for longer styles) with a one-tap booking link." },
-      { q: "Is this too expensive for a small barbershop?", a: "Basic AI booking and reminder systems start at $50-$100/month — less than one missed appointment costs you. It pays for itself on day one." }
+      { q: "Is this too expensive for a small barbershop?", a: "Our Starter plan is $97/month — about $3 a day, and less than a single missed appointment costs you. Setup, training, and ongoing support are included, and there's a 30-day guarantee." }
     ]
   },
   {
@@ -384,7 +384,7 @@ const industries = [
     faqs: [
       { q: "Can AI book cleaning appointments?", a: "Yes. AI booking forms let clients select their service, home size, and schedule — then automatically adds the job to your calendar, sends a confirmation, and creates reminders." },
       { q: "How does AI help cleaning businesses get more reviews?", a: "AI sends a review request text/email after every completed job with a direct link to your Google Business page. Timing it right after the clean (when the house looks great) gets the best results." },
-      { q: "Is AI automation affordable for solo cleaning businesses?", a: "Yes. Basic booking and follow-up automation starts at $50-$100/month. If it converts even one extra recurring client per month, it's paid for 10x over." }
+      { q: "Is AI automation affordable for solo cleaning businesses?", a: "Yes. Our Starter plan is $97/month, with setup, training, and ongoing support included. If it wins you even one extra recurring client, it more than pays for itself — and there's a 30-day guarantee if it isn't a fit." }
     ]
   },
   {
@@ -465,7 +465,7 @@ const industries = [
     faqs: [
       { q: "Can AI handle pet grooming appointments?", a: "Yes. AI booking systems let pet parents select breed, service type, and groomer preference — then book 24/7. It handles special instructions (sensitive skin, anxiety, etc.) and syncs with your calendar." },
       { q: "How does AI remind pet parents to rebook?", a: "AI tracks each pet's last visit and grooming interval (every 4 weeks for doodles, 6 weeks for labs, etc.) and sends a personalized text with a one-tap booking link when it's time." },
-      { q: "Is this affordable for a solo pet groomer?", a: "Basic AI booking and reminder systems cost $50-$100/month. Preventing just one no-show per week covers that cost many times over." }
+      { q: "Is this affordable for a solo pet groomer?", a: "Our Starter plan is $97/month — about $3 a day. Preventing just one no-show a week covers that several times over, and every plan includes setup, training, support, and a 30-day guarantee." }
     ]
   },
   {
