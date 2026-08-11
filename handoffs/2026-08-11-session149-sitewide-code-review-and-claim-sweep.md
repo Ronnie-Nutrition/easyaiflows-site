@@ -175,13 +175,17 @@ foundation**"* — singular, when Ronnie has several. Now "grant research for se
 organizations." Used his own scope word (*research*); **did not upgrade to "write"** without asking,
 even though memory logs [[client_lphf]] as a grant-*writing* engagement.
 
-**Still open on this thread (2 questions for Ronnie):**
-1. Is the LPHF work full grant **writing**, not just research? If so the line can say so — a
-   materially better credential that costs nothing if true.
-2. ⚠️ **`nonprofit.html` (the paid 501(c)(3) formation service page) claims the templates were
-   *"refined over multiple successful filings"* and *"We've done this before."*** Same species of
-   claim, on a page selling a service, and **not yet verified**. How many filings have actually gone
-   through? If it is one, or one in progress, that line needs the same treatment.
+**Both follow-ups answered and shipped (`085af7e`, live):**
+1. ✅ The LPHF work **is** full grant writing. All three lines now say *"research and write grants for
+   several nonprofit organizations."*
+2. ✅ **Three** successful 501(c)(3) filings. `nonprofit.html` said *"refined over **multiple**
+   successful filings"* — true at three, but changed to *"refined over **three** successful filings."*
+
+⭐ **This thread ran in both directions and that is the point.** Four claims were removed as
+unsupported; three were made **stronger** once the facts were checked (*a charitable foundation* →
+*several nonprofit organizations*; *research* → *research and write*; *multiple* → *three*). 🔑 **A
+claim sweep is not a deletion pass. Vague quantifiers hide real credentials as often as they inflate
+absent ones — "multiple" reads as puffery, "three" reads as fact, and it was three the whole time.**
 
 The footer's *"Serving clients nationwide"* is a service-area statement and is fine as-is — that
 line describes where the company will work, not a roster it has.
