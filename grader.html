@@ -319,7 +319,7 @@
         <a href="/#services">Services</a>
         <a href="/#proof">Results</a>
         <a href="/pricing">Pricing</a>
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book a Call</a>
+        <a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book a Call</a>
       </div>
     </div>
   </nav>
@@ -403,7 +403,7 @@
       <div id="tierOffer"></div>
 
       <div class="results-cta">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book Your Free Strategy Call</a>
+        <a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" class="btn btn-primary" target="_blank" onclick="trackBookingClick()">Book Your Free Strategy Call</a>
         <a href="/" class="btn btn-secondary">Back to EasyAiFlows</a>
       </div>
 
@@ -832,12 +832,12 @@ function trackOfferClick(tierName) {
   }
 }
 
-// Meta Pixel — Strategy Call Booked (fires on TidyCal link click)
+// Meta Pixel — qualification form opened
 function trackBookingClick() {
   if (typeof fbq !== 'undefined') {
-    fbq('track', 'Schedule', {
-      content_name: 'AI Strategy Call',
-      content_category: 'Booking Intent'
+    fbq('track', 'Lead', {
+      content_name: 'AI Strategy Intake Form',
+      content_category: 'Qualification Intent'
     });
   }
 }

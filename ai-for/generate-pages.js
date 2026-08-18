@@ -747,7 +747,7 @@ ${faqSchema}
         <a href="/ai-for/">Industries</a>
         <a href="/blog/">Blog</a>
         <a href="/grader" class="btn btn-outline" style="border-color:var(--cyan);color:var(--cyan)">AI Grader</a>
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book a Call</a>
+        <a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" class="btn btn-primary" target="_blank">Book a Call</a>
       </div>
     </div>
   </nav>
@@ -759,7 +759,7 @@ ${faqSchema}
       <h1>${industry.headline}</h1>
       <p>${industry.description}</p>
       <div class="hero-buttons">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank">Book Your Free Strategy Call</a>
+        <a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" class="btn btn-primary" target="_blank">Book Your Free Strategy Call</a>
         <a href="/grader" class="btn btn-outline">Take the AI Readiness Quiz</a>
       </div>
     </div>
@@ -851,7 +851,7 @@ ${industry.faqs.map(f => `        <div class="faq-item">
       <h2>Ready to Automate Your ${ctaNoun}?</h2>
       <p>Book a free 15-minute strategy call. We'll identify exactly where AI can save you the most time and money — no pressure, no pitch.</p>
       <div class="cta-buttons">
-        <a href="https://tidycal.com/ronnieysela/ai-strategy-call" class="btn btn-primary" target="_blank" style="font-size:1.15rem; padding:1.1rem 2.5rem;">Book Your Free Call Now</a>
+        <a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" class="btn btn-primary" target="_blank" style="font-size:1.15rem; padding:1.1rem 2.5rem;">Book Your Free Call Now</a>
         <a href="/grader" class="btn btn-outline" style="font-size:1rem; padding:0.9rem 2rem;">Take the AI Readiness Quiz</a>
       </div>
     </div>
@@ -884,7 +884,7 @@ ${related}
             <li><a href="/ai-for/">Industries</a></li>
             <li><a href="/blog/">Blog</a></li>
             <li><a href="/grader">AI Readiness Grader</a></li>
-            <li><a href="https://tidycal.com/ronnieysela/ai-strategy-call" target="_blank">Book a Call</a></li>
+            <li><a href="https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe" target="_blank">Book a Call</a></li>
           </ul>
         </div>
         <div>
