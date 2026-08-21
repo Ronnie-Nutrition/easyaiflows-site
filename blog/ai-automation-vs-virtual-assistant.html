@@ -292,7 +292,7 @@
       var ok=false;
       for(var i=0;i<2&&!ok;i++){
         try{
-          var r=await fetch('https://services.leadconnectorhq.com/contacts/upsert',{method:'POST',headers:{'Authorization':'Bearer pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0','Version':'2021-07-28','Content-Type':'application/json'},body:JSON.stringify({locationId:'k5gu12TNotD5eV866JKZ',email:em,source:'free-build-'+location.pathname,tags:['free-build-lead','blog-capture']})});
+          var r=await fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/b99341ed-f13c-4101-a3cb-8b908ec380ca',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:em,source:'free-build-'+location.pathname,tags:'free-build-lead,blog-capture',form:'blog-capture'})});
           ok=r.ok;
         }catch(e){}
       }
