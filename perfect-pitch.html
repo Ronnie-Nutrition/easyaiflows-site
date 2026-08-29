@@ -459,20 +459,23 @@ async function submitCapture() {
     return;
   }
 
-  // Phone + consent go via the contacts API (the kit webhook only maps name/email);
-  // upsert merges by email, and the note is the auditable TCPA consent record.
+  // Phone + consent go to the GHL inbound webhook, NOT the contacts API — no private
+  // token ships to the browser. The workflow branches on `form`; the hook merges by
+  // email, and `note` carries the auditable TCPA consent record.
   if (phone && smsConsent) {
-    const H = { 'Authorization': 'Bearer pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0', 'Version': '2021-07-28', 'Content-Type': 'application/json' };
-    fetch('https://services.leadconnectorhq.com/contacts/upsert', {
-      method: 'POST', headers: H,
-      body: JSON.stringify({ locationId: 'k5gu12TNotD5eV866JKZ', email: email, phone: phone, tags: ['sms-opt-in'] })
-    }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
-      const cid = d && d.contact && d.contact.id;
-      if (cid) fetch('https://services.leadconnectorhq.com/contacts/' + cid + '/notes', {
-        method: 'POST', headers: H,
-        body: JSON.stringify({ body: 'SMS OPT-IN via easyaiflows.com/perfect-pitch on ' + new Date().toISOString()
-          + '. Checkbox consent to recurring automated marketing & informational texts. Msg freq varies; msg & data rates may apply; reply STOP to cancel.' })
-      });
+    fetch('https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/b99341ed-f13c-4101-a3cb-8b908ec380ca', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        form: 'perfect-pitch',
+        email: email,
+        phone: phone,
+        tags: 'sms-opt-in',
+        smsConsent: true,
+        note: 'SMS OPT-IN via easyaiflows.com/perfect-pitch on ' + new Date().toISOString()
+          + '. Checkbox consent to recurring automated marketing & informational texts. '
+          + 'Msg freq varies; msg & data rates may apply; reply STOP to cancel.'
+      })
     }).catch(function () {});
   }
 

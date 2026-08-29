@@ -642,52 +642,42 @@ function prevQuestion() {
 }
 
 // ── Email & GHL Contact Creation ──
-const GHL_API = 'https://services.leadconnectorhq.com';
-const GHL_TOKEN = 'pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0';
-const GHL_LOC = 'k5gu12TNotD5eV866JKZ';
-const GHL_HEADERS = {
-  'Authorization': 'Bearer ' + GHL_TOKEN,
-  'Version': '2021-07-28',
-  'Content-Type': 'application/json'
-};
+// Posts to a GHL inbound webhook, NOT the contacts API — so no private token ships
+// to the browser. The workflow behind the hook branches on `form`. Fields match the
+// registered mapping sample: form,email,firstName,lastName,phone,source,tags,
+// smsConsent,score,note.
+const GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/b99341ed-f13c-4101-a3cb-8b908ec380ca';
 
 async function createGHLContact(email, score, phone, smsConsent) {
-  // Upsert is idempotent, so a retry after a network blip is safe.
+  const consented = !!(phone && smsConsent);
+  const tags = ['ai-grader-lead'];
+  if (consented) tags.push('sms-opt-in');
+
+  const body = {
+    form: 'grader',
+    email: email,
+    source: 'ai-readiness-grader',
+    score: score,
+    tags: tags.join(','),
+    smsConsent: consented
+  };
+  if (consented) {
+    body.phone = phone;
+    // TCPA consent record — auditable proof of the opt-in, wording unchanged.
+    body.note = 'SMS OPT-IN via easyaiflows.com/grader on ' + new Date().toISOString()
+      + '. Checkbox consent to recurring automated marketing & informational texts. '
+      + 'Msg freq varies; msg & data rates may apply; reply STOP to cancel.';
+  }
+
+  // The hook is idempotent on email, so a retry after a network blip is safe.
   for (let attempt = 0; attempt < 2; attempt++) {
     try {
-      const body = {
-        locationId: GHL_LOC,
-        email: email,
-        source: 'ai-readiness-grader',
-        customFields: [{ id: 'F1QxWcOiC8OwRQpH5NdS', value: score }]
-      };
-      if (phone && smsConsent) body.phone = phone;
-      const contactRes = await fetch(GHL_API + '/contacts/upsert', {
+      const res = await fetch(GHL_HOOK, {
         method: 'POST',
-        headers: GHL_HEADERS,
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
-      if (!contactRes.ok) throw new Error('upsert HTTP ' + contactRes.status);
-      const contactData = await contactRes.json();
-      const contactId = contactData.contact?.id;
-      if (!contactId) throw new Error('no contact id in response');
-
-      const tags = ['ai-grader-lead'];
-      if (phone && smsConsent) tags.push('sms-opt-in');
-      await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
-        method: 'POST',
-        headers: GHL_HEADERS,
-        body: JSON.stringify({ tags: tags })
-      });
-      // TCPA consent record — auditable note proving the opt-in (never blocks the flow)
-      if (phone && smsConsent) {
-        fetch(GHL_API + '/contacts/' + contactId + '/notes', {
-          method: 'POST',
-          headers: GHL_HEADERS,
-          body: JSON.stringify({ body: 'SMS OPT-IN via easyaiflows.com/grader on ' + new Date().toISOString()
-            + '. Checkbox consent to recurring automated marketing & informational texts. Msg freq varies; msg & data rates may apply; reply STOP to cancel.' })
-        }).catch(function(){});
-      }
+      if (!res.ok) throw new Error('hook HTTP ' + res.status);
       return true;
     } catch (e) { /* retry once, then report failure */ }
   }

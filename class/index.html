@@ -403,14 +403,9 @@
   </footer>
 
   <script>
-    const GHL_API = 'https://services.leadconnectorhq.com';
-    const GHL_TOKEN = 'pit-e782c0f8-7d6f-4bee-a26e-72930de0abb0';
-    const GHL_LOC = 'k5gu12TNotD5eV866JKZ';
-    const GHL_HEADERS = {
-      'Authorization': 'Bearer ' + GHL_TOKEN,
-      'Version': '2021-07-28',
-      'Content-Type': 'application/json'
-    };
+    // Posts to a GHL inbound webhook, NOT the contacts API — so no private token
+    // ships to the browser. The workflow behind the hook branches on `form`.
+    const GHL_HOOK = 'https://services.leadconnectorhq.com/hooks/k5gu12TNotD5eV866JKZ/webhook-trigger/b99341ed-f13c-4101-a3cb-8b908ec380ca';
 
     async function submitClassEmail(e) {
       e.preventDefault();
@@ -423,27 +418,18 @@
       let saved = false;
       for (let attempt = 0; attempt < 2 && !saved; attempt++) {
         try {
-          const res = await fetch(GHL_API + '/contacts/upsert', {
+          const res = await fetch(GHL_HOOK, {
             method: 'POST',
-            headers: GHL_HEADERS,
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-              locationId: GHL_LOC,
+              form: 'class',
               firstName: name,
               email: email,
               source: 'ai-class-apr8',
-              tags: ['class-attendee']
+              tags: 'class-attendee'
             })
           });
-          if (!res.ok) throw new Error('upsert HTTP ' + res.status);
-          const data = await res.json();
-          const contactId = data.contact?.id;
-          if (contactId) {
-            await fetch(GHL_API + '/contacts/' + contactId + '/tags', {
-              method: 'POST',
-              headers: GHL_HEADERS,
-              body: JSON.stringify({ tags: ['class-attendee'] })
-            });
-          }
+          if (!res.ok) throw new Error('hook HTTP ' + res.status);
           saved = true;
         } catch (err) { /* retry once */ }
       }
