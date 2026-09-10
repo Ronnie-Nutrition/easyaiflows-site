@@ -676,6 +676,7 @@ ${industry.deepDive.blocks.map(b => `      <div class="deep-block">
     gtag('js', new Date());
     gtag('config', 'G-4LZG421Q7T');
   </script>
+  <script defer src="/js/inquiry-tracking.js"></script>
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
