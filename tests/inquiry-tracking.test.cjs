@@ -3,12 +3,12 @@ const fs = require('node:fs');
 const assert = require('node:assert/strict');
 const code = fs.readFileSync(require('node:path').join(__dirname, '../js/inquiry-tracking.js'), 'utf8');
 const target = 'https://api.leadconnectorhq.com/widget/form/PQwWIbbL5y2v0pBMn3Oe';
-function visit(search='', storage=new Map(), href=target, referrer='', now=10000000, blocked=false) {
+function visit(search='', storage=new Map(), href=target, referrer='', now=10000000, blocked=false, consent=true, path='/blog/example') {
   const link={href}; const handlers={}; const events=[];
-  const context={URL, URLSearchParams, Date:{now:()=>now}, location:new URL('https://easyaiflows.com/blog/example'+search), window:{gtag:(...args)=>events.push(args)}, sessionStorage:{getItem:k=>{if(blocked)throw Error();return storage.get(k)||null;},setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},document:{referrer,querySelectorAll:()=>[link],addEventListener:(k,fn)=>handlers[k]=fn}};
+  const context={URL, URLSearchParams, Date:{now:()=>now}, location:new URL('https://easyaiflows.com'+path+search), window:{eafAnalyticsAllowed:()=>consent,gtag:(...args)=>events.push(args)}, sessionStorage:{getItem:k=>{if(blocked)throw Error();return storage.get(k)||null;},setItem:(k,v)=>storage.set(k,v),removeItem:k=>storage.delete(k)},document:{referrer,querySelectorAll:()=>[link],addEventListener:(k,fn)=>handlers[k]=fn}};
   vm.runInNewContext(code, context);
   const click=(type='click',button=0)=>handlers[type]({type,button,target:{closest:()=>link}});
-  return {link,events,click,storage};
+  return {link,events,click,storage,setConsent:value=>{consent=value;handlers['eaf-consent-change']();}};
 }
 let a=visit('?utm_source=test&utm_medium=email&utm_campaign=setup&email=private%40example.com');
 assert.equal(new URL(a.link.href).searchParams.get('utm_campaign'),'setup');
@@ -25,3 +25,17 @@ let unrelated=visit('?utm_source=test',new Map(),'https://example.com/'); unrela
 let noStorage=visit('?utm_source=test',new Map(),target,'',10000000,true); noStorage.click(); assert.equal(noStorage.events.length,1);
 let direct=visit(); assert.equal(direct.link.href,target); direct.click('auxclick',2); assert.equal(direct.events.length,0); direct.click('auxclick',1); assert.equal(direct.events.length,1);
 console.log('PASS: campaign handoff, internal navigation, expiration, external referral reset, sensitive/unknown parameter exclusion, explicit destination campaign, unrelated links, blocked storage, direct traffic, click-only event and middle/right clicks.');
+
+const calendar='https://api.leadconnectorhq.com/widget/bookings/easyaiflows-ai-strategy-call';
+const slug='publish-claude-designed-website';
+let denied=visit('?utm_source=existing',new Map(),calendar,'',10000000,false,false,'/blog/'+slug+'.html');
+assert.equal(denied.link.href,calendar);assert.equal(denied.storage.size,0);denied.click();assert.equal(denied.events.length,0);
+denied.setConsent(true);assert.equal(new URL(denied.link.href).searchParams.get('eaf_tutorial'),slug);denied.click();assert.equal(denied.events[0][1],'strategy_call_click');
+denied.setConsent(false);assert.equal(denied.link.href,calendar);denied.click();assert.equal(denied.events.length,1);
+let tutorial=visit('?utm_source=newsletter&utm_content=original',new Map(),calendar,'',10000000,false,true,'/blog/'+slug+'.html');
+assert.equal(new URL(tutorial.link.href).searchParams.get('utm_content'),'original');assert.equal(new URL(tutorial.link.href).searchParams.get('eaf_tutorial'),slug);
+let service=visit('',tutorial.storage,calendar,'https://easyaiflows.com/blog/'+slug+'.html',10000001,false,true,'/');
+assert.equal(new URL(service.link.href).searchParams.get('eaf_tutorial'),slug);
+let stale=visit('',tutorial.storage,calendar,'',10000001+1800001);assert.equal(new URL(stale.link.href).searchParams.has('eaf_tutorial'),false);
+let reset=visit('',tutorial.storage,calendar,'https://www.google.com/',10000002);assert.equal(new URL(reset.link.href).searchParams.has('eaf_tutorial'),false);
+console.log('PASS: consent gating/revocation; direct and assisted tutorial handoff; original campaigns preserved; expiry and external-session reset; clicks never emit booking events.');
